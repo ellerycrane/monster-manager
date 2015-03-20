@@ -1,0 +1,6 @@
+node_modules
+.sass-cache
+.idea
+personal
+vector_art
+.DS_Store

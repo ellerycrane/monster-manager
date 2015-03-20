@@ -1,0 +1,62 @@
+@import 'typography';
+@import "compass/css3";
+@import "compass/utilities";
+@import "monster-values";
+@import "avatars";
+@import "stat-values";
+
+$yellow-border: rgb(165, 150, 46);
+$monster-value-size: 35px;
+$avatar-size: 70px;
+@mixin monster-rows {
+  .monster-row {
+    @include user-select(none);
+    margin: 0 0 50px 0;
+    .monster-card {
+      position: relative;
+      margin-top: 50px;
+      .card-border {
+        width: 370px;
+        height: 65px;
+        padding: 5px 5px 5px 105px;
+        background-color: #F7F6F3;
+        border: 1px solid rgb(165, 150, 46);
+        top: 20px;
+        @include border-radius(10px, 10px);
+      }
+      .avatar {
+        @include avatar($avatar-size);
+        position: absolute;
+        left: 10px;
+        top: -20px;
+      }
+      .monster-name {
+        @include user-select(none);
+        @include header-font;
+        @include border-radius(10px, 10px);
+        @include box-shadow(0 1px 3px rgba(0, 0, 0, 0.1));
+        background-color: white;
+        text-align: center;
+        padding: 2px 5px;
+      }
+      .monster-card-values {
+        @include monster-values;
+        position: absolute;
+        width: 105px;
+        top: 35px;
+        .hp {
+          float: left;
+        }
+        .ac {
+          float: right;
+        }
+      }
+      .body {
+        @include body-font;
+        padding: 8px 0 0 0;
+        text-align: center;
+        @include stat-values;
+      }
+    }
+  }
+}

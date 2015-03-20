@@ -1,0 +1,17 @@
+$libre-baskerville: 'Libre Baskerville', serif;
+$rockkitt: 'Rokkitt', serif;
+$alegreya-sans: 'Alegreya Sans', sans-serif;
+
+@mixin header-font {
+  font-family: $libre-baskerville;
+  font-weight: bold;
+}
+
+@mixin body-font {
+  font-family: $rockkitt;
+}
+
+@mixin value-font {
+  font-family: $alegreya-sans;
+  font-weight: bold;
+}

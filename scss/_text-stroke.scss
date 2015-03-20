@@ -1,0 +1,17 @@
+@mixin text-stroke($fill-color, $stroke-color, $stroke-width) {
+  /* WebKit (Safari/Chrome) Only */
+  -webkit-text-stroke: $stroke-width $stroke-color;
+
+  /* If we weren't using text-shadow, we'd set a fallback color
+     and use this to set color instead
+    -webkit-text-fill-color: white; */
+
+  color: $fill-color;
+  /* Simulated effect for Firefox and Opera
+         and nice enhancement for WebKit */
+//  text-shadow: 3px 3px 0 $stroke-color,
+//  -1px -1px 0 $stroke-color,
+//  1px -1px 0 $stroke-color,
+//  -1px 1px 0 $stroke-color,
+//  1px 1px 0 $stroke-color;
+}

@@ -1,0 +1,47 @@
+@import 'typography';
+@import "compass/css3";
+@import "compass/utilities";
+
+@mixin stat-values {
+  .stat-value {
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    width: 48px;
+    margin: 0 5px 0 5px;
+    padding: 1px;
+    @include border-radius(10px, 10px);
+    @include transition-property(background-color);
+    @include transition-duration(50ms);
+    @include transition-timing-function(ease-in);
+    .name {
+      font-weight: 900;
+      font-size: 90%;
+    }
+    .value {
+      &.negative {
+        color: darkred;
+      }
+      &.positive {
+        color: darkgreen;
+      }
+      &.extreme {
+        font-weight: 900;
+        font-size: 110%;
+      }
+    }
+    &:hover {
+      border: 1px solid $yellow-border;
+      padding: 0;
+      background-color: rgba(165, 150, 46, 0.18);
+      background-image: url('../img/d20.svg');
+      background-size: 20px;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-origin: content-box;
+      .name, .value {
+        opacity: 0;
+      }
+    }
+  }
+}

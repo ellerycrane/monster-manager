@@ -1,0 +1,41 @@
+@import 'typography';
+@import 'text-stroke';
+@import "compass/css3/user-interface";
+@import "compass/css3";
+@import "compass/utilities";
+@import "compass/utilities/sprites";
+
+@mixin monster-value {
+  @include user-select(none);
+  cursor: default;
+  width: $monster-value-size;
+  height: $monster-value-size;
+  position: relative;
+  display: inline-block;
+  background-repeat: no-repeat;
+  &.hp {
+    background-image: url('../img/hp.svg');
+  }
+  &.ac {
+    background-image: url('../img/ac.svg');
+  }
+  .value {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: $monster-value-size;
+    height: $monster-value-size;
+    line-height: $monster-value-size;
+    vertical-align: middle;
+    text-align: center;
+    @include value-font;
+    @include text-stroke(white, black, 2px);
+    font-size: 26px;
+  }
+}
+
+@mixin monster-values {
+  .monster-value {
+    @include monster-value;
+  }
+}
