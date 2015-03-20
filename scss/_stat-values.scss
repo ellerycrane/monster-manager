@@ -43,5 +43,8 @@
         opacity: 0;
       }
     }
+    &:active {
+      background-color: rgba(165, 150, 46, 0.48);
+    }
   }
 }
