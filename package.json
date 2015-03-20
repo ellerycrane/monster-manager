@@ -42,6 +42,8 @@
     "flux": "*",
     "keymirror": "*",
     "immutable": "*",
-    "fluxxor": "*"
+    "fluxxor": "*",
+    "codemirror": "5.0.0",
+    "hasher":"1.2.0"
   }
 }

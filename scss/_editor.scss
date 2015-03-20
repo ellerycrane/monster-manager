@@ -1,0 +1,41 @@
+@import "CSS:../node_modules/codemirror/lib/codemirror";
+@import "CSS:../node_modules/codemirror/theme/monokai";
+
+.editor {
+  width: 49%;
+  height: 97%;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-family: verdana, sans-serif;
+
+  h5 {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 30px;
+    margin: 0;
+    font-style: italic;
+    height: 5%;
+
+  }
+  #permalink {
+    float: right;
+  }
+}
+
+.CodeMirror {
+  background-color: #fffffb;
+  border: 1px solid #888;
+  border-radius: 3px;
+  box-shadow: 0 0 3px #ccc inset;
+  height: 95%;
+}
+
+.CodeMirror-scroll {
+  height: 95%;
+  line-height: 1.2;
+}
+
+.cm-s-default span.cm-comment {
+  color: #baa;
+}

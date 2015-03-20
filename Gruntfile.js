@@ -53,19 +53,22 @@ module.exports = function (grunt) {
                 options: {
                     sassDir: 'scss',
                     cssDir: 'dist/css',
+                    config: 'compass-config.rb',
                     environment: 'production'
                 }
             },
             dev: {
                 options: {
                     sassDir: 'scss',
-                    cssDir: 'dist/css'
+                    cssDir: 'dist/css',
+                    config: 'compass-config.rb'
                 }
             },
             watch: {
                 options: {
                     sassDir: 'scss',
                     cssDir: 'dist/css',
+                    config: 'compass-config.rb',
                     watch: true
                 }
             }

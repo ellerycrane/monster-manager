@@ -1,7 +1,8 @@
 var React = require('react'),
     Fluxxor = require('fluxxor'),
     Stores = require('./stores/Stores.js'),
-    Actions = require('./actions/Actions.js');
+    Actions = require('./actions/Actions.js'),
+    Editor = require('./services/MonsterEditor');
 
 var flux = new Fluxxor.Flux(Stores, Actions);
 flux.on("dispatch", function(type, payload) {
@@ -17,3 +18,5 @@ React.render(
     <MonsterManagerApplication flux={flux} />,
     document.getElementById('monster-manager-container')
 );
+
+Editor.initialize(flux.actions.updateMonsters);
