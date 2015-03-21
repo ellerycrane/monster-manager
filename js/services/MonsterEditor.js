@@ -15,15 +15,16 @@ var initialize = function (updateMonstersCallback) {
     function parse() {
         var str, monsters;
 
-        try {
+        //try {
+
             str = source.getValue();
             permalink.href = '#yaml=' + base64.encode(str);
             monsters = MonsterParser.parseMonstersFromYaml(str);
             updateMonstersCallback(monsters);
-        } catch (err) {
-            console.log("Error!! ");
-            console.log(err);
-        }
+        //} catch (err) {
+        //    console.log("Error!! ");
+        //    console.log(err);
+        //}
     }
 
     function updateSource() {
