@@ -17,9 +17,9 @@ var MonsterManagerApplication = React.createClass({
         return this.getFlux().store(STORE).getState();
     },
 
-    componentDidMount: function() {
-        this.getFlux().actions.loadMonsters('test.yaml');
-    },
+    //componentDidMount: function() {
+    //    this.getFlux().actions.loadMonsters('test.yaml');
+    //},
 
     render: function() {
         return (
