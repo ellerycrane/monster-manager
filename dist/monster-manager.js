@@ -46,7 +46,8 @@ var initialize = function (monsterManagerContainerElement) {
 };
 
 window.MonsterManager = {
-    initialize: initialize
+    initialize: initialize,
+    updateMonsters: flux.actions.updateMonsters
 };
 
 module.exports = {
