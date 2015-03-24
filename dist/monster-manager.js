@@ -43,11 +43,12 @@ var initialize = function (monsterManagerContainerElement) {
         React.createElement(MonsterManagerApplication, {flux: flux}),
         monsterManagerContainerElement
     );
+
+    window.MonsterManager.updateMonsters = flux.actions.updateMonsters;
 };
 
 window.MonsterManager = {
-    initialize: initialize,
-    updateMonsters: window.flux.actions.updateMonsters
+    initialize: initialize
 };
 
 module.exports = {
