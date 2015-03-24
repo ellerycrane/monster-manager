@@ -17,7 +17,8 @@ module.exports = function (grunt) {
                 },
                 files: {
                     'dist/monster-manager.js': ['js/app.js'],
-                    'dist/monster-manager-with-editor.js': ['js/editor.js']
+                    'dist/monster-manager-with-editor.js': ['js/editor.js'],
+                    'dist/monster-manager-loader.js': ['js/bookmarklet-loader.js']
                 }
             }
         },
@@ -45,7 +46,8 @@ module.exports = function (grunt) {
             dist: {
                 files: {
                     'dist/monster-manager.min.js': 'dist/monster-manager.js',
-                    'dist/monster-manager-with-editor.min.js': 'dist/monster-manager-with-editor.js'
+                    'dist/monster-manager-with-editor.min.js': 'dist/monster-manager-with-editor.js',
+                    'dist/monster-manager-loader.min.js': 'dist/monster-manager-loader.js'
                 }
             }
 
