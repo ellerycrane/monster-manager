@@ -38,6 +38,7 @@ function evalData(event) {
 window.addEventListener("message", onMonsterManagerLoad, false);
 window.addEventListener("message", evalData, false);
 var iframe = document.createElement("iframe");
+iframe.style.display="none";
 iframe.id = "monster-manager-iframe";
 iframe.src = "https://ellerycrane.github.io/monster-manager/loader.html";
 document.getElementsByTagName('body')[0].appendChild(iframe);
