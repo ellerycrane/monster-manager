@@ -275,6 +275,17 @@ var App = require('./app.js'),
 App.initialize();
 Editor.initialize(window.flux.actions.updateMonsters);
 
+
+function receiveMessage(event) {
+    console.log("got message!");
+    console.log(event);
+    console.log(event.source);
+    console.log(event.data);
+    event.source.postMessage(event, event.origin);
+}
+
+window.addEventListener("message", receiveMessage, false);
+
 },{"./app.js":2,"./services/MonsterEditor":14}],12:[function(require,module,exports){
 var $ = require('jquery');
 var MonsterParser = require('./MonsterParser');
