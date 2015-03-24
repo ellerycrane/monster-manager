@@ -4,3 +4,4 @@ node_modules
 personal
 vector_art
 .DS_Store
+dist/.monster-manager*.js
