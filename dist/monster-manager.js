@@ -24,6 +24,7 @@ var React = require('react'),
     Fluxxor = require('fluxxor'),
     Stores = require('./stores/Stores.js'),
     Actions = require('./actions/Actions.js'),
+    MonsterParser = require('./services/MonsterParser'),
     MonsterManagerApplication = require('./components/MonsterManagerApplication.react.js');
 
 var initialize = function (monsterManagerContainerElement) {
@@ -44,7 +45,10 @@ var initialize = function (monsterManagerContainerElement) {
         monsterManagerContainerElement
     );
 
-    window.MonsterManager.updateMonsters = flux.actions.updateMonsters;
+    window.MonsterManager.updateMonsters = function(data){
+        monsters = MonsterParser.parseMonstersFromYaml(data);
+        flux.actions.updateMonsters(monsters);
+    }
 };
 
 window.MonsterManager = {
@@ -55,7 +59,7 @@ module.exports = {
     initialize: initialize
 };
 
-},{"./actions/Actions.js":1,"./components/MonsterManagerApplication.react.js":6,"./stores/Stores.js":15,"fluxxor":16,"react":287}],3:[function(require,module,exports){
+},{"./actions/Actions.js":1,"./components/MonsterManagerApplication.react.js":6,"./services/MonsterParser":12,"./stores/Stores.js":15,"fluxxor":16,"react":287}],3:[function(require,module,exports){
 var React = require("react");
 
 var MonsterAvatar = React.createClass({displayName: "MonsterAvatar",

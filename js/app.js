@@ -2,6 +2,7 @@ var React = require('react'),
     Fluxxor = require('fluxxor'),
     Stores = require('./stores/Stores.js'),
     Actions = require('./actions/Actions.js'),
+    MonsterParser = require('./services/MonsterParser'),
     MonsterManagerApplication = require('./components/MonsterManagerApplication.react.js');
 
 var initialize = function (monsterManagerContainerElement) {
@@ -22,7 +23,10 @@ var initialize = function (monsterManagerContainerElement) {
         monsterManagerContainerElement
     );
 
-    window.MonsterManager.updateMonsters = flux.actions.updateMonsters;
+    window.MonsterManager.updateMonsters = function(data){
+        monsters = MonsterParser.parseMonstersFromYaml(data);
+        flux.actions.updateMonsters(monsters);
+    }
 };
 
 window.MonsterManager = {
