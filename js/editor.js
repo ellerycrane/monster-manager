@@ -9,7 +9,7 @@ function receiveMessage(event) {
     console.log(event);
     console.log(event.source);
     console.log(event.data);
-    event.source.postMessage("Here is the data: "+event.data, event.origin);
+    event.source.postMessage({test:true, foo:'bar', app:App}, event.origin);
 }
 
 window.addEventListener("message", receiveMessage, false);
