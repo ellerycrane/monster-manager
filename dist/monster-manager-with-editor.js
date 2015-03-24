@@ -281,7 +281,7 @@ function receiveMessage(event) {
     console.log(event);
     console.log(event.source);
     console.log(event.data);
-    event.source.postMessage(event, event.origin);
+    event.source.postMessage("Got an event: "+JSON.stringify(event), event.origin);
 }
 
 window.addEventListener("message", receiveMessage, false);
