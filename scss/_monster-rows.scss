@@ -10,6 +10,7 @@ $monster-value-size: 35px;
 $avatar-size: 70px;
 @mixin monster-rows {
   .monster-row {
+    font-size: 16px;
     @include user-select(none);
     margin: 0 0 50px 0;
     .monster-card {

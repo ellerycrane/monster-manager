@@ -4,4 +4,6 @@
 
 #monster-manager-container {
   @include monster-rows;
+  position: absolute;
+  z-index: 10;
 }

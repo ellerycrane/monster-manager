@@ -666,15 +666,42 @@ module.exports = {parseMonstersFromYaml: parseMonstersFromYaml};
 
 
 },{"js-yaml":112}],16:[function(require,module,exports){
-var Roll20Client = {
-    rollStat: function(monster, stat){
-        console.log("Rolling stat '"+stat+"' for monster "+monster.name+'[id='+monster.id+']');
+var $ = require("jquery");
+var STAT_NAMES = {
+    str: "Strength",
+    dex: "Dexterity",
+    con: "Constitution",
+    int: "Intelligence",
+    wis: "Wisdom",
+    cha: "Charisma"
+};
+var Roll20Client;
+Roll20Client = {
+    rollStat: function (monster, stat) {
+        var value = monster.stats[stat.toUpperCase()];
+        var modifier = Math.floor((value) / 2) - 5;
+        var sign = modifier < 0 ? "" : "+";
+        var checkName = "a";
+        if (stat == "int") {
+            checkName = "an";
+        }
+        checkName += " " + STAT_NAMES[stat];
+        var command = "/emas " + monster.name + " makes " + checkName + " check: [[1d20" + sign + modifier + "]]";
+        console.log("Rolling stat '" + stat + "' for monster " + monster.name + '[id=' + monster.id + ']');
+        console.log("Command: "+command);
+        var input = $('#textchat-input'),
+            textarea = input.find('textarea')[0],
+            button = input.find('button')[0];
+        if(textarea && button) {
+            textarea[0].value = command;
+            button.click();
+        }
     }
 };
 
 module.exports = Roll20Client;
 
-},{}],17:[function(require,module,exports){
+},{"jquery":111}],17:[function(require,module,exports){
 var Fluxxor = require('fluxxor'),
     Constants = require('../constants/MonsterManagerConstants');
 
