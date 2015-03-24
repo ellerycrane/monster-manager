@@ -1,14 +1,20 @@
 var yaml = require('js-yaml');
 
+parseStatValue = function (values, index) {
+    if (values == null || values.length <= index || isNaN(values[index])) {
+        return 0;
+    }
+    return values[index];
+};
 var valueFunctions = {
-    stats: function(values){
+    stats: function (values) {
         return {
-            STR: values[0],
-            DEX: values[1],
-            CON: values[2],
-            INT: values[3],
-            WIS: values[4],
-            CHA: values[5]
+            STR: parseStatValue(values, 0),
+            DEX: parseStatValue(values, 1),
+            CON: parseStatValue(values, 2),
+            INT: parseStatValue(values, 3),
+            WIS: parseStatValue(values, 4),
+            CHA: parseStatValue(values, 5)
         };
     },
     attacks: function (data) {
@@ -30,12 +36,12 @@ var valueFunctions = {
             return result;
         });
     },
-    DEFAULT: function(value){
+    DEFAULT: function (value) {
         return value;
     }
 };
-var getValueFunction = function(key){
-    if(valueFunctions.hasOwnProperty(key)){
+var getValueFunction = function (key) {
+    if (valueFunctions.hasOwnProperty(key)) {
         return valueFunctions[key];
     }
     return valueFunctions.DEFAULT;
@@ -43,8 +49,14 @@ var getValueFunction = function(key){
 
 var parseMonster = function (monsterData) {
     var monster = {};
-    if(!monsterData.hasOwnProperty('stats')){
+    if (!monsterData.hasOwnProperty('stats')) {
         monsterData.stats = [10, 10, 10, 10, 10, 10];
+    }
+    if (!monsterData.hasOwnProperty('ac')) {
+        monsterData.ac = 0;
+    }
+    if (!monsterData.hasOwnProperty('hp')) {
+        monsterData.hp = 0;
     }
     for (var key in monsterData) {
         if (monsterData.hasOwnProperty(key)) {
@@ -54,11 +66,18 @@ var parseMonster = function (monsterData) {
     return monster;
 };
 
-var parseMonstersFromYaml = function(monsterYamlData){
+var isValidMonster = function (monsterDocument, key) {
+    return (typeof key == 'string' || key instanceof String) &&
+        monsterDocument[key] != null &&
+        typeof monsterDocument[key] == 'object';
+
+};
+
+var parseMonstersFromYaml = function (monsterYamlData) {
     var monsterDocument = yaml.safeLoad(monsterYamlData);
     var monsters = [];
     for (var key in monsterDocument) {
-        if (monsterDocument.hasOwnProperty(key)) {
+        if (monsterDocument.hasOwnProperty(key) && isValidMonster(monsterDocument, key)) {
             var monster = monsterDocument[key];
             monster.name = key;
             monster.id = monsters.length;

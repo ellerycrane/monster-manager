@@ -3,29 +3,27 @@ require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/css/css');
 require('codemirror/mode/htmlmixed/htmlmixed');
 
+var _ = require("underscore");
 var CodeMirror = require('codemirror/lib/codemirror');
 var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 
+
 var initialize = function (updateMonstersCallback) {
     var source, result, initial, permalink, timer1, timer2 = null,
         fallback = document.getElementById('source').value || '';
 
-    function parse() {
+    function _parse() {
         var str, monsters;
-
-        //try {
-
-            str = source.getValue();
-            permalink.href = '#yaml=' + base64.encode(str);
-            monsters = MonsterParser.parseMonstersFromYaml(str);
-            updateMonstersCallback(monsters);
-        //} catch (err) {
-        //    console.log("Error!! ");
-        //    console.log(err);
-        //}
+        str = source.getValue();
+        permalink.href = '#yaml=' + base64.encode(str);
+        monsters = MonsterParser.parseMonstersFromYaml(str);
+        updateMonstersCallback(monsters);
     }
+
+    var parse = _.debounce(_parse, 500);
+
 
     function updateSource() {
         var yaml;
@@ -35,7 +33,6 @@ var initialize = function (updateMonstersCallback) {
         }
 
         source.setValue(yaml || fallback);
-        parse();
     }
 
     permalink = document.getElementById('permalink');
@@ -46,27 +43,17 @@ var initialize = function (updateMonstersCallback) {
         undoDepth: 1
     });
     source.on("change", function (instance, changeObj) {
-        window.clearTimeout(timer1);
-        timer1 = window.setTimeout(parse, 500);
-
-        if (null === timer2) {
-            timer2 = setTimeout(function () {
-                window.clearTimeout(timer1);
-                window.clearTimeout(timer2);
-                timer2 = null;
-                parse();
-            }, 1000);
-        }
+        parse();
     });
     source.setOption("extraKeys", {
-        Tab: function(cm) {
+        Tab: function (cm) {
             var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
             cm.replaceSelection(spaces);
         }
     });
 
     // initial source
-    updateSource();
+    _parse();
 
     // start monitor hash change
     hasher.prependHash = '';

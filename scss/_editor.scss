@@ -1,5 +1,5 @@
 @import "CSS:../node_modules/codemirror/lib/codemirror";
-@import "CSS:../node_modules/codemirror/theme/monokai";
+//@import "CSS:../node_modules/codemirror/theme/monokai";
 
 .editor {
   width: 49%;
@@ -29,6 +29,7 @@
   border-radius: 3px;
   box-shadow: 0 0 3px #ccc inset;
   height: 95%;
+  clear: both;
 }
 
 .CodeMirror-scroll {

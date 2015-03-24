@@ -16,7 +16,8 @@ module.exports = function (grunt) {
                     keepalive: false
                 },
                 files: {
-                    'dist/monster-manager.js': ['js/app.js']
+                    'dist/monster-manager.js': ['js/app.js'],
+                    'dist/monster-manager-with-editor.js': ['js/editor.js']
                 }
             }
         },
@@ -28,8 +29,8 @@ module.exports = function (grunt) {
                 keepalive: true
             },
             default: {
-                src: './js/app.js',
-                dest: './dist/monster-manager.js'
+                src: './js/editor.js',
+                dest: './dist/monster-manager-with-editor.js'
             }
         },
 
@@ -43,7 +44,8 @@ module.exports = function (grunt) {
             },
             dist: {
                 files: {
-                    'dist/monster-manager.min.js': 'dist/monster-manager.js'
+                    'dist/monster-manager.min.js': 'dist/monster-manager.js',
+                    'dist/monster-manager-with-editor.min.js': 'dist/monster-manager-with-editor.js'
                 }
             }
 

@@ -2,21 +2,31 @@ var React = require('react'),
     Fluxxor = require('fluxxor'),
     Stores = require('./stores/Stores.js'),
     Actions = require('./actions/Actions.js'),
-    Editor = require('./services/MonsterEditor');
+    MonsterManagerApplication = require('./components/MonsterManagerApplication.react.js');
 
-var flux = new Fluxxor.Flux(Stores, Actions);
-flux.on("dispatch", function(type, payload) {
-    if (console && console.log) {
-        console.log("[Dispatch]", type, payload);
+var initialize = function (monsterManagerContainerElement) {
+    if(!monsterManagerContainerElement){
+        monsterManagerContainerElement = document.getElementById('monster-manager-container');
     }
-});
-window.React = React;
-window.flux = flux;
-var MonsterManagerApplication = require('./components/MonsterManagerApplication.react.js');
+    var flux = new Fluxxor.Flux(Stores, Actions);
+    flux.on("dispatch", function (type, payload) {
+        if (console && console.log) {
+            console.log("[Dispatch]", type, payload);
+        }
+    });
+    window.React = React;
+    window.flux = flux;
 
-React.render(
-    <MonsterManagerApplication flux={flux} />,
-    document.getElementById('monster-manager-container')
-);
+    React.render(
+        <MonsterManagerApplication flux={flux} />,
+        monsterManagerContainerElement
+    );
+};
 
-Editor.initialize(flux.actions.updateMonsters);
+window.MonsterManager = {
+    initialize: initialize
+};
+
+module.exports = {
+    initialize: initialize
+};

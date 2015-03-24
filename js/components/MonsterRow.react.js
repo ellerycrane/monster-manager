@@ -3,26 +3,26 @@ var React = require("react"),
     StatValue = require('./StatValue.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
+var STATS = ['str','dex','con','int','wis','cha'];
+
 var MonsterRow = React.createClass({
     render: function () {
         var m = this.props.monster;
+        var statValues = STATS.map(function(stat){
+            return <StatValue stat={stat} key={m.id+'-'+stat} monster={m} />;
+        });
         return (
             <div className="monster-row">
                 <div className="monster-card">
                     <MonsterAvatar monster={m} />
                     <div className="monster-card-values">
-                        <MonsterValue className="hp" value={m.hp} />
-                        <MonsterValue className="ac" value={m.ac} />
+                        <MonsterValue key="hp" className="hp" value={m.hp} />
+                        <MonsterValue key="ac" className="ac" value={m.ac} />
                     </div>
                     <div className="card-border">
                         <div className="monster-name">{m.name}</div>
                         <div className="body">
-                            <StatValue stat="str" monster={m} />
-                            <StatValue stat="dex" monster={m} />
-                            <StatValue stat="con" monster={m} />
-                            <StatValue stat="int" monster={m} />
-                            <StatValue stat="wis" monster={m} />
-                            <StatValue stat="cha" monster={m} />
+                            {statValues}
                         </div>
                     </div>
                 </div>
