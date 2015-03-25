@@ -1,19 +1,19 @@
+var root = "https://ellerycrane.github.io/monster-manager/";
 var head = document.getElementsByTagName('head')[0];
 var css = document.createElement("link");
 css.rel = "stylesheet";
 css.type = "text/css";
-css.href = "https://ellerycrane.github.io/monster-manager/dist/css/monster-manager.css";
+css.href = root+"dist/css/monster-manager.css";
 head.appendChild(css);
 var container = document.createElement("div");
 container.id = "monster-manager-container";
 var body = document.getElementsByTagName('body')[0];
 body.insertBefore(container, body.childNodes[0]);
-
 function onMonsterManagerLoad(event) {
     if (event.data.monsterManagerLoaded) {
         console.log("Loaded!");
         event.source.postMessage({
-            url: "https://ellerycrane.github.io/monster-manager/dist/monster-manager.js",
+            url: root+"dist/monster-manager.js",
             type: "js"
         }, event.origin);
     }
@@ -27,7 +27,7 @@ function evalData(event) {
         eval(event.data.data);
         window.MonsterManager.initialize();
         event.source.postMessage({
-            url: "https://ellerycrane.github.io/monster-manager/test.yaml",
+            url: root+"test.yaml",
             type: "yaml"
         }, event.origin);
     }
@@ -40,5 +40,5 @@ window.addEventListener("message", evalData, false);
 var iframe = document.createElement("iframe");
 iframe.style.display="none";
 iframe.id = "monster-manager-iframe";
-iframe.src = "https://ellerycrane.github.io/monster-manager/loader.html";
+iframe.src = root+"loader.html";
 document.getElementsByTagName('body')[0].appendChild(iframe);

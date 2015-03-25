@@ -8,11 +8,16 @@ var CodeMirror = require('codemirror/lib/codemirror');
 var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
+var BookmarkletGenerator = require('../services/BookmarkletGenerator');
 
 
 var initialize = function (updateMonstersCallback) {
-    var source, result, initial, permalink, timer1, timer2 = null,
+    var source,
+        permalink,
+        bookmarkletLink = document.getElementById('bookmarklet-link'),
         fallback = document.getElementById('source').value || '';
+
+    bookmarkletLink.href = BookmarkletGenerator.generated;
 
     function _parse() {
         var str, monsters;

@@ -4,12 +4,21 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Monster Manager</title>
-    <link rel="stylesheet" type="text/css" href="dist/css/monster-manager.css" />
+    <link rel="stylesheet" type="text/css" href="dist/css/monster-manager.css"/>
 </head>
-<body>
-<div id="monster-manager-container"></div>
-<div class="editor">
-    <h5>Edit monster data here: <a href="#" id="permalink">permalink</a></h5>
+<body class="monster-manager-landing">
+<div class="masthead">
+    <div id="bookmarklet-container">
+        <a id="bookmarklet-link" title="Monster Manager">Monster Manager</a>
+
+        <p class="instructions">Drag button above to browser toolbar to install</p>
+    </div>
+</div>
+<div class="content">
+    <div id="monster-manager-container"></div>
+
+    <div class="editor">
+        <h5>Edit monster data here: <a href="#" id="permalink">permalink</a></h5>
 <textarea id="source">Kobold:
   ac: 12
   hp: 5
@@ -90,6 +99,7 @@ Tyrannosaurus Rex:
     - 2
     - 8
 </textarea>
+    </div>
 </div>
 <!--<script type="text/javascript" src="dist/monster-manager.min.js"></script>-->
 <script type="text/javascript" src="dist/monster-manager-with-editor.js"></script>
