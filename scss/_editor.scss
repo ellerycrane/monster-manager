@@ -1,61 +1,48 @@
 @import "CSS:../node_modules/codemirror/lib/codemirror";
-//@import "CSS:../node_modules/codemirror/theme/monokai";
+@import "compass/css3";
 
-.monster-manager-landing{
-  margin: 0;
-  position: absolute;
-  width: 100%;
-  height: 100%;
+@mixin monster-editor($masthead-vertical-space, $content-vertical-padding) {
+  $content-header-height: 30px;
+  $content-header-bottom-padding: 5px;
+  $content-header-vertical-space: $content-header-height+$content-header-bottom-padding;
+  $code-mirror-offset: $masthead-vertical-space+(2*$content-vertical-padding)+$content-header-vertical-space;
+  $code-mirror-height: calc(100vh - #{$code-mirror-offset});
 
-  .masthead {
-    height: 120px;
-    width: 100%;
-    position: relative;
+  #source {
+    display: none;
   }
-  .content{
-    position: relative;
-    padding: 10px;
-    height:100%;
+  .editor {
+    @include display-flex;
+    @include flex-direction(column);
+
+    h5 {
+      @include display-flex;
+      @include justify-content(space-between);
+      padding: 0 0 $content-header-bottom-padding 0;
+      height: $content-header-height;
+      line-height: $content-header-height;
+      font-family: verdana, sans-serif;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .CodeMirror {
+      @include flex(1);
+      background-color: #fffffb;
+      border: 1px solid #888;
+      border-radius: 3px;
+      box-shadow: 0 0 3px #ccc inset;
+      height: $code-mirror-height;
+
+      &.cm-s-default span.cm-comment {
+        color: #baa;
+      }
+      .CodeMirror-scroll {
+        height: $code-mirror-height;
+        line-height: 1.2;
+      }
+    }
   }
-}
-
-
-.editor {
-  position: fixed;
-  width: 48%;
-  margin-left: 50%;
-  font-family: verdana, sans-serif;
-
-  h5 {
-    font-size: 16px;
-    font-weight: normal;
-    line-height: 30px;
-    margin: 0;
-    font-style: italic;
-    height: 5%;
-
-  }
-  #permalink {
-    float: right;
-  }
-}
-
-.CodeMirror {
-  background-color: #fffffb;
-  border: 1px solid #888;
-  border-radius: 3px;
-  box-shadow: 0 0 3px #ccc inset;
-  height: 95%;
-  max-height: 600px;
-  clear: both;
-}
-
-.CodeMirror-scroll {
-  height: 95%;
-  max-height: 600px;
-  line-height: 1.2;
-}
-
-.cm-s-default span.cm-comment {
-  color: #baa;
 }

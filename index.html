@@ -5,105 +5,32 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Monster Manager</title>
     <link rel="stylesheet" type="text/css" href="dist/css/monster-manager.css"/>
+    <link rel="stylesheet" type="text/css" href="dist/css/monster-manager-landing-page.css"/>
 </head>
 <body class="monster-manager-landing">
-<div class="masthead">
-    <div id="bookmarklet-container">
-        <a id="bookmarklet-link" title="Monster Manager">Monster Manager</a>
 
-        <p class="instructions">Drag button above to browser toolbar to install</p>
-    </div>
+<div class="masthead">
+    <a id="bookmarklet-link" title="Monster Manager">Monster Manager</a>
+
+    <p class="instructions">Drag button above to browser toolbar to install</p>
 </div>
 <div class="content">
-    <div id="monster-manager-container"></div>
-
-    <div class="editor">
-        <h5>Edit monster data here: <a href="#" id="permalink">permalink</a></h5>
-<textarea id="source">Kobold:
-  ac: 12
-  hp: 5
-  speed: 30 ft.
-  stats:
-    - 7
-    - 15
-    - 9
-    - 8
-    - 7
-    - 8
-  attacks:
-    - Dagger: +4, 1d4+2 piercing
-    - Sling: +4, 1d4+2 bludgeoning
-  statblock: http://i.imgur.com/02uwl0S.png
-  avatar: http://i.imgur.com/S7DE0hg.png?1
-
-Winged Kobold:
-  ac: 13
-  hp: 7
-  speed: 30 ft., fly 30 ft.
-  stats:
-    - 7
-    - 16
-    - 9
-    - 8
-    - 7
-    - 8
-  senses:
-    - darkvision 60 ft.
-  attacks:
-    - Dagger: +5, 1d4+3 piercing
-    - Dropped Rock: +5, 1d6+3 bludgeoning
-  statblock: http://i.imgur.com/VTGR6KR.png
-  avatar: http://i.imgur.com/X9kAhJ7.jpg?1
-
-Cloaker:
-  ac: 14
-  hp: 78
-  speed: 10 ft., fly 40 ft.
-  stats:
-    - 17
-    - 15
-    - 12
-    - 13
-    - 12
-    - 14
-  skills:
-    - Stealth: +5
-  senses:
-    - darkvision 60 ft.
-  avatar: http://i.imgur.com/SdTKfBM.jpg?1
-  attacks:
-    - Bite: +6, 2d6+3 piercing
-    - Tail: +6, 1d8+3 slashing
-
-Cthulhu:
-  ac: 25
-  hp: 615
-  speed: 60 ft., fly 120ft.
-  stats:
-    - 30
-    - 10
-    - 30
-    - 26
-    - 26
-    - 28
-  avatar: http://i.imgur.com/EyUFdjO.jpg
-
-Tyrannosaurus Rex:
-  ac: 10
-  hp: 163
-  stats:
-    - 30
-    - 10
-    - 30
-    - 1
-    - 2
-    - 8
-</textarea>
+    <div class="left">
+        <div class="manager-position-fix">
+            <div id="monster-manager-container"></div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="editor">
+            <h5>Edit monster data here: <a href="#" id="permalink">permalink</a></h5>
+            <textarea id="source"></textarea>
+        </div>
     </div>
 </div>
-<!--<script type="text/javascript" src="dist/monster-manager.min.js"></script>-->
-<script type="text/javascript" src="dist/monster-manager-with-editor.js"></script>
+
 <!--<script type="text/javascript" src="dist/monster-manager-with-editor.min.js"></script>-->
+<script type="text/javascript" src="dist/monster-manager-with-editor.js"></script>
+
 </body>
 </html>
 

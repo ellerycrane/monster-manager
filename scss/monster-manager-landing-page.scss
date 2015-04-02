@@ -1,0 +1,5 @@
+@import 'landing-page';
+
+.monster-manager-landing{
+  @include landing-page;
+}

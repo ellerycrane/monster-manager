@@ -529,54 +529,49 @@ require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/css/css');
 require('codemirror/mode/htmlmixed/htmlmixed');
 
+
 var _ = require("underscore");
 var CodeMirror = require('codemirror/lib/codemirror');
 var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 var BookmarkletGenerator = require('../services/BookmarkletGenerator');
-
+var INITIAL_MONSTER_DATA = "Kobold:\n  ac: 12\n  hp: 5\n  speed: 30 ft.\n  stats:\n    - 7\n    - 15\n    - 9\n    - 8\n    - 7\n    - 8\n  attacks:\n    - Dagger: +4, 1d4+2 piercing\n    - Sling: +4, 1d4+2 bludgeoning\n  statblock: http://i.imgur.com/02uwl0S.png\n  avatar: http://i.imgur.com/S7DE0hg.png?1\n\nWinged Kobold:\n  ac: 13\n  hp: 7\n  speed: 30 ft., fly 30 ft.\n  stats:\n    - 7\n    - 16\n    - 9\n    - 8\n    - 7\n    - 8\n  senses:\n    - darkvision 60 ft.\n  attacks:\n    - Dagger: +5, 1d4+3 piercing\n    - Dropped Rock: +5, 1d6+3 bludgeoning\n  statblock: http://i.imgur.com/VTGR6KR.png\n  avatar: http://i.imgur.com/X9kAhJ7.jpg?1\n\nCloaker:\n  ac: 14\n  hp: 78\n  speed: 10 ft., fly 40 ft.\n  stats:\n    - 17\n    - 15\n    - 12\n    - 13\n    - 12\n    - 14\n  skills:\n    - Stealth: +5\n  senses:\n    - darkvision 60 ft.\n  avatar: http://i.imgur.com/SdTKfBM.jpg?1\n  attacks:\n    - Bite: +6, 2d6+3 piercing\n    - Tail: +6, 1d8+3 slashing\n\nCthulhu:\n  ac: 25\n  hp: 615\n  speed: 60 ft., fly 120ft.\n  stats:\n    - 30\n    - 10\n    - 30\n    - 26\n    - 26\n    - 28\n  avatar: http://i.imgur.com/EyUFdjO.jpg\n\nTyrannosaurus Rex:\n  ac: 10\n  hp: 163\n  stats:\n    - 30\n    - 10\n    - 30\n    - 1\n    - 2\n    - 8";
 
 var initialize = function (updateMonstersCallback) {
-    var source,
-        permalink,
-        bookmarkletLink = document.getElementById('bookmarklet-link'),
-        fallback = document.getElementById('source').value || '';
+    var codeMirrorEditor,
+        permalink = document.getElementById('permalink'),
+        fallback = INITIAL_MONSTER_DATA || '',
+        sourceTextArea = document.getElementById('source'),
+        bookmarkletLink = document.getElementById('bookmarklet-link');
 
+    sourceTextArea.innerHTML = INITIAL_MONSTER_DATA;
     bookmarkletLink.href = BookmarkletGenerator.generated;
 
-    function _parse() {
+    var _parse = function() {
         var str, monsters;
-        str = source.getValue();
+        str = codeMirrorEditor.getValue();
         permalink.href = '#yaml=' + base64.encode(str);
         monsters = MonsterParser.parseMonstersFromYaml(str);
         updateMonstersCallback(monsters);
-    }
-
+    };
     var parse = _.debounce(_parse, 500);
-
-
-    function updateSource() {
+    var updateSource = function() {
         var yaml;
-
         if (location.hash && '#yaml=' === location.hash.toString().slice(0, 6)) {
             yaml = base64.decode(location.hash.slice(6));
         }
-
-        source.setValue(yaml || fallback);
-    }
-
-    permalink = document.getElementById('permalink');
-
-    source = CodeMirror.fromTextArea(document.getElementById('source'), {
+        codeMirrorEditor.setValue(yaml || fallback);
+    };
+    codeMirrorEditor = CodeMirror.fromTextArea(sourceTextArea, {
         mode: 'yaml',
         //theme: 'monokai',
         undoDepth: 1
     });
-    source.on("change", function (instance, changeObj) {
+    codeMirrorEditor.on("change", function (instance, changeObj) {
         parse();
     });
-    source.setOption("extraKeys", {
+    codeMirrorEditor.setOption("extraKeys", {
         Tab: function (cm) {
             var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
             cm.replaceSelection(spaces);

@@ -3,54 +3,49 @@ require('codemirror/mode/javascript/javascript');
 require('codemirror/mode/css/css');
 require('codemirror/mode/htmlmixed/htmlmixed');
 
+var fs = require('fs');
 var _ = require("underscore");
 var CodeMirror = require('codemirror/lib/codemirror');
 var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 var BookmarkletGenerator = require('../services/BookmarkletGenerator');
-
+var INITIAL_MONSTER_DATA = fs.readFileSync(__dirname + '/../../test.yaml', 'utf8');
 
 var initialize = function (updateMonstersCallback) {
-    var source,
-        permalink,
-        bookmarkletLink = document.getElementById('bookmarklet-link'),
-        fallback = document.getElementById('source').value || '';
+    var codeMirrorEditor,
+        permalink = document.getElementById('permalink'),
+        fallback = INITIAL_MONSTER_DATA || '',
+        sourceTextArea = document.getElementById('source'),
+        bookmarkletLink = document.getElementById('bookmarklet-link');
 
+    sourceTextArea.innerHTML = INITIAL_MONSTER_DATA;
     bookmarkletLink.href = BookmarkletGenerator.generated;
 
-    function _parse() {
+    var _parse = function() {
         var str, monsters;
-        str = source.getValue();
+        str = codeMirrorEditor.getValue();
         permalink.href = '#yaml=' + base64.encode(str);
         monsters = MonsterParser.parseMonstersFromYaml(str);
         updateMonstersCallback(monsters);
-    }
-
+    };
     var parse = _.debounce(_parse, 500);
-
-
-    function updateSource() {
+    var updateSource = function() {
         var yaml;
-
         if (location.hash && '#yaml=' === location.hash.toString().slice(0, 6)) {
             yaml = base64.decode(location.hash.slice(6));
         }
-
-        source.setValue(yaml || fallback);
-    }
-
-    permalink = document.getElementById('permalink');
-
-    source = CodeMirror.fromTextArea(document.getElementById('source'), {
+        codeMirrorEditor.setValue(yaml || fallback);
+    };
+    codeMirrorEditor = CodeMirror.fromTextArea(sourceTextArea, {
         mode: 'yaml',
         //theme: 'monokai',
         undoDepth: 1
     });
-    source.on("change", function (instance, changeObj) {
+    codeMirrorEditor.on("change", function (instance, changeObj) {
         parse();
     });
-    source.setOption("extraKeys", {
+    codeMirrorEditor.setOption("extraKeys", {
         Tab: function (cm) {
             var spaces = Array(cm.getOption("indentUnit") + 1).join(" ");
             cm.replaceSelection(spaces);

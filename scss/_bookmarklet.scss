@@ -3,16 +3,6 @@
 @import "typography";
 
 @mixin bookmarklet {
-  text-align: center;
-  height: 90px;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 10px 0;
-  z-index: 999999999;
-  background-color: white;
-  @include box-shadow(1px 1px 8px #ccc);
-
   #bookmarklet-link{
     display: inline-block;
     @include user-select(none);
@@ -30,9 +20,9 @@
     font-size: 21px;
     border: 1px solid #ccc;
     @include background-image(linear-gradient(white, #f8f8f8 80%, #eee 90%));
-
   }
   .instructions{
     @include body-font;
+    margin: 0;
   }
 }
