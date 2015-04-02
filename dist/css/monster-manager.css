@@ -622,10 +622,55 @@ span.CodeMirror-selectedtext {
   color: #baa;
 }
 
-/* line 6, ../../scss/monster-manager.scss */
+/* line 7, ../../scss/monster-manager.scss */
 #monster-manager-container {
   position: absolute;
   z-index: 100000;
+}
+/* line 40, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container div, #monster-manager-container span, #monster-manager-container applet, #monster-manager-container object, #monster-manager-container iframe,
+#monster-manager-container h1, #monster-manager-container h2, #monster-manager-container h3, #monster-manager-container h4, #monster-manager-container h5, #monster-manager-container h6, #monster-manager-container p, #monster-manager-container blockquote, #monster-manager-container pre,
+#monster-manager-container a, #monster-manager-container abbr, #monster-manager-container acronym, #monster-manager-container address, #monster-manager-container big, #monster-manager-container cite, #monster-manager-container code,
+#monster-manager-container del, #monster-manager-container dfn, #monster-manager-container em, #monster-manager-container img, #monster-manager-container ins, #monster-manager-container kbd, #monster-manager-container q, #monster-manager-container s, #monster-manager-container samp,
+#monster-manager-container small, #monster-manager-container strike, #monster-manager-container strong, #monster-manager-container sub, #monster-manager-container sup, #monster-manager-container tt, #monster-manager-container var,
+#monster-manager-container b, #monster-manager-container u, #monster-manager-container i, #monster-manager-container center,
+#monster-manager-container dl, #monster-manager-container dt, #monster-manager-container dd, #monster-manager-container ol, #monster-manager-container ul, #monster-manager-container li,
+#monster-manager-container fieldset, #monster-manager-container form, #monster-manager-container label, #monster-manager-container legend,
+#monster-manager-container table, #monster-manager-container caption, #monster-manager-container tbody, #monster-manager-container tfoot, #monster-manager-container thead, #monster-manager-container tr, #monster-manager-container th, #monster-manager-container td,
+#monster-manager-container article, #monster-manager-container aside, #monster-manager-container canvas, #monster-manager-container details, #monster-manager-container embed,
+#monster-manager-container figure, #monster-manager-container figcaption, #monster-manager-container footer, #monster-manager-container header, #monster-manager-container hgroup,
+#monster-manager-container menu, #monster-manager-container nav, #monster-manager-container output, #monster-manager-container ruby, #monster-manager-container section, #monster-manager-container summary,
+#monster-manager-container time, #monster-manager-container mark, #monster-manager-container audio, #monster-manager-container video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+/* line 55, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+/* line 57, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container caption, #monster-manager-container th, #monster-manager-container td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+/* line 59, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container q, #monster-manager-container blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container q:before, #monster-manager-container q:after, #monster-manager-container blockquote:before, #monster-manager-container blockquote:after {
+  content: "";
+  content: none;
+}
+/* line 61, ../../../../../../Library/Ruby/Gems/2.0.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
+#monster-manager-container a img {
+  border: none;
 }
 /* line 12, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row {
@@ -780,6 +825,7 @@ span.CodeMirror-selectedtext {
   font-family: "Rokkitt", serif;
   padding: 8px 0 0 0;
   text-align: center;
+  line-height: normal;
 }
 /* line 6, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value {
@@ -843,12 +889,12 @@ span.CodeMirror-selectedtext {
   background-color: rgba(165, 150, 46, 0.48);
 }
 
-/* line 12, ../../scss/monster-manager.scss */
+/* line 14, ../../scss/monster-manager.scss */
 .no-touch #monster-manager-container {
   left: 200px;
 }
 
-/* line 16, ../../scss/monster-manager.scss */
+/* line 18, ../../scss/monster-manager.scss */
 #bookmarklet-container {
   text-align: center;
   height: 90px;

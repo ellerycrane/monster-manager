@@ -1,9 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt|Libre+Baskerville:700|Alegreya+Sans:900);
+@import "compass/reset/utilities";
 @import 'monster-rows';
 @import 'editor';
 @import 'bookmarklet';
 
 #monster-manager-container {
+  @include nested-reset;
   @include monster-rows;
   position: absolute;
   z-index: 100000;
