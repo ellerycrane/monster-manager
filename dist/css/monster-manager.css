@@ -49,7 +49,7 @@
 #monster-manager-container a img {
   border: none;
 }
-/* line 12, ../../scss/_monster-rows.scss */
+/* line 13, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row {
   font-size: 16px;
   -moz-user-select: -moz-none;
@@ -58,12 +58,117 @@
   user-select: none;
   margin: 0 0 50px 0;
 }
-/* line 16, ../../scss/_monster-rows.scss */
+/* line 6, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .action-shelf {
+  font-family: "Rokkitt", serif;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 15px 5px 5px 5px;
+  z-index: -10;
+  width: 452px;
+  height: auto;
+  background-color: #F7F6F3;
+  border: 1px solid #a5962e;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  vertical-align: middle;
+  backface-visibility: hidden;
+  -moz-osx-font-smoothing: grayscale;
+  transition: all 250ms ease-out;
+  transition-property: transform, opacity;
+  transform: translateY(0%) scaleY(0);
+  opacity: 0;
+}
+/* line 27, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .action-shelf p {
+  margin: 2px 2px 2px 5px;
+}
+/* line 32, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .monster-card:hover {
+  z-index: 10;
+}
+/* line 34, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .monster-card:hover .action-shelf {
+  transform: translateY(100%) scaleY(1);
+  opacity: 1;
+}
+/* line 39, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .monster-card:hover .avatar,
+#monster-manager-container .monster-row .monster-card:hover .monster-card-values {
+  -moz-transform: scale(1.2, 1.2);
+  -ms-transform: scale(1.2, 1.2);
+  -webkit-transform: scale(1.2, 1.2);
+  transform: scale(1.2, 1.2);
+}
+/* line 44, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .monster-card:hover .avatar {
+  -moz-animation: green-pulse 1.5s ease-in-out infinite;
+  -webkit-animation: green-pulse 1.5s ease-in-out infinite;
+  animation: green-pulse 1.5s ease-in-out infinite;
+}
+/* line 49, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .avatar,
+#monster-manager-container .monster-row .monster-card-values {
+  transition: all 250ms ease-out;
+}
+@-moz-keyframes green-pulse {
+  0% {
+    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+  50% {
+    -moz-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+  }
+  100% {
+    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+}
+@-webkit-keyframes green-pulse {
+  0% {
+    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+  50% {
+    -webkit-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+  }
+  100% {
+    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+}
+@keyframes green-pulse {
+  0% {
+    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+  50% {
+    -moz-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    -webkit-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+  }
+  100% {
+    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+  }
+}
+/* line 18, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card {
   position: relative;
   margin-top: 25px;
+  width: 482px;
+  z-index: 1;
 }
-/* line 19, ../../scss/_monster-rows.scss */
+/* line 23, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .card-border {
   width: 370px;
   height: 65px;
@@ -74,8 +179,11 @@
   -moz-border-radius: 10px / 10px;
   -webkit-border-radius: 10px 10px;
   border-radius: 10px / 10px;
+  -moz-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
 }
-/* line 28, ../../scss/_monster-rows.scss */
+/* line 33, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .avatar {
   width: 70px;
   height: 70px;
@@ -88,14 +196,14 @@
   padding: 4px;
   background-color: #fff;
   border: 3px solid #999999;
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
   position: absolute;
-  left: 10px;
+  margin: 0 10px;
   top: -20px;
 }
-/* line 20, ../../scss/_avatars.scss */
+/* line 18, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar div {
   width: 100%;
   height: 100%;
@@ -103,26 +211,26 @@
   -webkit-border-radius: 500px 500px;
   border-radius: 500px / 500px;
 }
-/* line 26, ../../scss/_avatars.scss */
+/* line 24, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image {
   background-size: cover;
   background-origin: content-box;
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
-/* line 31, ../../scss/_avatars.scss */
+/* line 29, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image.missing {
   background-image: url(../img/missing-avatar.svg);
   background-size: 80px;
   background-position: top;
 }
-/* line 38, ../../scss/_avatars.scss */
+/* line 36, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .cover {
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 34, ../../scss/_monster-rows.scss */
+/* line 39, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-name {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -140,10 +248,11 @@
   text-align: center;
   padding: 2px 5px;
 }
-/* line 43, ../../scss/_monster-rows.scss */
+/* line 48, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values {
   position: absolute;
-  width: 105px;
+  width: 100px;
+  padding: 0 2px;
   top: 35px;
 }
 /* line 38, ../../scss/_monster-values.scss */
@@ -189,15 +298,15 @@
          and nice enhancement for WebKit */
   font-size: 26px;
 }
-/* line 48, ../../scss/_monster-rows.scss */
+/* line 54, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .hp {
   float: left;
 }
-/* line 51, ../../scss/_monster-rows.scss */
+/* line 57, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .ac {
   float: right;
 }
-/* line 55, ../../scss/_monster-rows.scss */
+/* line 61, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .body {
   font-family: "Rokkitt", serif;
   padding: 8px 0 0 0;

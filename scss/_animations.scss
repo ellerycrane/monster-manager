@@ -1,0 +1,85 @@
+@import "compass/css3";
+@import "compass/utilities";
+@import "typography";
+
+@mixin animations {
+  .action-shelf {
+    @include body-font;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 15px 5px 5px 5px;
+    z-index: -10;
+    width: 452px;
+    height: auto;
+    background-color: #F7F6F3;
+    border: 1px solid rgb(165, 150, 46);
+    @include border-radius(10px);
+    @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
+    vertical-align: middle;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    transition: all 250ms ease-out;
+    transition-property: transform, opacity;
+    transform: translateY(0%) scaleY(0);
+    opacity: 0;
+
+    p {
+      margin: 2px 2px 2px 5px;
+    }
+
+  }
+  .monster-card:hover {
+    z-index: 10;
+    .action-shelf {
+      transform: translateY(100%) scaleY(1);
+      opacity: 1;
+    }
+
+    .avatar,
+    .monster-card-values{
+      @include scale(1.2, 1.2);
+    }
+
+    .avatar {
+      @include animation(green-pulse 1.5s ease-in-out infinite);
+    }
+  }
+
+  .avatar,
+  .monster-card-values {
+    transition: all 250ms ease-out;
+  }
+
+  $start-glow: //inset 1px 2px 3px rgba(0, 0, 0, 0.2),
+  -1px 0px 2px 0.5px #fff,
+  0px 0px 1px 2px #08ff35,
+  0 0 2px #08ff35,
+  0 0 4px #08ff35,
+  1px 1px 7px #08ff35,
+  0 -1px 9px #08ff35,
+  0 -1px 10px #08ff35,
+  1px 0 12px #58ba0c;
+
+  $end-glow: //inset 1px 2px 3px rgba(0, 0, 0, 0.2),
+  1px -1px 2px 0.5px #fff,
+  0px 0px 2px 4px #08ff35,
+  0 0 4px #08ff35,
+  0 0 7px #08ff35,
+  0 0 8px #08ff35,
+  -1px 1px 10px #08ff35,
+  -1px 0 15px #08ff35,
+  0 1px 17px #58ba0c;
+
+  @include keyframes(green-pulse) {
+    0% {
+      @include box-shadow($start-glow);
+    }
+    50% {
+      @include box-shadow($end-glow);
+    }
+    100% {
+      @include box-shadow($start-glow);
+    }
+  }
+}

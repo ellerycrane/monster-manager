@@ -155,13 +155,30 @@ var React = require("react"),
     StatValue = require('./StatValue.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
-var STATS = ['str','dex','con','int','wis','cha'];
+var STATS = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
 var MonsterRow = React.createClass({displayName: "MonsterRow",
+    getInitialState: function() {
+        return {actions: []};
+    },
+
+    //handleOnMouseEnter: function () {
+    //    console.log("onMouseEnter called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: [true]});
+    //},
+    //handleOnMouseLeave: function () {
+    //    console.log("onMouseLeave called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: []});
+    //},
+
     render: function () {
         var m = this.props.monster;
-        var statValues = STATS.map(function(stat){
-            return React.createElement(StatValue, {stat: stat, key: m.id+'-'+stat, monster: m});
+        var statValues = STATS.map(function (stat) {
+            return React.createElement(StatValue, {stat: stat, key: m.id + '-' + stat, monster: m});
+        });
+
+        var actions = m.attacks.map(function(attack){
+            return React.createElement("p", null, attack.name)
         });
         return (
             React.createElement("div", {className: "monster-row"}, 
@@ -176,7 +193,11 @@ var MonsterRow = React.createClass({displayName: "MonsterRow",
                         React.createElement("div", {className: "body"}, 
                             statValues
                         )
+                    ), 
+                    React.createElement("div", {className: "action-shelf"}, 
+                        actions
                     )
+
                 )
             )
         );
@@ -331,6 +352,7 @@ var valueFunctions = {
                     }
                     result['toHit'] = toHit;
                     result['damage'] = damage;
+                    result['name'] = key;
                 }
             }
             return result;
@@ -357,6 +379,9 @@ var parseMonster = function (monsterData) {
     }
     if (!monsterData.hasOwnProperty('hp')) {
         monsterData.hp = 0;
+    }
+    if (!monsterData.hasOwnProperty('attacks')) {
+        monsterData.attacks = [];
     }
     for (var key in monsterData) {
         if (monsterData.hasOwnProperty(key)) {

@@ -155,13 +155,30 @@ var React = require("react"),
     StatValue = require('./StatValue.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
-var STATS = ['str','dex','con','int','wis','cha'];
+var STATS = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
 var MonsterRow = React.createClass({displayName: "MonsterRow",
+    getInitialState: function() {
+        return {actions: []};
+    },
+
+    //handleOnMouseEnter: function () {
+    //    console.log("onMouseEnter called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: [true]});
+    //},
+    //handleOnMouseLeave: function () {
+    //    console.log("onMouseLeave called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: []});
+    //},
+
     render: function () {
         var m = this.props.monster;
-        var statValues = STATS.map(function(stat){
-            return React.createElement(StatValue, {stat: stat, key: m.id+'-'+stat, monster: m});
+        var statValues = STATS.map(function (stat) {
+            return React.createElement(StatValue, {stat: stat, key: m.id + '-' + stat, monster: m});
+        });
+
+        var actions = m.attacks.map(function(attack){
+            return React.createElement("p", null, attack.name)
         });
         return (
             React.createElement("div", {className: "monster-row"}, 
@@ -176,7 +193,11 @@ var MonsterRow = React.createClass({displayName: "MonsterRow",
                         React.createElement("div", {className: "body"}, 
                             statValues
                         )
+                    ), 
+                    React.createElement("div", {className: "action-shelf"}, 
+                        actions
                     )
+
                 )
             )
         );
@@ -280,31 +301,6 @@ var App = require('./app.js'),
     Editor = require('./services/MonsterEditor');
 App.initialize();
 Editor.initialize(window.flux.actions.updateMonsters);
-
-
-//function receiveMessage(event) {
-//    var eventUrl = event.data.url;
-//    if(eventUrl == null){
-//        console.log("No url to load, aborting");
-//    } else {
-//        $.ajax({
-//            url: eventUrl,
-//            dataType: "text"
-//        }).done(function (data) {
-//            console.log("Loaded data");
-//            eval(data);
-//            //event.source.postMessage({urldata: data}, event.origin);
-//        });
-//    }
-//    //
-//    //console.log("got message!");
-//    //console.log(event);
-//    //console.log(event.source);
-//    //console.log(event.data);
-//    //event.source.postMessage({test:true, foo:'bar', app:App}, event.origin);
-//}
-//
-//window.addEventListener("message", receiveMessage, false);
 
 },{"./app.js":2,"./services/MonsterEditor":15}],12:[function(require,module,exports){
 var $ = require('jquery');
@@ -625,6 +621,7 @@ var valueFunctions = {
                     }
                     result['toHit'] = toHit;
                     result['damage'] = damage;
+                    result['name'] = key;
                 }
             }
             return result;
@@ -651,6 +648,9 @@ var parseMonster = function (monsterData) {
     }
     if (!monsterData.hasOwnProperty('hp')) {
         monsterData.hp = 0;
+    }
+    if (!monsterData.hasOwnProperty('attacks')) {
+        monsterData.attacks = [];
     }
     for (var key in monsterData) {
         if (monsterData.hasOwnProperty(key)) {

@@ -4,18 +4,22 @@
 @import "monster-values";
 @import "avatars";
 @import "stat-values";
+@import "animations";
 
 $yellow-border: rgb(165, 150, 46);
 $monster-value-size: 35px;
 $avatar-size: 70px;
 @mixin monster-rows {
   .monster-row {
+    @include animations;
     font-size: 16px;
     @include user-select(none);
     margin: 0 0 50px 0;
     .monster-card {
       position: relative;
       margin-top: 25px;
+      width: 482px;
+      z-index: 1;
       .card-border {
         width: 370px;
         height: 65px;
@@ -24,11 +28,12 @@ $avatar-size: 70px;
         border: 1px solid rgb(165, 150, 46);
         top: 20px;
         @include border-radius(10px, 10px);
+        @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
       }
       .avatar {
         @include avatar($avatar-size);
         position: absolute;
-        left: 10px;
+        margin: 0 10px;
         top: -20px;
       }
       .monster-name {
@@ -43,7 +48,8 @@ $avatar-size: 70px;
       .monster-card-values {
         @include monster-values;
         position: absolute;
-        width: 105px;
+        width: 100px;
+        padding: 0 2px;
         top: 35px;
         .hp {
           float: left;

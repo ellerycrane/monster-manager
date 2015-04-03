@@ -3,13 +3,30 @@ var React = require("react"),
     StatValue = require('./StatValue.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
-var STATS = ['str','dex','con','int','wis','cha'];
+var STATS = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
 var MonsterRow = React.createClass({
+    getInitialState: function() {
+        return {actions: []};
+    },
+
+    //handleOnMouseEnter: function () {
+    //    console.log("onMouseEnter called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: [true]});
+    //},
+    //handleOnMouseLeave: function () {
+    //    console.log("onMouseLeave called for MonsterRow["+this.props.monster.name+"]");
+    //    this.setState({actions: []});
+    //},
+
     render: function () {
         var m = this.props.monster;
-        var statValues = STATS.map(function(stat){
-            return <StatValue stat={stat} key={m.id+'-'+stat} monster={m} />;
+        var statValues = STATS.map(function (stat) {
+            return <StatValue stat={stat} key={m.id + '-' + stat} monster={m} />;
+        });
+
+        var actions = m.attacks.map(function(attack){
+            return <p>{attack.name}</p>
         });
         return (
             <div className="monster-row">
@@ -25,6 +42,10 @@ var MonsterRow = React.createClass({
                             {statValues}
                         </div>
                     </div>
+                    <div className="action-shelf">
+                        {actions}
+                    </div>
+
                 </div>
             </div>
         );

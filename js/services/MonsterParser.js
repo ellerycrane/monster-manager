@@ -31,6 +31,7 @@ var valueFunctions = {
                     }
                     result['toHit'] = toHit;
                     result['damage'] = damage;
+                    result['name'] = key;
                 }
             }
             return result;
@@ -57,6 +58,9 @@ var parseMonster = function (monsterData) {
     }
     if (!monsterData.hasOwnProperty('hp')) {
         monsterData.hp = 0;
+    }
+    if (!monsterData.hasOwnProperty('attacks')) {
+        monsterData.attacks = [];
     }
     for (var key in monsterData) {
         if (monsterData.hasOwnProperty(key)) {
