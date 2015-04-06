@@ -1,0 +1,32 @@
+@import "compass/css3";
+@import "look-and-feel";
+
+@mixin action-shelves{
+  .shelf-clipping-box{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -5;
+    height: 100%;
+    width: 100%;
+    clip: rect(0, auto, 2000px, 0);
+  }
+
+  .action-shelf {
+    @include card-styles;
+    @include body-font;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 15px 5px 5px 5px;
+    z-index: -10;
+    width: 452px;
+    height: auto;
+    vertical-align: middle;
+    backface-visibility: hidden;
+    transition: all 250ms ease-out;
+    transition-property: transform;
+    transform: translateY(0%);
+    @include monster-attacks;
+  }
+}

@@ -1,14 +1,13 @@
 var React = require("react"),
     MonsterValue = require('./MonsterValue.react'),
     StatValue = require('./StatValue.react'),
+    StatBlockInsert = require('./StatBlockInsert.react'),
+    MonsterAttack= require('./MonsterAttack.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
 var STATS = ['str', 'dex', 'con', 'int', 'wis', 'cha'];
 
 var MonsterRow = React.createClass({
-    getInitialState: function() {
-        return {actions: []};
-    },
 
     //handleOnMouseEnter: function () {
     //    console.log("onMouseEnter called for MonsterRow["+this.props.monster.name+"]");
@@ -25,8 +24,8 @@ var MonsterRow = React.createClass({
             return <StatValue stat={stat} key={m.id + '-' + stat} monster={m} />;
         });
 
-        var actions = m.attacks.map(function(attack){
-            return <p>{attack.name}</p>
+        var actions = m.attacks.map(function(attack, i){
+            return <MonsterAttack key={m.id + '-' + i + '-' +attack.name} monster={m} attack={attack} />;
         });
         return (
             <div className="monster-row">
@@ -39,12 +38,17 @@ var MonsterRow = React.createClass({
                     <div className="card-border">
                         <div className="monster-name">{m.name}</div>
                         <div className="body">
+                            <div className="stat-values">
                             {statValues}
+                            </div>
                         </div>
                     </div>
-                    <div className="action-shelf">
-                        {actions}
+                    <div className="shelf-clipping-box">
+                        <div className="action-shelf">
+                            {actions}
+                        </div>
                     </div>
+                    <StatBlockInsert monster={m} />
 
                 </div>
             </div>

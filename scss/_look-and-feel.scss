@@ -1,0 +1,11 @@
+@import "compass/css3";
+
+$card-bg-color: #F7F6F3;
+$card-border-color: rgb(165, 150, 46);
+
+@mixin card-styles {
+  background-color: $card-bg-color;
+  border: 1px solid $card-border-color;
+  @include border-radius(10px);
+  @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
+}

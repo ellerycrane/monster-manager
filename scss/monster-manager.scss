@@ -1,10 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt|Libre+Baskerville:700|Alegreya+Sans:900);
 @import "compass/reset/utilities";
 @import 'monster-rows';
+@import 'font-smoothing';
 
 #monster-manager-container {
   @include nested-reset;
   @include monster-rows;
+  @include font-smoothing;
   position: absolute;
   z-index: 100000;
 }

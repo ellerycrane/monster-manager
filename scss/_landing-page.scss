@@ -59,6 +59,7 @@ $monster-manager-width: 500px;
       @include display-flex;
       @include justify-content(center);
       min-width: $monster-manager-width;
+      overflow: visible;
 
       .manager-position-fix {
         position: relative;

@@ -1,12 +1,13 @@
 var React = require("react"),
     Fluxxor = require('fluxxor'),
-    FluxMixin = Fluxxor.FluxMixin(React);
+    FluxMixin = Fluxxor.FluxMixin(React),
+    ModifierUtils = require('../utilities/ModifierUtils');
 
 var StatValue = React.createClass({
     mixins: [FluxMixin],
 
     handleOnMouseDown: function () {
-        console.log("onMouseDown called for " + this.props.stat + " of monster " + this.props.monster.id);
+        //console.log("onMouseDown called for " + this.props.stat + " of monster " + this.props.monster.id);
         this.getFlux().actions.rollStat(this.props.monster, this.props.stat);
     },
     handleOnMouseEnter: function () {
@@ -30,8 +31,7 @@ var StatValue = React.createClass({
 
     render: function () {
         var value = this.props.monster.stats[this.props.stat.toUpperCase()];
-        var modifier = Math.floor((value) / 2) - 5;
-        var sign = modifier < 0 ? '' : '+';
+        var modifier = ModifierUtils.calculateModifier(value);
         var valueClass = 'value';
         if (modifier < 0) {
             valueClass += ' negative';
@@ -53,7 +53,7 @@ var StatValue = React.createClass({
                 onMouseUp={this.handleOnMouseUp}
             >
                 <div className="name">{this.props.stat.toUpperCase()}</div>
-                <div className={valueClass}>{sign + modifier}</div>
+                <div className={valueClass}>{ModifierUtils.modifierToString(modifier)}</div>
             </div>
         );
     }

@@ -25,8 +25,10 @@ Roll20Client = {
             textarea = input.find('textarea')[0],
             button = input.find('button')[0];
         if(textarea && button) {
+            var oldValue = textarea.value;
             textarea.value = command;
             button.click();
+            textarea.value = oldValue;
         }
     }
 };

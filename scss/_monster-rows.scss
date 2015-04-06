@@ -5,12 +5,16 @@
 @import "avatars";
 @import "stat-values";
 @import "animations";
+@import "statblocks";
+@import "action-shelves";
+@import "look-and-feel";
 
-$yellow-border: rgb(165, 150, 46);
 $monster-value-size: 35px;
 $avatar-size: 70px;
 @mixin monster-rows {
   .monster-row {
+    @include statblocks;
+    @include action-shelves;
     @include animations;
     font-size: 16px;
     @include user-select(none);
@@ -21,14 +25,11 @@ $avatar-size: 70px;
       width: 482px;
       z-index: 1;
       .card-border {
+        @include card-styles;
         width: 370px;
-        height: 65px;
+        height: 67px;
         padding: 5px 5px 5px 105px;
-        background-color: #F7F6F3;
-        border: 1px solid rgb(165, 150, 46);
         top: 20px;
-        @include border-radius(10px, 10px);
-        @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
       }
       .avatar {
         @include avatar($avatar-size);
@@ -60,7 +61,7 @@ $avatar-size: 70px;
       }
       .body {
         @include body-font;
-        padding: 8px 0 0 0;
+        padding: 8px 8px 0 8px;
         text-align: center;
         @include stat-values;
         line-height: normal;

@@ -1,6 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt|Libre+Baskerville:700|Alegreya+Sans:900);
-/* line 5, ../../scss/monster-manager.scss */
+/* line 6, ../../scss/monster-manager.scss */
 #monster-manager-container {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   position: absolute;
   z-index: 100000;
 }
@@ -49,7 +51,7 @@
 #monster-manager-container a img {
   border: none;
 }
-/* line 13, ../../scss/_monster-rows.scss */
+/* line 15, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row {
   font-size: 16px;
   -moz-user-select: -moz-none;
@@ -58,16 +60,8 @@
   user-select: none;
   margin: 0 0 50px 0;
 }
-/* line 6, ../../scss/_animations.scss */
-#monster-manager-container .monster-row .action-shelf {
-  font-family: "Rokkitt", serif;
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  padding: 15px 5px 5px 5px;
-  z-index: -10;
-  width: 452px;
-  height: auto;
+/* line 7, ../../scss/_statblocks.scss */
+#monster-manager-container .monster-row .statblock-insert {
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
   -moz-border-radius: 10px;
@@ -76,28 +70,124 @@
   -moz-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
-  vertical-align: middle;
-  backface-visibility: hidden;
-  -moz-osx-font-smoothing: grayscale;
+  position: absolute;
+  top: 0;
+  right: -10px;
+  z-index: -10;
+  width: 400px;
+  padding: 5px;
+  transform: translateX(100%) scale(0, 0);
   transition: all 250ms ease-out;
-  transition-property: transform, opacity;
-  transform: translateY(0%) scaleY(0);
   opacity: 0;
 }
-/* line 27, ../../scss/_animations.scss */
-#monster-manager-container .monster-row .action-shelf p {
+/* line 44, ../../scss/_css-arrows.scss */
+#monster-manager-container .monster-row .statblock-insert:after, #monster-manager-container .monster-row .statblock-insert:before {
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border: solid rgba(255, 255, 255, 0);
+}
+/* line 53, ../../scss/_css-arrows.scss */
+#monster-manager-container .monster-row .statblock-insert:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-width: 9px;
+  left: -18px;
+  border-right-color: #F7F6F3;
+  top: 0;
+  margin-top: 31px;
+}
+/* line 73, ../../scss/_css-arrows.scss */
+#monster-manager-container .monster-row .statblock-insert:before {
+  border-color: rgba(255, 255, 255, 0);
+  border-width: 10px;
+  left: -20px;
+  border-right-color: #a5962e;
+  top: 0;
+  margin-top: 30px;
+}
+/* line 2, ../../scss/_image-covers.scss */
+#monster-manager-container .monster-row .statblock-insert .cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 21, ../../scss/_statblocks.scss */
+#monster-manager-container .monster-row .statblock-insert .statblock {
+  max-width: 400px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
+}
+/* line 27, ../../scss/_statblocks.scss */
+#monster-manager-container .monster-row .statblock-insert .statblock img {
+  visibility: hidden;
+  max-width: 400px;
+}
+/* line 5, ../../scss/_action-shelves.scss */
+#monster-manager-container .monster-row .shelf-clipping-box {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -5;
+  height: 100%;
+  width: 100%;
+  clip: rect(0, auto, 2000px, 0);
+}
+/* line 15, ../../scss/_action-shelves.scss */
+#monster-manager-container .monster-row .action-shelf {
+  background-color: #F7F6F3;
+  border: 1px solid #a5962e;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  font-family: "Rokkitt", serif;
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 15px 5px 5px 5px;
+  z-index: -10;
+  width: 452px;
+  height: auto;
+  vertical-align: middle;
+  backface-visibility: hidden;
+  transition: all 250ms ease-out;
+  transition-property: transform;
+  transform: translateY(0%);
+}
+/* line 4, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack {
   margin: 2px 2px 2px 5px;
 }
-/* line 32, ../../scss/_animations.scss */
+/* line 6, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-name {
+  font-weight: bold;
+}
+/* line 8, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .monster-card:hover {
   z-index: 10;
 }
-/* line 34, ../../scss/_animations.scss */
+/* line 10, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .monster-card:hover .action-shelf {
-  transform: translateY(100%) scaleY(1);
+  transform: translateY(100%);
+}
+/* line 13, ../../scss/_animations.scss */
+#monster-manager-container .monster-row .monster-card:hover .statblock-insert {
+  transform: translateX(100%) scale(1, 1);
   opacity: 1;
 }
-/* line 39, ../../scss/_animations.scss */
+/* line 17, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .monster-card:hover .avatar,
 #monster-manager-container .monster-row .monster-card:hover .monster-card-values {
   -moz-transform: scale(1.2, 1.2);
@@ -105,85 +195,85 @@
   -webkit-transform: scale(1.2, 1.2);
   transform: scale(1.2, 1.2);
 }
-/* line 44, ../../scss/_animations.scss */
+/* line 21, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .monster-card:hover .avatar {
   -moz-animation: green-pulse 1.5s ease-in-out infinite;
   -webkit-animation: green-pulse 1.5s ease-in-out infinite;
   animation: green-pulse 1.5s ease-in-out infinite;
 }
-/* line 49, ../../scss/_animations.scss */
+/* line 26, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .avatar,
 #monster-manager-container .monster-row .monster-card-values {
   transition: all 250ms ease-out;
 }
 @-moz-keyframes green-pulse {
   0% {
-    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -moz-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
   50% {
-    -moz-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
-    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    -moz-box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
   }
   100% {
-    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -moz-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
 }
 @-webkit-keyframes green-pulse {
   0% {
-    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
   50% {
-    -webkit-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
-    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    -webkit-box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
   }
   100% {
-    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
 }
 @keyframes green-pulse {
   0% {
-    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -moz-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
   50% {
-    -moz-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
-    -webkit-box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
-    box-shadow: 1px -1px 2px 0.5px #fff, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    -moz-box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    -webkit-box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
+    box-shadow: 1px -1px 2px 0.5px #FFFFFF, 0px 0px 2px 4px #08ff35, 0 0 4px #08ff35, 0 0 7px #08ff35, 0 0 8px #08ff35, -1px 1px 10px #08ff35, -1px 0 15px #08ff35, 0 1px 17px #58ba0c;
   }
   100% {
-    -moz-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    -webkit-box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
-    box-shadow: -1px 0px 2px 0.5px #fff, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -moz-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    -webkit-box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
+    box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
 }
-/* line 18, ../../scss/_monster-rows.scss */
+/* line 22, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card {
   position: relative;
   margin-top: 25px;
   width: 482px;
   z-index: 1;
 }
-/* line 23, ../../scss/_monster-rows.scss */
+/* line 27, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .card-border {
-  width: 370px;
-  height: 65px;
-  padding: 5px 5px 5px 105px;
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
-  top: 20px;
-  -moz-border-radius: 10px / 10px;
-  -webkit-border-radius: 10px 10px;
-  border-radius: 10px / 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
   -moz-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
   -webkit-box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
   box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.3);
+  width: 370px;
+  height: 67px;
+  padding: 5px 5px 5px 105px;
+  top: 20px;
 }
-/* line 33, ../../scss/_monster-rows.scss */
+/* line 34, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .avatar {
   width: 70px;
   height: 70px;
@@ -203,7 +293,15 @@
   margin: 0 10px;
   top: -20px;
 }
-/* line 18, ../../scss/_avatars.scss */
+/* line 2, ../../scss/_image-covers.scss */
+#monster-manager-container .monster-row .monster-card .avatar .cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+/* line 21, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar div {
   width: 100%;
   height: 100%;
@@ -211,26 +309,20 @@
   -webkit-border-radius: 500px 500px;
   border-radius: 500px / 500px;
 }
-/* line 24, ../../scss/_avatars.scss */
+/* line 27, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image {
   background-size: cover;
   background-origin: content-box;
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
-/* line 29, ../../scss/_avatars.scss */
+/* line 32, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image.missing {
   background-image: url(../img/missing-avatar.svg);
   background-size: 80px;
   background-position: top;
 }
-/* line 36, ../../scss/_avatars.scss */
-#monster-manager-container .monster-row .monster-card .avatar .cover {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-/* line 39, ../../scss/_monster-rows.scss */
+/* line 40, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-name {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -248,7 +340,7 @@
   text-align: center;
   padding: 2px 5px;
 }
-/* line 48, ../../scss/_monster-rows.scss */
+/* line 49, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values {
   position: absolute;
   width: 100px;
@@ -298,28 +390,37 @@
          and nice enhancement for WebKit */
   font-size: 26px;
 }
-/* line 54, ../../scss/_monster-rows.scss */
+/* line 55, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .hp {
   float: left;
 }
-/* line 57, ../../scss/_monster-rows.scss */
+/* line 58, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .ac {
   float: right;
 }
-/* line 61, ../../scss/_monster-rows.scss */
+/* line 62, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .body {
   font-family: "Rokkitt", serif;
-  padding: 8px 0 0 0;
+  padding: 8px 8px 0 8px;
   text-align: center;
   line-height: normal;
 }
-/* line 6, ../../scss/_stat-values.scss */
+/* line 7, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-values {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+}
+/* line 12, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value {
   cursor: pointer;
-  display: inline-block;
+  display: block;
   text-align: center;
   width: 48px;
-  margin: 0 5px 0 5px;
+  margin: 0;
   padding: 1px;
   -moz-border-radius: 10px / 10px;
   -webkit-border-radius: 10px 10px;
@@ -337,25 +438,32 @@
   -webkit-transition-timing-function: ease-in;
   transition-timing-function: ease-in;
 }
-/* line 17, ../../scss/_stat-values.scss */
+/* line 23, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value .name {
   font-weight: 900;
   font-size: 90%;
+  line-height: 15px;
+  vertical-align: middle;
 }
-/* line 22, ../../scss/_stat-values.scss */
+/* line 29, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .value {
+  line-height: 19px;
+  vertical-align: middle;
+}
+/* line 32, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value .value.negative {
   color: darkred;
 }
-/* line 25, ../../scss/_stat-values.scss */
+/* line 35, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value .value.positive {
   color: darkgreen;
 }
-/* line 28, ../../scss/_stat-values.scss */
+/* line 38, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value .value.extreme {
   font-weight: 900;
   font-size: 110%;
 }
-/* line 33, ../../scss/_stat-values.scss */
+/* line 43, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:hover {
   border: 1px solid #a5962e;
   padding: 0;
@@ -366,16 +474,16 @@
   background-position: center;
   background-origin: content-box;
 }
-/* line 42, ../../scss/_stat-values.scss */
+/* line 52, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:hover .name, #monster-manager-container .monster-row .monster-card .body .stat-value:hover .value {
   opacity: 0;
 }
-/* line 46, ../../scss/_stat-values.scss */
+/* line 56, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:active {
   background-color: rgba(165, 150, 46, 0.48);
 }
 
-/* line 12, ../../scss/monster-manager.scss */
+/* line 14, ../../scss/monster-manager.scss */
 .no-touch #monster-manager-container {
   left: 200px;
 }
