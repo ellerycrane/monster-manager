@@ -51,7 +51,7 @@
 #monster-manager-container a img {
   border: none;
 }
-/* line 15, ../../scss/_monster-rows.scss */
+/* line 13, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row {
   font-size: 16px;
   -moz-user-select: -moz-none;
@@ -166,13 +166,127 @@
   transition-property: transform;
   transform: translateY(0%);
 }
-/* line 4, ../../scss/_monster-attacks.scss */
-#monster-manager-container .monster-row .action-shelf .monster-attack {
-  margin: 2px 2px 2px 5px;
-}
 /* line 6, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack {
+  margin: 2px;
+  -moz-border-radius: 10px / 10px;
+  -webkit-border-radius: 10px 10px;
+  border-radius: 10px / 10px;
+  padding: 1px 4px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid rgba(165, 150, 46, 0);
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-transition-property: background-color, border;
+  -o-transition-property: background-color, border;
+  -webkit-transition-property: background-color, border;
+  transition-property: background-color, border;
+  -moz-transition-duration: 50ms;
+  -o-transition-duration: 50ms;
+  -webkit-transition-duration: 50ms;
+  transition-duration: 50ms;
+  -moz-transition-timing-function: ease-in;
+  -o-transition-timing-function: ease-in;
+  -webkit-transition-timing-function: ease-in;
+  transition-timing-function: ease-in;
+}
+/* line 24, ../../scss/_look-and-feel.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack:hover {
+  border: 1px solid #a5962e;
+  background-color: rgba(165, 150, 46, 0.18);
+}
+/* line 29, ../../scss/_look-and-feel.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack:active {
+  background-color: rgba(165, 150, 46, 0.48);
+}
+/* line 15, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack:active .to-hit .icon {
+  transform: rotateZ(0deg);
+}
+/* line 21, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack:not(:active) .to-hit .icon {
+  transform: rotateZ(720deg);
+  transition: transform 500ms ease-out;
+}
+/* line 27, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+  width: 35px;
+  height: 35px;
+  position: relative;
+  display: inline-block;
+  background: no-repeat center;
+  background-size: contain;
+  cursor: pointer;
+  margin-right: 5px;
+}
+/* line 17, ../../scss/_monster-values.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.hp {
+  background-image: url("../img/hp.svg");
+}
+/* line 20, ../../scss/_monster-values.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.ac {
+  background-image: url("../img/ac.svg");
+}
+/* line 23, ../../scss/_monster-values.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon .value {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  vertical-align: middle;
+  text-align: center;
+  font-family: "Alegreya Sans", sans-serif;
+  font-weight: bold;
+  /* WebKit (Safari/Chrome) Only */
+  -webkit-text-stroke: 2px black;
+  /* If we weren't using text-shadow, we'd set a fallback color
+     and use this to set color instead
+    -webkit-text-fill-color: white; */
+  color: white;
+  /* Simulated effect for Firefox and Opera
+         and nice enhancement for WebKit */
+  font-size: 26px;
+}
+/* line 31, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon .icon {
+  width: 100%;
+  height: 100%;
+  background: no-repeat center;
+  background-size: contain;
+}
+/* line 39, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.to-hit .icon {
+  background-image: url("../img/d20.svg");
+}
+/* line 42, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.to-hit .value {
+  left: -2px;
+}
+/* line 48, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.dc .icon {
+  background-image: url("../img/dc.svg");
+}
+/* line 51, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.dc .value {
+  top: 6px;
+  left: 2px;
+}
+/* line 57, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-name {
   font-weight: bold;
+  margin-right: 5px;
 }
 /* line 8, ../../scss/_animations.scss */
 #monster-manager-container .monster-row .monster-card:hover {
@@ -251,14 +365,14 @@
     box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
 }
-/* line 22, ../../scss/_monster-rows.scss */
+/* line 20, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card {
   position: relative;
   margin-top: 25px;
   width: 482px;
   z-index: 1;
 }
-/* line 27, ../../scss/_monster-rows.scss */
+/* line 25, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .card-border {
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
@@ -273,7 +387,7 @@
   padding: 5px 5px 5px 105px;
   top: 20px;
 }
-/* line 34, ../../scss/_monster-rows.scss */
+/* line 32, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .avatar {
   width: 70px;
   height: 70px;
@@ -301,7 +415,7 @@
   top: 0;
   left: 0;
 }
-/* line 21, ../../scss/_avatars.scss */
+/* line 19, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar div {
   width: 100%;
   height: 100%;
@@ -309,20 +423,20 @@
   -webkit-border-radius: 500px 500px;
   border-radius: 500px / 500px;
 }
-/* line 27, ../../scss/_avatars.scss */
+/* line 25, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image {
   background-size: cover;
   background-origin: content-box;
   background-position: 50% 50%;
   background-repeat: no-repeat;
 }
-/* line 32, ../../scss/_avatars.scss */
+/* line 30, ../../scss/_avatars.scss */
 #monster-manager-container .monster-row .monster-card .avatar .image.missing {
   background-image: url(../img/missing-avatar.svg);
   background-size: 80px;
   background-position: top;
 }
-/* line 40, ../../scss/_monster-rows.scss */
+/* line 38, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-name {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -340,14 +454,14 @@
   text-align: center;
   padding: 2px 5px;
 }
-/* line 49, ../../scss/_monster-rows.scss */
+/* line 47, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values {
   position: absolute;
   width: 100px;
   padding: 0 2px;
   top: 35px;
 }
-/* line 38, ../../scss/_monster-values.scss */
+/* line 39, ../../scss/_monster-values.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .monster-value {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -358,17 +472,18 @@
   height: 35px;
   position: relative;
   display: inline-block;
-  background-repeat: no-repeat;
+  background: no-repeat center;
+  background-size: contain;
 }
-/* line 16, ../../scss/_monster-values.scss */
+/* line 17, ../../scss/_monster-values.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .monster-value.hp {
   background-image: url("../img/hp.svg");
 }
-/* line 19, ../../scss/_monster-values.scss */
+/* line 20, ../../scss/_monster-values.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .monster-value.ac {
   background-image: url("../img/ac.svg");
 }
-/* line 22, ../../scss/_monster-values.scss */
+/* line 23, ../../scss/_monster-values.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .monster-value .value {
   position: absolute;
   top: 0;
@@ -390,15 +505,15 @@
          and nice enhancement for WebKit */
   font-size: 26px;
 }
-/* line 55, ../../scss/_monster-rows.scss */
+/* line 53, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .hp {
   float: left;
 }
-/* line 58, ../../scss/_monster-rows.scss */
+/* line 56, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .ac {
   float: right;
 }
-/* line 62, ../../scss/_monster-rows.scss */
+/* line 60, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .body {
   font-family: "Rokkitt", serif;
   padding: 8px 8px 0 8px;
@@ -438,52 +553,69 @@
   -webkit-transition-timing-function: ease-in;
   transition-timing-function: ease-in;
 }
-/* line 23, ../../scss/_stat-values.scss */
-#monster-manager-container .monster-row .monster-card .body .stat-value .name {
+/* line 25, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .stat-container .name {
   font-weight: 900;
   font-size: 90%;
   line-height: 15px;
   vertical-align: middle;
 }
-/* line 29, ../../scss/_stat-values.scss */
-#monster-manager-container .monster-row .monster-card .body .stat-value .value {
+/* line 31, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .stat-container .value {
   line-height: 19px;
   vertical-align: middle;
 }
-/* line 32, ../../scss/_stat-values.scss */
-#monster-manager-container .monster-row .monster-card .body .stat-value .value.negative {
+/* line 34, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .stat-container .value.negative {
   color: darkred;
 }
-/* line 35, ../../scss/_stat-values.scss */
-#monster-manager-container .monster-row .monster-card .body .stat-value .value.positive {
+/* line 37, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .stat-container .value.positive {
   color: darkgreen;
 }
-/* line 38, ../../scss/_stat-values.scss */
-#monster-manager-container .monster-row .monster-card .body .stat-value .value.extreme {
+/* line 40, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value .stat-container .value.extreme {
   font-weight: 900;
   font-size: 110%;
 }
-/* line 43, ../../scss/_stat-values.scss */
+/* line 46, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:hover {
   border: 1px solid #a5962e;
   padding: 0;
   background-color: rgba(165, 150, 46, 0.18);
+}
+/* line 50, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value:hover .stat-container {
   background-image: url("../img/d20.svg");
   background-size: 20px;
   background-repeat: no-repeat;
   background-position: center;
   background-origin: content-box;
 }
-/* line 52, ../../scss/_stat-values.scss */
+/* line 57, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:hover .name, #monster-manager-container .monster-row .monster-card .body .stat-value:hover .value {
   opacity: 0;
 }
-/* line 56, ../../scss/_stat-values.scss */
+/* line 61, ../../scss/_stat-values.scss */
 #monster-manager-container .monster-row .monster-card .body .stat-value:active {
   background-color: rgba(165, 150, 46, 0.48);
+}
+/* line 63, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value:active .stat-container {
+  transform: rotateZ(0deg);
+}
+/* line 68, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value:not(:active) .stat-container {
+  transform: rotateZ(720deg);
+  transition: transform 500ms ease-out;
+}
+/* line 74, ../../scss/_stat-values.scss */
+#monster-manager-container .monster-row .monster-card .body .stat-value:not(:hover) .stat-container {
+  transition: none;
 }
 
 /* line 14, ../../scss/monster-manager.scss */
 .no-touch #monster-manager-container {
   left: 200px;
+  top: 50px;
 }

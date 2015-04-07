@@ -9,8 +9,6 @@
 @import "action-shelves";
 @import "look-and-feel";
 
-$monster-value-size: 35px;
-$avatar-size: 70px;
 @mixin monster-rows {
   .monster-row {
     @include statblocks;
@@ -32,7 +30,7 @@ $avatar-size: 70px;
         top: 20px;
       }
       .avatar {
-        @include avatar($avatar-size);
+        @include avatar;
         position: absolute;
         margin: 0 10px;
         top: -20px;

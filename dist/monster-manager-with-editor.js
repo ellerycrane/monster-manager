@@ -62,7 +62,8 @@ module.exports = {
 },{"./actions/Actions.js":1,"./components/MonsterManagerApplication.react.js":7,"./services/MonsterParser":18,"./stores/Stores.js":21,"fluxxor":30,"react":303}],3:[function(require,module,exports){
 var React = require("react"),
     _ = require("underscore"),
-    ModifierUtils = require('../utilities/ModifierUtils');
+    ModifierUtils = require('../utilities/ModifierUtils'),
+    PropertyUtils = require('../utilities/PropertyUtils');
 
 var MonsterAttack = React.createClass({displayName: "MonsterAttack",
     render: function () {
@@ -74,9 +75,30 @@ var MonsterAttack = React.createClass({displayName: "MonsterAttack",
             var amount = pair[1];
             damageStrings.push(amount + ' ' + type + ' damage');
         });
+        var detailsString = damageStrings.join(' plus ');
+
+        var valueString;
+        var className = 'attack-icon ';
+        if(PropertyUtils.exists(attack, 'toHit')){
+            className += 'to-hit';
+            valueString = ModifierUtils.modifierToString(attack.toHit);
+        }
+        if(PropertyUtils.exists(attack, 'save')){
+            valueString = attack.save.dc;
+            detailsString = attack.save.type + ' save. ' + detailsString;
+            className += 'dc';
+        }
+
+
+
         return (
-            React.createElement("div", {className: "monster-attack"}, React.createElement("span", {className: "attack-name"}, attack.name, ". "), 
-                React.createElement("span", {className: "attack-details"}, ModifierUtils.modifierToString(attack.toHit), " to hit, ", damageStrings.join(' plus '), ".")
+            React.createElement("div", {className: "monster-attack"}, 
+                React.createElement("div", {className: className}, 
+                    React.createElement("div", {className: "icon"}), 
+                    React.createElement("div", {className: "value"}, valueString)
+                ), 
+                React.createElement("div", {className: "attack-name"}, attack.name, "."), 
+                React.createElement("div", {className: "attack-details"}, detailsString, ".")
             )
         );
     }
@@ -85,7 +107,7 @@ var MonsterAttack = React.createClass({displayName: "MonsterAttack",
 
 module.exports = MonsterAttack;
 
-},{"../utilities/ModifierUtils":22,"react":303,"underscore":304}],4:[function(require,module,exports){
+},{"../utilities/ModifierUtils":22,"../utilities/PropertyUtils":23,"react":303,"underscore":304}],4:[function(require,module,exports){
 var React = require("react");
 
 var MonsterAvatar = React.createClass({displayName: "MonsterAvatar",
@@ -330,8 +352,10 @@ var StatValue = React.createClass({displayName: "StatValue",
                 onMouseLeave: this.handleOnMouseLeave, 
                 onMouseUp: this.handleOnMouseUp
             }, 
-                React.createElement("div", {className: "name"}, this.props.stat.toUpperCase()), 
-                React.createElement("div", {className: valueClass}, ModifierUtils.modifierToString(modifier))
+                React.createElement("div", {className: "stat-container"}, 
+                    React.createElement("div", {className: "name"}, this.props.stat.toUpperCase()), 
+                    React.createElement("div", {className: valueClass}, ModifierUtils.modifierToString(modifier))
+                )
             )
         );
     }
@@ -585,7 +609,8 @@ var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 var BookmarkletGenerator = require('../services/BookmarkletGenerator');
-var INITIAL_MONSTER_DATA = "Kobold:\n  ac: 12\n  hp: 5\n  speed: 30 ft.\n  stats:\n    - 7\n    - 15\n    - 9\n    - 8\n    - 7\n    - 8\n  attacks:\n    - Dagger: +4, 1d4+2 piercing\n    - Sling: +4, 1d4+2 bludgeoning\n  statblock: http://i.imgur.com/02uwl0S.png\n  avatar: http://i.imgur.com/S7DE0hg.png?1\n\nWinged Kobold:\n  ac: 13\n  hp: 7\n  speed: 30 ft., fly 30 ft.\n  stats:\n    - 7\n    - 16\n    - 9\n    - 8\n    - 7\n    - 8\n  senses:\n    - darkvision 60 ft.\n  attacks:\n    - Dagger: +5, 1d4+3 piercing\n    - Dropped Rock: +5, 1d6+3 bludgeoning\n  statblock: http://i.imgur.com/VTGR6KR.png\n  avatar: http://i.imgur.com/X9kAhJ7.jpg?1\n\nCloaker:\n  ac: 14\n  hp: 78\n  speed: 10 ft., fly 40 ft.\n  stats:\n    - 17\n    - 15\n    - 12\n    - 13\n    - 12\n    - 14\n  skills:\n    - Stealth: +5\n  senses:\n    - darkvision 60 ft.\n  avatar: http://i.imgur.com/SdTKfBM.jpg?1\n  attacks:\n    - Bite: +6, 2d6+3 piercing\n    - Tail: +6, 1d8+3 slashing\n\nCthulhu:\n  ac: 25\n  hp: 615\n  speed: 60 ft., fly 120ft.\n  stats:\n    - 30\n    - 10\n    - 30\n    - 26\n    - 26\n    - 28\n  avatar: http://i.imgur.com/EyUFdjO.jpg\n\nTyrannosaurus Rex:\n  ac: 10\n  hp: 163\n  stats:\n    - 30\n    - 10\n    - 30\n    - 1\n    - 2\n    - 8";
+
+var INITIAL_MONSTER_DATA = "Kobold:\n  ac: 12\n  hp: 5\n  speed: 30 ft.\n  stats:\n    - 7\n    - 15\n    - 9\n    - 8\n    - 7\n    - 8\n  attacks:\n    - Dagger: +4, 1d4+2 piercing\n    - Sling: +4, 1d4+2 bludgeoning\n  statblock: http://i.imgur.com/02uwl0S.png\n  avatar: http://i.imgur.com/S7DE0hg.png?1\n\nWinged Kobold:\n  ac: 13\n  hp: 7\n  speed: 30 ft., fly 30 ft.\n  stats:\n    - 7\n    - 16\n    - 9\n    - 8\n    - 7\n    - 8\n  senses:\n    - darkvision 60 ft.\n  attacks:\n    - Dagger: +5, 1d4+3 piercing\n    - Dropped Rock: +5, 1d6+3 bludgeoning\n  statblock: http://i.imgur.com/VTGR6KR.png\n  avatar: http://i.imgur.com/X9kAhJ7.jpg?1\n\nCloaker:\n  ac: 14\n  hp: 78\n  speed: 10 ft., fly 40 ft.\n  stats:\n    - 17\n    - 15\n    - 12\n    - 13\n    - 12\n    - 14\n  skills:\n    - Stealth: +5\n  senses:\n    - darkvision 60 ft.\n  avatar: http://i.imgur.com/SdTKfBM.jpg?1\n  attacks:\n    - Bite: +6, 2d6+3 piercing\n    - Tail: +6, 1d8+3 slashing\n\nAncient Blue Dragon:\n  ac: 22\n  hp: 481\n  stats:\n    - 29\n    - 10\n    - 27\n    - 18\n    - 17\n    - 21\n  avatar: http://i.imgur.com/y0gjTQB.png\n  attacks:\n    - Bite: +16, 2d10+9 piercing, 2d10 lightning\n    - Claw: +16, 2d6+9 slashing\n    - Tail: +16, 2d8+9 bludgeoning\n    - Lightning Breath: DC 23 Dex, 16d10 lightning\n\nCthulhu:\n  ac: 25\n  hp: 615\n  speed: 60 ft., fly 120ft.\n  stats:\n    - 30\n    - 10\n    - 30\n    - 26\n    - 26\n    - 28\n  avatar: http://i.imgur.com/EyUFdjO.jpg\n\nTyrannosaurus Rex:\n  ac: 10\n  hp: 163\n  stats:\n    - 30\n    - 10\n    - 30\n    - 1\n    - 2\n    - 8\n";
 
 var initialize = function (updateMonstersCallback) {
     var codeMirrorEditor,
@@ -641,14 +666,45 @@ var initialize = function (updateMonstersCallback) {
 module.exports = {initialize: initialize};
 
 },{"../services/BookmarkletGenerator":16,"./Base64":15,"./MonsterParser":18,"codemirror/lib/codemirror":24,"codemirror/mode/css/css":25,"codemirror/mode/htmlmixed/htmlmixed":26,"codemirror/mode/javascript/javascript":27,"codemirror/mode/yaml/yaml":29,"hasher":114,"underscore":304}],18:[function(require,module,exports){
-var yaml = require('js-yaml');
+var yaml = require('js-yaml'),
+    _ = require("underscore");
 
-parseStatValue = function (values, index) {
+var parseStatValue = function (values, index) {
     if (values == null || values.length <= index || isNaN(values[index])) {
         return 0;
     }
     return values[index];
 };
+
+var isAttackBonus = function(value){
+    var parsed = parseInt(value);
+    return _.isNumber(parsed) && !_.isNaN(parsed);
+};
+
+var isSavingThrowDC = function(value){
+    return value.indexOf("DC") === 0;
+};
+
+var parseSavingThrowDC = function(value){
+    var savingThrowComponents = value.split(' ');
+
+    return {
+        dc: savingThrowComponents[1],
+        type: savingThrowComponents.length == 3 ? savingThrowComponents[2] : null
+    };
+
+};
+
+var parseDamage = function(values){
+    var damage = {};
+    for (var i = 1; i < values.length; i++) {
+        var damageValues = values[i].trim().split(' ');
+        damage[damageValues[1]] = damageValues[0];
+    }
+    return damage;
+};
+
+
 var valueFunctions = {
     stats: function (values) {
         return {
@@ -665,16 +721,19 @@ var valueFunctions = {
             var result = {};
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    var values = obj[key].split(",");
-                    var toHit = parseInt(values[0]);
-                    var damage = {};
-                    for (var i = 1; i < values.length; i++) {
-                        var damageValues = values[i].trim().split(' ');
-                        damage[damageValues[1]] = damageValues[0];
-                    }
-                    result['toHit'] = toHit;
-                    result['damage'] = damage;
                     result['name'] = key;
+                    var values = obj[key].split(","),
+                        firstValue = values[0].trim();
+
+                    if(isAttackBonus(firstValue)){
+                        result['toHit'] = parseInt(firstValue);
+                    }
+                    if(isSavingThrowDC(firstValue)){
+                        result['save'] = parseSavingThrowDC(firstValue);
+                    }
+
+                    result['damage'] = parseDamage(values);
+
                 }
             }
             return result;
@@ -737,7 +796,7 @@ var parseMonstersFromYaml = function (monsterYamlData) {
 module.exports = {parseMonstersFromYaml: parseMonstersFromYaml};
 
 
-},{"js-yaml":117}],19:[function(require,module,exports){
+},{"js-yaml":117,"underscore":304}],19:[function(require,module,exports){
 var $ = require("jquery");
 var STAT_NAMES = {
     str: "Strength",

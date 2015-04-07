@@ -52,8 +52,10 @@ var StatValue = React.createClass({
                 onMouseLeave={this.handleOnMouseLeave}
                 onMouseUp={this.handleOnMouseUp}
             >
-                <div className="name">{this.props.stat.toUpperCase()}</div>
-                <div className={valueClass}>{ModifierUtils.modifierToString(modifier)}</div>
+                <div className="stat-container">
+                    <div className="name">{this.props.stat.toUpperCase()}</div>
+                    <div className={valueClass}>{ModifierUtils.modifierToString(modifier)}</div>
+                </div>
             </div>
         );
     }

@@ -35,7 +35,7 @@ $monster-manager-width: 500px;
 
   .content {
     @include display-flex;
-    overflow: hidden;
+    overflow: scroll;
     height: $content-height;
     position: relative;
     width: 100%;
@@ -71,6 +71,10 @@ $monster-manager-width: 500px;
     }
     .right {
       @include flex(1);
+      .editor {
+        position: fixed;
+        width: calc(50vw - 20px);
+      }
     }
   }
 }

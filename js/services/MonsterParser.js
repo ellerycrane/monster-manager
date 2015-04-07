@@ -1,11 +1,42 @@
-var yaml = require('js-yaml');
+var yaml = require('js-yaml'),
+    _ = require("underscore");
 
-parseStatValue = function (values, index) {
+var parseStatValue = function (values, index) {
     if (values == null || values.length <= index || isNaN(values[index])) {
         return 0;
     }
     return values[index];
 };
+
+var isAttackBonus = function(value){
+    var parsed = parseInt(value);
+    return _.isNumber(parsed) && !_.isNaN(parsed);
+};
+
+var isSavingThrowDC = function(value){
+    return value.indexOf("DC") === 0;
+};
+
+var parseSavingThrowDC = function(value){
+    var savingThrowComponents = value.split(' ');
+
+    return {
+        dc: savingThrowComponents[1],
+        type: savingThrowComponents.length == 3 ? savingThrowComponents[2] : null
+    };
+
+};
+
+var parseDamage = function(values){
+    var damage = {};
+    for (var i = 1; i < values.length; i++) {
+        var damageValues = values[i].trim().split(' ');
+        damage[damageValues[1]] = damageValues[0];
+    }
+    return damage;
+};
+
+
 var valueFunctions = {
     stats: function (values) {
         return {
@@ -22,16 +53,19 @@ var valueFunctions = {
             var result = {};
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    var values = obj[key].split(",");
-                    var toHit = parseInt(values[0]);
-                    var damage = {};
-                    for (var i = 1; i < values.length; i++) {
-                        var damageValues = values[i].trim().split(' ');
-                        damage[damageValues[1]] = damageValues[0];
-                    }
-                    result['toHit'] = toHit;
-                    result['damage'] = damage;
                     result['name'] = key;
+                    var values = obj[key].split(","),
+                        firstValue = values[0].trim();
+
+                    if(isAttackBonus(firstValue)){
+                        result['toHit'] = parseInt(firstValue);
+                    }
+                    if(isSavingThrowDC(firstValue)){
+                        result['save'] = parseSavingThrowDC(firstValue);
+                    }
+
+                    result['damage'] = parseDamage(values);
+
                 }
             }
             return result;

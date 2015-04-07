@@ -671,7 +671,7 @@ span.CodeMirror-selectedtext {
 .monster-manager-landing .content {
   display: -webkit-flex;
   display: flex;
-  overflow: hidden;
+  overflow: scroll;
   height: calc(100vh - 110px);
   position: relative;
   width: 100%;
@@ -716,4 +716,9 @@ span.CodeMirror-selectedtext {
 .monster-manager-landing .content .right {
   -webkit-flex: 1;
   flex: 1;
+}
+/* line 74, ../../scss/_landing-page.scss */
+.monster-manager-landing .content .right .editor {
+  position: fixed;
+  width: calc(50vw - 20px);
 }

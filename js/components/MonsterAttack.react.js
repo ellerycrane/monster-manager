@@ -1,6 +1,7 @@
 var React = require("react"),
     _ = require("underscore"),
-    ModifierUtils = require('../utilities/ModifierUtils');
+    ModifierUtils = require('../utilities/ModifierUtils'),
+    PropertyUtils = require('../utilities/PropertyUtils');
 
 var MonsterAttack = React.createClass({
     render: function () {
@@ -12,9 +13,30 @@ var MonsterAttack = React.createClass({
             var amount = pair[1];
             damageStrings.push(amount + ' ' + type + ' damage');
         });
+        var detailsString = damageStrings.join(' plus ');
+
+        var valueString;
+        var className = 'attack-icon ';
+        if(PropertyUtils.exists(attack, 'toHit')){
+            className += 'to-hit';
+            valueString = ModifierUtils.modifierToString(attack.toHit);
+        }
+        if(PropertyUtils.exists(attack, 'save')){
+            valueString = attack.save.dc;
+            detailsString = attack.save.type + ' save. ' + detailsString;
+            className += 'dc';
+        }
+
+
+
         return (
-            <div className="monster-attack"><span className="attack-name">{attack.name}. </span>
-                <span className="attack-details">{ModifierUtils.modifierToString(attack.toHit)} to hit, {damageStrings.join(' plus ')}.</span>
+            <div className="monster-attack">
+                <div className={className}>
+                    <div className="icon"></div>
+                    <div className="value">{valueString}</div>
+                </div>
+                <div className="attack-name">{attack.name}.</div>
+                <div className="attack-details">{detailsString}.</div>
             </div>
         );
     }

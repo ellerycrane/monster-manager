@@ -62,7 +62,8 @@ module.exports = {
 },{"./actions/Actions.js":1,"./components/MonsterManagerApplication.react.js":7,"./services/MonsterParser":14,"./stores/Stores.js":17,"fluxxor":20,"react":291}],3:[function(require,module,exports){
 var React = require("react"),
     _ = require("underscore"),
-    ModifierUtils = require('../utilities/ModifierUtils');
+    ModifierUtils = require('../utilities/ModifierUtils'),
+    PropertyUtils = require('../utilities/PropertyUtils');
 
 var MonsterAttack = React.createClass({displayName: "MonsterAttack",
     render: function () {
@@ -74,9 +75,30 @@ var MonsterAttack = React.createClass({displayName: "MonsterAttack",
             var amount = pair[1];
             damageStrings.push(amount + ' ' + type + ' damage');
         });
+        var detailsString = damageStrings.join(' plus ');
+
+        var valueString;
+        var className = 'attack-icon ';
+        if(PropertyUtils.exists(attack, 'toHit')){
+            className += 'to-hit';
+            valueString = ModifierUtils.modifierToString(attack.toHit);
+        }
+        if(PropertyUtils.exists(attack, 'save')){
+            valueString = attack.save.dc;
+            detailsString = attack.save.type + ' save. ' + detailsString;
+            className += 'dc';
+        }
+
+
+
         return (
-            React.createElement("div", {className: "monster-attack"}, React.createElement("span", {className: "attack-name"}, attack.name, ". "), 
-                React.createElement("span", {className: "attack-details"}, ModifierUtils.modifierToString(attack.toHit), " to hit, ", damageStrings.join(' plus '), ".")
+            React.createElement("div", {className: "monster-attack"}, 
+                React.createElement("div", {className: className}, 
+                    React.createElement("div", {className: "icon"}), 
+                    React.createElement("div", {className: "value"}, valueString)
+                ), 
+                React.createElement("div", {className: "attack-name"}, attack.name, "."), 
+                React.createElement("div", {className: "attack-details"}, detailsString, ".")
             )
         );
     }
@@ -85,7 +107,7 @@ var MonsterAttack = React.createClass({displayName: "MonsterAttack",
 
 module.exports = MonsterAttack;
 
-},{"../utilities/ModifierUtils":18,"react":291,"underscore":292}],4:[function(require,module,exports){
+},{"../utilities/ModifierUtils":18,"../utilities/PropertyUtils":19,"react":291,"underscore":292}],4:[function(require,module,exports){
 var React = require("react");
 
 var MonsterAvatar = React.createClass({displayName: "MonsterAvatar",
@@ -330,8 +352,10 @@ var StatValue = React.createClass({displayName: "StatValue",
                 onMouseLeave: this.handleOnMouseLeave, 
                 onMouseUp: this.handleOnMouseUp
             }, 
-                React.createElement("div", {className: "name"}, this.props.stat.toUpperCase()), 
-                React.createElement("div", {className: valueClass}, ModifierUtils.modifierToString(modifier))
+                React.createElement("div", {className: "stat-container"}, 
+                    React.createElement("div", {className: "name"}, this.props.stat.toUpperCase()), 
+                    React.createElement("div", {className: valueClass}, ModifierUtils.modifierToString(modifier))
+                )
             )
         );
     }
@@ -373,14 +397,45 @@ module.exports = {load: load};
 
 
 },{"./MonsterParser":14,"jquery":104}],14:[function(require,module,exports){
-var yaml = require('js-yaml');
+var yaml = require('js-yaml'),
+    _ = require("underscore");
 
-parseStatValue = function (values, index) {
+var parseStatValue = function (values, index) {
     if (values == null || values.length <= index || isNaN(values[index])) {
         return 0;
     }
     return values[index];
 };
+
+var isAttackBonus = function(value){
+    var parsed = parseInt(value);
+    return _.isNumber(parsed) && !_.isNaN(parsed);
+};
+
+var isSavingThrowDC = function(value){
+    return value.indexOf("DC") === 0;
+};
+
+var parseSavingThrowDC = function(value){
+    var savingThrowComponents = value.split(' ');
+
+    return {
+        dc: savingThrowComponents[1],
+        type: savingThrowComponents.length == 3 ? savingThrowComponents[2] : null
+    };
+
+};
+
+var parseDamage = function(values){
+    var damage = {};
+    for (var i = 1; i < values.length; i++) {
+        var damageValues = values[i].trim().split(' ');
+        damage[damageValues[1]] = damageValues[0];
+    }
+    return damage;
+};
+
+
 var valueFunctions = {
     stats: function (values) {
         return {
@@ -397,16 +452,19 @@ var valueFunctions = {
             var result = {};
             for (var key in obj) {
                 if (obj.hasOwnProperty(key)) {
-                    var values = obj[key].split(",");
-                    var toHit = parseInt(values[0]);
-                    var damage = {};
-                    for (var i = 1; i < values.length; i++) {
-                        var damageValues = values[i].trim().split(' ');
-                        damage[damageValues[1]] = damageValues[0];
-                    }
-                    result['toHit'] = toHit;
-                    result['damage'] = damage;
                     result['name'] = key;
+                    var values = obj[key].split(","),
+                        firstValue = values[0].trim();
+
+                    if(isAttackBonus(firstValue)){
+                        result['toHit'] = parseInt(firstValue);
+                    }
+                    if(isSavingThrowDC(firstValue)){
+                        result['save'] = parseSavingThrowDC(firstValue);
+                    }
+
+                    result['damage'] = parseDamage(values);
+
                 }
             }
             return result;
@@ -469,7 +527,7 @@ var parseMonstersFromYaml = function (monsterYamlData) {
 module.exports = {parseMonstersFromYaml: parseMonstersFromYaml};
 
 
-},{"js-yaml":105}],15:[function(require,module,exports){
+},{"js-yaml":105,"underscore":292}],15:[function(require,module,exports){
 var $ = require("jquery");
 var STAT_NAMES = {
     str: "Strength",

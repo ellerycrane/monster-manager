@@ -54,6 +54,23 @@ Cloaker:
     - Bite: +6, 2d6+3 piercing
     - Tail: +6, 1d8+3 slashing
 
+Ancient Blue Dragon:
+  ac: 22
+  hp: 481
+  stats:
+    - 29
+    - 10
+    - 27
+    - 18
+    - 17
+    - 21
+  avatar: http://i.imgur.com/y0gjTQB.png
+  attacks:
+    - Bite: +16, 2d10+9 piercing, 2d10 lightning
+    - Claw: +16, 2d6+9 slashing
+    - Tail: +16, 2d8+9 bludgeoning
+    - Lightning Breath: DC 23 Dex, 16d10 lightning
+
 Cthulhu:
   ac: 25
   hp: 615

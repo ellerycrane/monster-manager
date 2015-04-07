@@ -2,9 +2,7 @@
 @import "compass/utilities";
 @import "image-covers";
 
-$avatar-size: 70px !default;
-
-@mixin avatar($avatar-size) {
+@mixin avatar($avatar-size: 70px) {
   width: $avatar-size;
   height: $avatar-size;
   display: inline-block;
@@ -39,6 +37,6 @@ $avatar-size: 70px !default;
 
 @mixin avatars {
   .avatar {
-    @include avatar($avatar-size);
+    @include avatar;
   }
 }

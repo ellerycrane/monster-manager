@@ -10,6 +10,7 @@ var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 var BookmarkletGenerator = require('../services/BookmarkletGenerator');
+
 var INITIAL_MONSTER_DATA = fs.readFileSync(__dirname + '/../../test.yaml', 'utf8');
 
 var initialize = function (updateMonstersCallback) {

@@ -2,10 +2,31 @@
 
 $card-bg-color: #F7F6F3;
 $card-border-color: rgb(165, 150, 46);
+$button-border-color: rgba(165, 150, 46, 0);
+$button-hover-color: rgba(165, 150, 46, 0.18);
+$button-depress-color: rgba(165, 150, 46, 0.48);
 
 @mixin card-styles {
   background-color: $card-bg-color;
   border: 1px solid $card-border-color;
   @include border-radius(10px);
   @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
+}
+
+@mixin card-button-styles {
+  cursor: pointer;
+  border: 1px solid $button-border-color;
+  @include border-radius(10px);
+  @include transition-property(background-color, border);
+  @include transition-duration(50ms);
+  @include transition-timing-function(ease-in);
+
+  &:hover {
+    border: 1px solid $card-border-color;
+    background-color: $button-hover-color;
+  }
+
+  &:active {
+    background-color: $button-depress-color;
+  }
 }

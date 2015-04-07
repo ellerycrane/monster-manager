@@ -1,10 +1,62 @@
-
+@import "compass/css3";
+@import "monster-values";
+@import "look-and-feel";
 
 @mixin monster-attacks {
   .monster-attack {
-    margin: 2px 2px 2px 5px;
+    margin: 2px;
+    @include border-radius(10px, 10px);
+    padding: 1px 4px;
+    @include display-flex;
+    @include align-items(center);
+    @include card-button-styles;
+
+    &:active {
+      .to-hit .icon{
+        transform: rotateZ(0deg);
+      }
+    }
+
+    &:not(:active) {
+      .to-hit .icon{
+        transform: rotateZ(720deg);
+        transition: transform 500ms ease-out;
+      }
+    }
+
+    .attack-icon {
+      @include monster-value;
+      cursor: pointer;
+      margin-right: 5px;
+      .icon {
+        width: 100%;
+        height: 100%;
+        background: no-repeat center;
+        background-size: contain;
+      }
+
+      &.to-hit{
+        .icon {
+          background-image: url('../img/d20.svg');
+        }
+        .value {
+          left: -2px;
+        }
+      }
+
+      &.dc {
+        .icon {
+          background-image: url('../img/dc.svg');
+        }
+        .value {
+          top: 6px;
+          left: 2px;
+        }
+      }
+    }
     .attack-name {
       font-weight: bold;
+      margin-right: 5px;
     }
   }
 }

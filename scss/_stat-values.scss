@@ -4,7 +4,7 @@
 @import "look-and-feel";
 
 @mixin stat-values {
-  .stat-values{
+  .stat-values {
     @include display-flex;
     @include align-items(center);
     @include justify-content(space-between);
@@ -20,41 +20,61 @@
     @include transition-property(background-color);
     @include transition-duration(50ms);
     @include transition-timing-function(ease-in);
-    .name {
-      font-weight: 900;
-      font-size: 90%;
-      line-height: 15px;
-      vertical-align: middle;
-    }
-    .value {
-      line-height: 19px;
-      vertical-align: middle;
-      &.negative {
-        color: darkred;
-      }
-      &.positive {
-        color: darkgreen;
-      }
-      &.extreme {
+
+    .stat-container {
+      .name {
         font-weight: 900;
-        font-size: 110%;
+        font-size: 90%;
+        line-height: 15px;
+        vertical-align: middle;
+      }
+      .value {
+        line-height: 19px;
+        vertical-align: middle;
+        &.negative {
+          color: darkred;
+        }
+        &.positive {
+          color: darkgreen;
+        }
+        &.extreme {
+          font-weight: 900;
+          font-size: 110%;
+        }
       }
     }
     &:hover {
       border: 1px solid $card-border-color;
       padding: 0;
-      background-color: rgba(165, 150, 46, 0.18);
-      background-image: url('../img/d20.svg');
-      background-size: 20px;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-origin: content-box;
+      background-color: $button-hover-color;
+      .stat-container {
+        background-image: url('../img/d20.svg');
+        background-size: 20px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-origin: content-box;
+      }
       .name, .value {
         opacity: 0;
       }
     }
     &:active {
-      background-color: rgba(165, 150, 46, 0.48);
+      background-color: $button-depress-color;
+      .stat-container {
+        transform: rotateZ(0deg);
+      }
     }
+    &:not(:active) {
+      .stat-container {
+        transform: rotateZ(720deg);
+        transition: transform 500ms ease-out;
+      }
+    }
+    &:not(:hover) {
+      .stat-container {
+        transition: none;
+      }
+    }
+
   }
 }
