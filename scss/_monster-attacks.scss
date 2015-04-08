@@ -11,6 +11,12 @@
     @include align-items(center);
     @include card-button-styles;
 
+    &:hover {
+      .attack-icon{
+        transform: scale(1.1);
+      }
+    }
+
     &:active {
       .to-hit .icon{
         transform: rotateZ(0deg);
@@ -26,6 +32,8 @@
 
     .attack-icon {
       @include monster-value;
+      transform: scale(0.8);
+      transition: transform 250ms ease-out;
       cursor: pointer;
       margin-right: 5px;
       .icon {

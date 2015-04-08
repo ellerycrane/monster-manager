@@ -1,8 +1,9 @@
 var yaml = require('js-yaml'),
-    _ = require("underscore");
+    _ = require("underscore"),
+    PROPS = require('../constants/MonsterProperties');
 
 var parseStatValue = function (values, index) {
-    if (values == null || values.length <= index || isNaN(values[index])) {
+    if (values == null || values.length <= index || _.isNaN(values[index])) {
         return 0;
     }
     return values[index];
@@ -18,12 +19,11 @@ var isSavingThrowDC = function(value){
 };
 
 var parseSavingThrowDC = function(value){
-    var savingThrowComponents = value.split(' ');
-
-    return {
-        dc: savingThrowComponents[1],
-        type: savingThrowComponents.length == 3 ? savingThrowComponents[2] : null
-    };
+    var savingThrowComponents = value.split(' '),
+        savingThrowData = {};
+    savingThrowData[PROPS.dc] = savingThrowComponents[1];
+    savingThrowData[PROPS.type] = savingThrowComponents.length == 3 ? savingThrowComponents[2] : null;
+    return savingThrowData;
 
 };
 
@@ -38,43 +38,45 @@ var parseDamage = function(values){
 
 
 var valueFunctions = {
-    stats: function (values) {
-        return {
-            STR: parseStatValue(values, 0),
-            DEX: parseStatValue(values, 1),
-            CON: parseStatValue(values, 2),
-            INT: parseStatValue(values, 3),
-            WIS: parseStatValue(values, 4),
-            CHA: parseStatValue(values, 5)
-        };
-    },
-    attacks: function (data) {
-        return data.map(function (obj) {
-            var result = {};
-            for (var key in obj) {
-                if (obj.hasOwnProperty(key)) {
-                    result['name'] = key;
-                    var values = obj[key].split(","),
-                        firstValue = values[0].trim();
-
-                    if(isAttackBonus(firstValue)){
-                        result['toHit'] = parseInt(firstValue);
-                    }
-                    if(isSavingThrowDC(firstValue)){
-                        result['save'] = parseSavingThrowDC(firstValue);
-                    }
-
-                    result['damage'] = parseDamage(values);
-
-                }
-            }
-            return result;
-        });
-    },
     DEFAULT: function (value) {
         return value;
     }
 };
+
+valueFunctions[PROPS.stats] = function (values) {
+    return {
+        STR: parseStatValue(values, 0),
+        DEX: parseStatValue(values, 1),
+        CON: parseStatValue(values, 2),
+        INT: parseStatValue(values, 3),
+        WIS: parseStatValue(values, 4),
+        CHA: parseStatValue(values, 5)
+    };
+};
+valueFunctions[PROPS.attacks] = function (data) {
+    return data.map(function (obj) {
+        var result = {};
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                result[PROPS.name] = key;
+                var values = obj[key].split(","),
+                    firstValue = values[0].trim();
+
+                if(isAttackBonus(firstValue)){
+                    result[PROPS.toHit] = parseInt(firstValue);
+                }
+                if(isSavingThrowDC(firstValue)){
+                    result[PROPS.save] = parseSavingThrowDC(firstValue);
+                }
+
+                result[PROPS.damage] = parseDamage(values);
+
+            }
+        }
+        return result;
+    });
+};
+
 var getValueFunction = function (key) {
     if (valueFunctions.hasOwnProperty(key)) {
         return valueFunctions[key];
@@ -84,17 +86,17 @@ var getValueFunction = function (key) {
 
 var parseMonster = function (monsterData) {
     var monster = {};
-    if (!monsterData.hasOwnProperty('stats')) {
-        monsterData.stats = [10, 10, 10, 10, 10, 10];
+    if (!monsterData.hasOwnProperty(PROPS.stats)) {
+        monsterData[PROPS.stats] = [10, 10, 10, 10, 10, 10];
     }
-    if (!monsterData.hasOwnProperty('ac')) {
-        monsterData.ac = 0;
+    if (!monsterData.hasOwnProperty(PROPS.ac)) {
+        monsterData[PROPS.ac] = 0;
     }
-    if (!monsterData.hasOwnProperty('hp')) {
-        monsterData.hp = 0;
+    if (!monsterData.hasOwnProperty(PROPS.hp)) {
+        monsterData[PROPS.hp] = 0;
     }
-    if (!monsterData.hasOwnProperty('attacks')) {
-        monsterData.attacks = [];
+    if (!monsterData.hasOwnProperty(PROPS.attacks)) {
+        monsterData[PROPS.attacks]= [];
     }
     for (var key in monsterData) {
         if (monsterData.hasOwnProperty(key)) {

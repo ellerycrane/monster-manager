@@ -12,7 +12,7 @@ Kobold:
   attacks:
     - Dagger: +4, 1d4+2 piercing
     - Sling: +4, 1d4+2 bludgeoning
-  statblock: http://i.imgur.com/02uwl0S.png
+  sidebar: http://i.imgur.com/02uwl0S.png
   avatar: http://i.imgur.com/S7DE0hg.png?1
 
 Winged Kobold:
@@ -31,7 +31,7 @@ Winged Kobold:
   attacks:
     - Dagger: +5, 1d4+3 piercing
     - Dropped Rock: +5, 1d6+3 bludgeoning
-  statblock: http://i.imgur.com/VTGR6KR.png
+  sidebar: http://i.imgur.com/VTGR6KR.png
   avatar: http://i.imgur.com/X9kAhJ7.jpg?1
 
 Cloaker:

@@ -5,16 +5,17 @@
 @import "avatars";
 @import "stat-values";
 @import "animations";
-@import "statblocks";
+@import "sidebars";
 @import "action-shelves";
 @import "look-and-feel";
 
 @mixin monster-rows {
   .monster-row {
-    @include statblocks;
+    @include sidebars;
     @include action-shelves;
     @include animations;
     font-size: 16px;
+    color: #000;
     @include user-select(none);
     margin: 0 0 50px 0;
     .monster-card {
@@ -43,6 +44,7 @@
         background-color: white;
         text-align: center;
         padding: 2px 5px;
+//        font-variant: small-caps;
       }
       .monster-card-values {
         @include monster-values;

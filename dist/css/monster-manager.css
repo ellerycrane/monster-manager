@@ -54,14 +54,15 @@
 /* line 13, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row {
   font-size: 16px;
+  color: #000;
   -moz-user-select: -moz-none;
   -ms-user-select: none;
   -webkit-user-select: none;
   user-select: none;
   margin: 0 0 50px 0;
 }
-/* line 7, ../../scss/_statblocks.scss */
-#monster-manager-container .monster-row .statblock-insert {
+/* line 7, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container {
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
   -moz-border-radius: 10px;
@@ -81,7 +82,7 @@
   opacity: 0;
 }
 /* line 44, ../../scss/_css-arrows.scss */
-#monster-manager-container .monster-row .statblock-insert:after, #monster-manager-container .monster-row .statblock-insert:before {
+#monster-manager-container .monster-row .sidebar-container:after, #monster-manager-container .monster-row .sidebar-container:before {
   content: " ";
   height: 0;
   width: 0;
@@ -90,7 +91,7 @@
   border: solid rgba(255, 255, 255, 0);
 }
 /* line 53, ../../scss/_css-arrows.scss */
-#monster-manager-container .monster-row .statblock-insert:after {
+#monster-manager-container .monster-row .sidebar-container:after {
   border-color: rgba(255, 255, 255, 0);
   border-width: 9px;
   left: -18px;
@@ -99,7 +100,7 @@
   margin-top: 31px;
 }
 /* line 73, ../../scss/_css-arrows.scss */
-#monster-manager-container .monster-row .statblock-insert:before {
+#monster-manager-container .monster-row .sidebar-container:before {
   border-color: rgba(255, 255, 255, 0);
   border-width: 10px;
   left: -20px;
@@ -108,15 +109,15 @@
   margin-top: 30px;
 }
 /* line 2, ../../scss/_image-covers.scss */
-#monster-manager-container .monster-row .statblock-insert .cover {
+#monster-manager-container .monster-row .sidebar-container .cover {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
 }
-/* line 21, ../../scss/_statblocks.scss */
-#monster-manager-container .monster-row .statblock-insert .statblock {
+/* line 20, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-content {
   max-width: 400px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -127,8 +128,8 @@
   -webkit-box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
 }
-/* line 27, ../../scss/_statblocks.scss */
-#monster-manager-container .monster-row .statblock-insert .statblock img {
+/* line 26, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-content img {
   visibility: hidden;
   max-width: 400px;
 }
@@ -205,15 +206,19 @@
   background-color: rgba(165, 150, 46, 0.48);
 }
 /* line 15, ../../scss/_monster-attacks.scss */
+#monster-manager-container .monster-row .action-shelf .monster-attack:hover .attack-icon {
+  transform: scale(1.1);
+}
+/* line 21, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack:active .to-hit .icon {
   transform: rotateZ(0deg);
 }
-/* line 21, ../../scss/_monster-attacks.scss */
+/* line 27, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack:not(:active) .to-hit .icon {
   transform: rotateZ(720deg);
   transition: transform 500ms ease-out;
 }
-/* line 27, ../../scss/_monster-attacks.scss */
+/* line 33, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -226,6 +231,8 @@
   display: inline-block;
   background: no-repeat center;
   background-size: contain;
+  transform: scale(0.8);
+  transition: transform 250ms ease-out;
   cursor: pointer;
   margin-right: 5px;
 }
@@ -259,31 +266,31 @@
          and nice enhancement for WebKit */
   font-size: 26px;
 }
-/* line 31, ../../scss/_monster-attacks.scss */
+/* line 39, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon .icon {
   width: 100%;
   height: 100%;
   background: no-repeat center;
   background-size: contain;
 }
-/* line 39, ../../scss/_monster-attacks.scss */
+/* line 47, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.to-hit .icon {
   background-image: url("../img/d20.svg");
 }
-/* line 42, ../../scss/_monster-attacks.scss */
+/* line 50, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.to-hit .value {
   left: -2px;
 }
-/* line 48, ../../scss/_monster-attacks.scss */
+/* line 56, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.dc .icon {
   background-image: url("../img/dc.svg");
 }
-/* line 51, ../../scss/_monster-attacks.scss */
+/* line 59, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-icon.dc .value {
   top: 6px;
   left: 2px;
 }
-/* line 57, ../../scss/_monster-attacks.scss */
+/* line 65, ../../scss/_monster-attacks.scss */
 #monster-manager-container .monster-row .action-shelf .monster-attack .attack-name {
   font-weight: bold;
   margin-right: 5px;
@@ -297,7 +304,7 @@
   transform: translateY(100%);
 }
 /* line 13, ../../scss/_animations.scss */
-#monster-manager-container .monster-row .monster-card:hover .statblock-insert {
+#monster-manager-container .monster-row .monster-card:hover .sidebar-container {
   transform: translateX(100%) scale(1, 1);
   opacity: 1;
 }
@@ -365,14 +372,14 @@
     box-shadow: -1px 0px 2px 0.5px #FFFFFF, 0px 0px 1px 2px #08ff35, 0 0 2px #08ff35, 0 0 4px #08ff35, 1px 1px 7px #08ff35, 0 -1px 9px #08ff35, 0 -1px 10px #08ff35, 1px 0 12px #58ba0c;
   }
 }
-/* line 20, ../../scss/_monster-rows.scss */
+/* line 21, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card {
   position: relative;
   margin-top: 25px;
   width: 482px;
   z-index: 1;
 }
-/* line 25, ../../scss/_monster-rows.scss */
+/* line 26, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .card-border {
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
@@ -387,7 +394,7 @@
   padding: 5px 5px 5px 105px;
   top: 20px;
 }
-/* line 32, ../../scss/_monster-rows.scss */
+/* line 33, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .avatar {
   width: 70px;
   height: 70px;
@@ -436,7 +443,7 @@
   background-size: 80px;
   background-position: top;
 }
-/* line 38, ../../scss/_monster-rows.scss */
+/* line 39, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-name {
   -moz-user-select: -moz-none;
   -ms-user-select: none;
@@ -454,7 +461,7 @@
   text-align: center;
   padding: 2px 5px;
 }
-/* line 47, ../../scss/_monster-rows.scss */
+/* line 49, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values {
   position: absolute;
   width: 100px;
@@ -505,15 +512,15 @@
          and nice enhancement for WebKit */
   font-size: 26px;
 }
-/* line 53, ../../scss/_monster-rows.scss */
+/* line 55, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .hp {
   float: left;
 }
-/* line 56, ../../scss/_monster-rows.scss */
+/* line 58, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .monster-card-values .ac {
   float: right;
 }
-/* line 60, ../../scss/_monster-rows.scss */
+/* line 62, ../../scss/_monster-rows.scss */
 #monster-manager-container .monster-row .monster-card .body {
   font-family: "Rokkitt", serif;
   padding: 8px 8px 0 8px;

@@ -6,4 +6,5 @@ var Constants = {
     change: null
 };
 Constants = keyMirror(Constants);
+
 module.exports = Constants;

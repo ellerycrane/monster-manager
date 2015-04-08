@@ -1,7 +1,7 @@
 var React = require("react"),
     MonsterValue = require('./MonsterValue.react'),
     StatValue = require('./StatValue.react'),
-    StatBlockInsert = require('./StatBlockInsert.react'),
+    MonsterSidebar = require('./MonsterSidebar.react'),
     MonsterAttack= require('./MonsterAttack.react'),
     MonsterAvatar = require('./MonsterAvatar.react');
 
@@ -48,7 +48,7 @@ var MonsterRow = React.createClass({
                             {actions}
                         </div>
                     </div>
-                    <StatBlockInsert monster={m} />
+                    <MonsterSidebar monster={m} />
 
                 </div>
             </div>
