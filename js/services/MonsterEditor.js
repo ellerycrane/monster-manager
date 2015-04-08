@@ -10,7 +10,6 @@ var hasher = require("hasher");
 var MonsterParser = require('./MonsterParser');
 var base64 = require("./Base64");
 var BookmarkletGenerator = require('../services/BookmarkletGenerator');
-
 var INITIAL_MONSTER_DATA = fs.readFileSync(__dirname + '/../../test.yaml', 'utf8');
 
 var initialize = function (updateMonstersCallback) {
@@ -18,10 +17,17 @@ var initialize = function (updateMonstersCallback) {
         permalink = document.getElementById('permalink'),
         fallback = INITIAL_MONSTER_DATA || '',
         sourceTextArea = document.getElementById('source'),
-        bookmarkletLink = document.getElementById('bookmarklet-link');
+        bookmarkletLink = document.getElementById('bookmarklet-link'),
+        instructions = document.querySelector('.instructions');
+
+    bookmarkletLink.addEventListener("click", function(e){
+        e.stopPropagation();
+        e.preventDefault();
+        instructions.innerHTML = "You must *drag* the button to your toolbar to install; clicking it here will do nothing!";
+    }, false);
+    bookmarkletLink.href = BookmarkletGenerator.generated;
 
     sourceTextArea.innerHTML = INITIAL_MONSTER_DATA;
-    bookmarkletLink.href = BookmarkletGenerator.generated;
 
     var _parse = function() {
         var str, monsters;
