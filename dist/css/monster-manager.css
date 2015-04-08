@@ -61,7 +61,7 @@
   user-select: none;
   margin: 0 0 50px 0;
 }
-/* line 7, ../../scss/_sidebars.scss */
+/* line 8, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container {
   background-color: #F7F6F3;
   border: 1px solid #a5962e;
@@ -75,8 +75,7 @@
   top: 0;
   right: -10px;
   z-index: -10;
-  width: 400px;
-  padding: 5px;
+  padding: 5px 5px 5px 5px;
   transform: translateX(100%) scale(0, 0);
   transition: all 250ms ease-out;
   opacity: 0;
@@ -116,9 +115,32 @@
   top: 0;
   left: 0;
 }
-/* line 20, ../../scss/_sidebars.scss */
+/* line 21, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-inner {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  max-height: 500px;
+  overflow: scroll;
+  position: relative;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+/* line 30, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-content-pane {
+  position: relative;
+}
+/* line 32, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-content-pane:nth-child(2) {
+  margin-left: 5px;
+}
+/* line 36, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content {
-  max-width: 400px;
+  max-width: 300px;
   background-size: contain;
   background-repeat: no-repeat;
   -moz-border-radius: 5px;
@@ -128,10 +150,10 @@
   -webkit-box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
 }
-/* line 26, ../../scss/_sidebars.scss */
+/* line 42, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content img {
   visibility: hidden;
-  max-width: 400px;
+  max-width: 300px;
 }
 /* line 5, ../../scss/_action-shelves.scss */
 #monster-manager-container .monster-row .shelf-clipping-box {

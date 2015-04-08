@@ -12,6 +12,9 @@ Actions = {
     },
     rollStat: function(monster, stat){
         Roll20Client.rollStat(monster, stat);
+    },
+    rollAttack: function(monster, attack){
+        Roll20Client.rollAttack(monster, attack);
     }
 
 };

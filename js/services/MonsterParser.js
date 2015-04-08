@@ -18,6 +18,10 @@ var isSavingThrowDC = function(value){
     return value.indexOf("DC") === 0;
 };
 
+var hasDamage = function(values){
+    return values.length > 1;
+};
+
 var parseSavingThrowDC = function(value){
     var savingThrowComponents = value.split(' '),
         savingThrowData = {};
@@ -59,7 +63,7 @@ valueFunctions[PROPS.attacks] = function (data) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 result[PROPS.name] = key;
-                var values = obj[key].split(","),
+                var values = (''+obj[key]).split(","),
                     firstValue = values[0].trim();
 
                 if(isAttackBonus(firstValue)){
@@ -68,9 +72,9 @@ valueFunctions[PROPS.attacks] = function (data) {
                 if(isSavingThrowDC(firstValue)){
                     result[PROPS.save] = parseSavingThrowDC(firstValue);
                 }
-
-                result[PROPS.damage] = parseDamage(values);
-
+                if(hasDamage(values)){
+                    result[PROPS.damage] = parseDamage(values);
+                }
             }
         }
         return result;

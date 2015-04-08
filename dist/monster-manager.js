@@ -13,6 +13,9 @@ Actions = {
     },
     rollStat: function(monster, stat){
         Roll20Client.rollStat(monster, stat);
+    },
+    rollAttack: function(monster, attack){
+        Roll20Client.rollAttack(monster, attack);
     }
 
 };
@@ -61,44 +64,56 @@ module.exports = {
 
 },{"./actions/Actions.js":1,"./components/MonsterManagerApplication.react.js":7,"./services/MonsterParser":15,"./stores/Stores.js":18,"fluxxor":21,"react":292}],3:[function(require,module,exports){
 var React = require("react"),
+    Fluxxor = require('fluxxor'),
+    FluxMixin = Fluxxor.FluxMixin(React),
     _ = require("underscore"),
+    PROPS = require('../constants/MonsterProperties'),
     ModifierUtils = require('../utilities/ModifierUtils'),
     PropertyUtils = require('../utilities/PropertyUtils');
 
 var MonsterAttack = React.createClass({displayName: "MonsterAttack",
+    mixins: [FluxMixin],
+
+    handleOnMouseDown: function () {
+        this.getFlux().actions.rollAttack(this.props.monster, this.props.attack);
+    },
+
     render: function () {
         var m = this.props.monster,
             attack = this.props.attack;
-        var damageStrings = [];
-        _.pairs(attack.damage).forEach(function(pair){
-            var type = pair[0];
-            var amount = pair[1];
-            damageStrings.push(amount + ' ' + type + ' damage');
-        });
-        var detailsString = damageStrings.join(' plus ');
+        var detailsString = "";
+        if(PropertyUtils.exists(attack, PROPS.damage)) {
+            var damageStrings = [];
+            _.pairs(attack.damage).forEach(function (pair) {
+                var type = pair[0];
+                var amount = pair[1];
+                damageStrings.push(amount + ' ' + type + ' damage');
+            });
+            detailsString = damageStrings.join(' plus ')+'.';
+        }
 
         var valueString;
         var className = 'attack-icon ';
-        if(PropertyUtils.exists(attack, 'toHit')){
+        if(PropertyUtils.exists(attack, PROPS.toHit)){
             className += 'to-hit';
             valueString = ModifierUtils.modifierToString(attack.toHit);
         }
-        if(PropertyUtils.exists(attack, 'save')){
-            valueString = attack.save.dc;
-            detailsString = attack.save.type + ' save. ' + detailsString;
+        if(PropertyUtils.exists(attack, PROPS.save)){
             className += 'dc';
+            valueString = attack.save.dc;
+            if(PropertyUtils.exists(attack.save, PROPS.type)) {
+                detailsString = attack.save.type + ' save. ' + detailsString;
+            }
         }
 
-
-
         return (
-            React.createElement("div", {className: "monster-attack"}, 
+            React.createElement("div", {className: "monster-attack", onMouseDown: this.handleOnMouseDown}, 
                 React.createElement("div", {className: className}, 
                     React.createElement("div", {className: "icon"}), 
                     React.createElement("div", {className: "value"}, valueString)
                 ), 
                 React.createElement("div", {className: "attack-name"}, attack.name, "."), 
-                React.createElement("div", {className: "attack-details"}, detailsString, ".")
+                React.createElement("div", {className: "attack-details"}, detailsString)
             )
         );
     }
@@ -107,7 +122,7 @@ var MonsterAttack = React.createClass({displayName: "MonsterAttack",
 
 module.exports = MonsterAttack;
 
-},{"../utilities/ModifierUtils":19,"../utilities/PropertyUtils":20,"react":292,"underscore":293}],4:[function(require,module,exports){
+},{"../constants/MonsterProperties":13,"../utilities/ModifierUtils":19,"../utilities/PropertyUtils":20,"fluxxor":21,"react":292,"underscore":293}],4:[function(require,module,exports){
 var React = require("react");
 
 var MonsterAvatar = React.createClass({displayName: "MonsterAvatar",
@@ -269,12 +284,22 @@ var MonsterSidebar = React.createClass({displayName: "MonsterSidebar",
         if(sidebarUrl === null){
             return null;
         }
+        var sidebarUrls = sidebarUrl.constructor === Array ? sidebarUrl : [sidebarUrl];
+        var sidebarContent = sidebarUrls.map(function(url, i){
+            return (
+                React.createElement("div", {key: m.id+'-'+url+'-'+i, className: "sidebar-content-pane"}, 
+                    React.createElement("div", {className: "sidebar-content", style: {backgroundImage: 'url(' + url + ')'}}, 
+                        React.createElement("img", {src: url, style: {visibility: "hidden"}})
+                    ), 
+                    React.createElement("div", {className: "cover"})
+                )
+            );
+        }.bind(this));
         return (
             React.createElement("div", {className: "sidebar-container"}, 
-                React.createElement("div", {className: "sidebar-content", style: {backgroundImage:'url('+sidebarUrl+')'}}, 
-                    React.createElement("img", {src: sidebarUrl, style: {visibility:"hidden"}})
-                ), 
-                React.createElement("div", {className: "cover"})
+                React.createElement("div", {className: "sidebar-inner"}, 
+                    sidebarContent
+                )
             )
         )
 
@@ -442,6 +467,10 @@ var isSavingThrowDC = function(value){
     return value.indexOf("DC") === 0;
 };
 
+var hasDamage = function(values){
+    return values.length > 1;
+};
+
 var parseSavingThrowDC = function(value){
     var savingThrowComponents = value.split(' '),
         savingThrowData = {};
@@ -483,7 +512,7 @@ valueFunctions[PROPS.attacks] = function (data) {
         for (var key in obj) {
             if (obj.hasOwnProperty(key)) {
                 result[PROPS.name] = key;
-                var values = obj[key].split(","),
+                var values = (''+obj[key]).split(","),
                     firstValue = values[0].trim();
 
                 if(isAttackBonus(firstValue)){
@@ -492,9 +521,9 @@ valueFunctions[PROPS.attacks] = function (data) {
                 if(isSavingThrowDC(firstValue)){
                     result[PROPS.save] = parseSavingThrowDC(firstValue);
                 }
-
-                result[PROPS.damage] = parseDamage(values);
-
+                if(hasDamage(values)){
+                    result[PROPS.damage] = parseDamage(values);
+                }
             }
         }
         return result;
@@ -555,7 +584,12 @@ module.exports = {parseMonstersFromYaml: parseMonstersFromYaml};
 
 
 },{"../constants/MonsterProperties":13,"js-yaml":106,"underscore":293}],16:[function(require,module,exports){
-var $ = require("jquery");
+var $ = require("jquery"),
+    _ = require("underscore"),
+    PropertyUtils = require('../utilities/PropertyUtils'),
+    PROPS = require('../constants/MonsterProperties'),
+    exists = PropertyUtils.exists,
+    safeGet = PropertyUtils.safeGet;
 var STAT_NAMES = {
     str: "Strength",
     dex: "Dexterity",
@@ -564,35 +598,103 @@ var STAT_NAMES = {
     wis: "Wisdom",
     cha: "Charisma"
 };
+
+var rollD20WithModifier = function (modifier) {
+    var sign = modifier < 0 ? "" : "+";
+    return "[[1d20" + sign + modifier + "]]";
+};
+
+var damageCommand = function (damage) {
+    var damageStrings = [];
+    _.pairs(damage).forEach(function (pair) {
+        var type = pair[0];
+        var amount = pair[1];
+        damageStrings.push(['[[' + amount + ']]', type, 'damage'].join(' '));
+    });
+    return damageStrings.join(' plus ');
+};
+
+var enterCommand = function(command){
+    if(command === null || !_.isString(command) || _.isEmpty(command)){
+        console.log("Empty command; aborting.");
+        return;
+    }
+    console.log("Entering roll20 Command: " + command);
+    var input = $('#textchat-input'),
+        textarea = input.find('textarea')[0],
+        button = input.find('button')[0],
+        oldValue;
+    if (textarea && button) {
+        oldValue = textarea.value;
+        textarea.value = command;
+        button.click();
+        textarea.value = oldValue;
+    }
+};
+
 var Roll20Client;
 Roll20Client = {
     rollStat: function (monster, stat) {
         var value = monster.stats[stat.toUpperCase()];
         var modifier = Math.floor((value) / 2) - 5;
-        var sign = modifier < 0 ? "" : "+";
         var checkName = "a";
         if (stat == "int") {
             checkName = "an";
         }
         checkName += " " + STAT_NAMES[stat];
-        var command = "/emas " + monster.name + " makes " + checkName + " check: [[1d20" + sign + modifier + "]]";
+        var command = "/emas " + monster.name + " makes " + checkName + " check: " + rollD20WithModifier(modifier);
         console.log("Rolling stat '" + stat + "' for monster " + monster.name + '[id=' + monster.id + ']');
-        console.log("Command: "+command);
-        var input = $('#textchat-input'),
-            textarea = input.find('textarea')[0],
-            button = input.find('button')[0];
-        if(textarea && button) {
-            var oldValue = textarea.value;
-            textarea.value = command;
-            button.click();
-            textarea.value = oldValue;
+        enterCommand(command);
+    },
+
+    rollAttack: function (monster, attack) {
+        var monsterName = safeGet(monster,PROPS.name),
+            attackName = safeGet(attack, PROPS.name),
+            toHit = safeGet(attack, PROPS.toHit),
+            damage = safeGet(attack, PROPS.damage),
+            save = safeGet(attack, PROPS.save),
+            saveType = safeGet(save, PROPS.type),
+            separator = (toHit !== null || save !== null) ? ',' : '!';
+
+        console.log("Rolling attack: " + attackName + " for monster " + monsterName);
+
+        var sb = ["/emas " + monsterName + " attacks"];
+        if(attackName){
+            sb.push("with " + attackName + separator)
+        } else {
+            sb[0] += separator;
         }
+        if(toHit){
+            var attackRoll = rollD20WithModifier(toHit);
+            sb.push("hitting AC " + attackRoll);
+            if(damage){
+                sb.push("and dealing " + damageCommand(damage) + " if it hits.");
+            }
+            sb.push("([dis]advantage die: "+attackRoll+")");
+        }
+        if(save){
+            var savingThrowText = "saving throw";
+            if(saveType){
+                var typeText = saveType;
+                if(exists(STAT_NAMES, saveType.toLowerCase())){
+                    typeText = STAT_NAMES[saveType.toLowerCase()];
+                }
+                savingThrowText = [typeText,savingThrowText].join(' ');
+            }
+            if(damage){
+                sb.push("dealing " + damageCommand(damage)+" on a failed "+savingThrowText+'.');
+            } else {
+                sb.push("hitting on a failed "+savingThrowText+'.');
+            }
+        }
+        var command = sb.join(' ');
+        enterCommand(command);
     }
 };
 
 module.exports = Roll20Client;
 
-},{"jquery":105}],17:[function(require,module,exports){
+},{"../constants/MonsterProperties":13,"../utilities/PropertyUtils":20,"jquery":105,"underscore":293}],17:[function(require,module,exports){
 var Fluxxor = require('fluxxor'),
     Constants = require('../constants/MonsterManagerConstants');
 

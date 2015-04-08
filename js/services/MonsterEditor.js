@@ -19,14 +19,12 @@ var initialize = function (updateMonstersCallback) {
         sourceTextArea = document.getElementById('source'),
         bookmarkletLink = document.getElementById('bookmarklet-link'),
         instructions = document.querySelector('.instructions');
-
     bookmarkletLink.addEventListener("click", function(e){
         e.stopPropagation();
         e.preventDefault();
         instructions.innerHTML = "You must *drag* the button to your toolbar to install; clicking it here will do nothing!";
     }, false);
     bookmarkletLink.href = BookmarkletGenerator.generated;
-
     sourceTextArea.innerHTML = INITIAL_MONSTER_DATA;
 
     var _parse = function() {

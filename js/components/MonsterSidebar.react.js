@@ -8,12 +8,22 @@ var MonsterSidebar = React.createClass({
         if(sidebarUrl === null){
             return null;
         }
+        var sidebarUrls = sidebarUrl.constructor === Array ? sidebarUrl : [sidebarUrl];
+        var sidebarContent = sidebarUrls.map(function(url, i){
+            return (
+                <div key={m.id+'-'+url+'-'+i} className="sidebar-content-pane">
+                    <div className="sidebar-content" style={{backgroundImage: 'url(' + url + ')'}}>
+                        <img src={url} style={{visibility: "hidden"}}/>
+                    </div>
+                    <div className="cover" />
+                </div>
+            );
+        }.bind(this));
         return (
             <div className="sidebar-container">
-                <div className="sidebar-content" style={{backgroundImage:'url('+sidebarUrl+')'}}>
-                    <img src={sidebarUrl} style={{visibility:"hidden"}}/>
+                <div className="sidebar-inner">
+                    {sidebarContent}
                 </div>
-                <div className="cover" />
             </div>
         )
 

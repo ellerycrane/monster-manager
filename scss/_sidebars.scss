@@ -4,6 +4,7 @@
 @import "image-covers";
 
 @mixin sidebars {
+  $sidebar-column-width: 300px;
   .sidebar-container {
     @include card-styles;
     @include css-arrow(left, top, 10px, 30px, $card-bg-color, $card-border-color);
@@ -12,20 +13,35 @@
     top: 0;
     right: -10px;
     z-index: -10;
-    width: 400px;
-    padding: 5px;
+    padding: 5px 5px 5px 5px;
     transform: translateX(100%) scale(0, 0);
     transition: all 250ms ease-out;
     opacity: 0;
+
+    .sidebar-inner {
+      @include display-flex;
+      @include flex-direction(row);
+      @include align-items(flex-start);
+      max-height: 500px;
+      overflow: scroll;
+      position:relative;
+      @include border-radius(5px);
+    }
+    .sidebar-content-pane {
+      position:relative;
+      &:nth-child(2) {
+        margin-left: 5px;
+      }
+    }
     .sidebar-content {
-      max-width: 400px;
+      max-width: $sidebar-column-width;
       background-size: contain;
       background-repeat: no-repeat;
       @include border-radius(5px);
       @include box-shadow(inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5));
       img {
         visibility: hidden;
-        max-width: 400px;
+        max-width: $sidebar-column-width;
       }
     }
   }
