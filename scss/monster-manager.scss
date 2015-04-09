@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt|Libre+Baskerville:700|Alegreya+Sans:900);
 @import "compass/reset/utilities";
+@import "compass/css3";
 @import 'monster-rows';
 @import 'font-smoothing';
 
@@ -9,9 +10,14 @@
   @include font-smoothing;
   position: absolute;
   z-index: 100000;
+  .monster-manager {
+    @include user-select(none);
+    position: absolute;
+    cursor: move;
+  }
 }
 
 .no-touch #monster-manager-container{
-  left: 200px;
+  left: 100px;
   top: 50px;
 }

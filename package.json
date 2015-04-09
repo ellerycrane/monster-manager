@@ -40,6 +40,7 @@
     "react": "*",
     "react-tools": "*",
     "reactify": "*",
+    "react-draggable": "~0.4.0",
     "flux": "*",
     "keymirror": "*",
     "immutable": "*",

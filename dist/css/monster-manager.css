@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Rokkitt|Libre+Baskerville:700|Alegreya+Sans:900);
-/* line 6, ../../scss/monster-manager.scss */
+/* line 7, ../../scss/monster-manager.scss */
 #monster-manager-container {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -75,10 +75,27 @@
   top: 0;
   right: -10px;
   z-index: -10;
-  padding: 5px 5px 5px 5px;
+  padding: 5px;
   transform: translateX(100%) scale(0, 0);
   transition: all 250ms ease-out;
   opacity: 0;
+}
+/* line 9, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container ::-webkit-scrollbar-corner {
+  -webkit-appearance: none;
+}
+/* line 13, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container ::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 12px;
+  background: transparent;
+}
+/* line 19, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container ::-webkit-scrollbar-thumb {
+  border-radius: 12px;
+  border: 4px solid rgba(255, 255, 255, 0);
+  background-clip: content-box;
+  background-color: #A0A0A0;
 }
 /* line 44, ../../scss/_css-arrows.scss */
 #monster-manager-container .monster-row .sidebar-container:after, #monster-manager-container .monster-row .sidebar-container:before {
@@ -115,7 +132,11 @@
   top: 0;
   left: 0;
 }
-/* line 21, ../../scss/_sidebars.scss */
+/* line 38, ../../scss/_sidebars.scss */
+#monster-manager-container .monster-row .sidebar-container .sidebar-scrollable-area {
+  overflow: hidden;
+}
+/* line 42, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-inner {
   display: -webkit-flex;
   display: flex;
@@ -124,23 +145,25 @@
   -webkit-align-items: flex-start;
   align-items: flex-start;
   max-height: 500px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
+  margin-right: -12px;
   -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 30, ../../scss/_sidebars.scss */
+/* line 53, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content-pane {
   position: relative;
 }
-/* line 32, ../../scss/_sidebars.scss */
+/* line 55, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content-pane:nth-child(2) {
   margin-left: 5px;
 }
-/* line 36, ../../scss/_sidebars.scss */
+/* line 59, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content {
-  max-width: 300px;
+  width: 300px;
   background-size: contain;
   background-repeat: no-repeat;
   -moz-border-radius: 5px;
@@ -150,10 +173,10 @@
   -webkit-box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
   box-shadow: inset 0px 1px 3px 2px rgba(0, 0, 0, 0.5);
 }
-/* line 42, ../../scss/_sidebars.scss */
+/* line 65, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content img {
   visibility: hidden;
-  max-width: 300px;
+  width: 300px;
 }
 /* line 5, ../../scss/_action-shelves.scss */
 #monster-manager-container .monster-row .shelf-clipping-box {
@@ -642,9 +665,18 @@
 #monster-manager-container .monster-row .monster-card .body .stat-value:not(:hover) .stat-container {
   transition: none;
 }
+/* line 13, ../../scss/monster-manager.scss */
+#monster-manager-container .monster-manager {
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  position: absolute;
+  cursor: move;
+}
 
-/* line 14, ../../scss/monster-manager.scss */
+/* line 20, ../../scss/monster-manager.scss */
 .no-touch #monster-manager-container {
-  left: 200px;
+  left: 100px;
   top: 50px;
 }

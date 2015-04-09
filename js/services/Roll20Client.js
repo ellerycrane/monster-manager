@@ -28,8 +28,8 @@ var damageCommand = function (damage) {
     return damageStrings.join(' plus ');
 };
 
-var enterCommand = function(command){
-    if(command === null || !_.isString(command) || _.isEmpty(command)){
+var enterCommand = function (command) {
+    if (command === null || !_.isString(command) || _.isEmpty(command)) {
         console.log("Empty command; aborting.");
         return;
     }
@@ -46,8 +46,58 @@ var enterCommand = function(command){
     }
 };
 
+var observeDOM = (function() {
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver,
+        eventListenerSupported = window.addEventListener;
+
+    return function(obj, callback) {
+        if (MutationObserver) {
+            var obs = new MutationObserver(function(mutations, observer) {
+                if (mutations[0].addedNodes.length || mutations[0].removedNodes.length)
+                    callback(mutations);
+            });
+            obs.observe(obj, {
+                childList: true,
+                subtree: true
+            });
+        } else if (eventListenerSupported) {
+            obj.addEventListener('DOMNodeInserted', callback, false);
+            obj.addEventListener('DOMNodeRemoved', callback, false);
+        }
+    }
+})();
+
+var INITIATIVE_REGEX = /^(.+) rolls for Initiative\: (\d+)$/;
+
+var setupInitiativeTracking = function() {
+    observeDOM(document.querySelector('#textchat > .content'), function (mutations) {
+        var added = mutations[0].addedNodes;
+        if (added.length === 3 && added[1].className == "message emote" && added[1].innerText) {
+            var matches = added[1].innerText.trim().match(INITIATIVE_REGEX);
+            if (matches && matches.length === 3) {
+                console.log("Initiative was rolled: " + matches[1] + " rolled " + matches[2]);
+                Roll20Client.addMonsterToInitiative(matches[1], matches[2]);
+            }
+        }
+    });
+};
 var Roll20Client;
 Roll20Client = {
+    addMonsterToInitiative: function (name, initiative) {
+        if (window.is_gm) {
+            var n = window.Campaign.initiativewindow.cleanList(),
+                r = {
+                    id: "-1",
+                    pr: "" + initiative,
+                    custom: name
+                };
+            n.push(r);
+            window.Campaign.initiativewindow.model.save({
+                turnorder: JSON.stringify(n)
+            });
+        }
+    },
+
     rollStat: function (monster, stat) {
         var value = monster.stats[stat.toUpperCase()];
         var modifier = Math.floor((value) / 2) - 5;
@@ -62,7 +112,7 @@ Roll20Client = {
     },
 
     rollAttack: function (monster, attack) {
-        var monsterName = safeGet(monster,PROPS.name),
+        var monsterName = safeGet(monster, PROPS.name),
             attackName = safeGet(attack, PROPS.name),
             toHit = safeGet(attack, PROPS.toHit),
             damage = safeGet(attack, PROPS.damage),
@@ -73,32 +123,32 @@ Roll20Client = {
         console.log("Rolling attack: " + attackName + " for monster " + monsterName);
 
         var sb = ["/emas " + monsterName + " attacks"];
-        if(attackName){
+        if (attackName) {
             sb.push("with " + attackName + separator)
         } else {
             sb[0] += separator;
         }
-        if(toHit){
+        if (toHit) {
             var attackRoll = rollD20WithModifier(toHit);
             sb.push("hitting AC " + attackRoll);
-            if(damage){
+            if (damage) {
                 sb.push("and dealing " + damageCommand(damage) + " if it hits.");
             }
-            sb.push("([dis]advantage die: "+attackRoll+")");
+            sb.push("([dis]advantage die: " + attackRoll + ")");
         }
-        if(save){
+        if (save) {
             var savingThrowText = "saving throw";
-            if(saveType){
+            if (saveType) {
                 var typeText = saveType;
-                if(exists(STAT_NAMES, saveType.toLowerCase())){
+                if (exists(STAT_NAMES, saveType.toLowerCase())) {
                     typeText = STAT_NAMES[saveType.toLowerCase()];
                 }
-                savingThrowText = [typeText,savingThrowText].join(' ');
+                savingThrowText = [typeText, savingThrowText].join(' ');
             }
-            if(damage){
-                sb.push("dealing " + damageCommand(damage)+" on a failed "+savingThrowText+'.');
+            if (damage) {
+                sb.push("dealing " + damageCommand(damage) + " on a failed " + savingThrowText + '.');
             } else {
-                sb.push("hitting on a failed "+savingThrowText+'.');
+                sb.push("hitting on a failed " + savingThrowText + '.');
             }
         }
         var command = sb.join(' ');

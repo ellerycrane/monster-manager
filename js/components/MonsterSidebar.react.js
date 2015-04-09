@@ -21,8 +21,10 @@ var MonsterSidebar = React.createClass({
         }.bind(this));
         return (
             <div className="sidebar-container">
-                <div className="sidebar-inner">
+                <div className="sidebar-scrollable-area">
+                    <div className="sidebar-inner">
                     {sidebarContent}
+                    </div>
                 </div>
             </div>
         )
