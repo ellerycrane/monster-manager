@@ -4,7 +4,7 @@
 @import "image-covers";
 
 @mixin sidebars {
-  $sidebar-column-width: 300px;
+  $sidebar-column-width: 400px;
   .sidebar-container {
     ::-webkit-scrollbar-corner {
       -webkit-appearance: none;
@@ -43,7 +43,7 @@
       @include display-flex;
       @include flex-direction(row);
       @include align-items(flex-start);
-      max-height: 500px;
+      max-height: 600px;
       overflow-y: scroll;
       overflow-x: hidden;
       position:relative;

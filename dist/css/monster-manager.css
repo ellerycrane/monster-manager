@@ -144,7 +144,7 @@
   flex-direction: row;
   -webkit-align-items: flex-start;
   align-items: flex-start;
-  max-height: 500px;
+  max-height: 600px;
   overflow-y: scroll;
   overflow-x: hidden;
   position: relative;
@@ -163,7 +163,7 @@
 }
 /* line 59, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content {
-  width: 300px;
+  width: 400px;
   background-size: contain;
   background-repeat: no-repeat;
   -moz-border-radius: 5px;
@@ -176,7 +176,7 @@
 /* line 65, ../../scss/_sidebars.scss */
 #monster-manager-container .monster-row .sidebar-container .sidebar-content img {
   visibility: hidden;
-  width: 300px;
+  width: 400px;
 }
 /* line 5, ../../scss/_action-shelves.scss */
 #monster-manager-container .monster-row .shelf-clipping-box {
