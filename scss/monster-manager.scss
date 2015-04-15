@@ -3,10 +3,10 @@
 @import "compass/css3";
 @import 'monster-rows';
 @import 'font-smoothing';
+@import './admin/administrator';
 
 #monster-manager-container {
   @include nested-reset;
-  @include monster-rows;
   @include font-smoothing;
   position: absolute;
   z-index: 100000;
@@ -14,6 +14,8 @@
     @include user-select(none);
     position: absolute;
     cursor: move;
+    @include administrator;
+    @include monster-rows;
   }
 }
 

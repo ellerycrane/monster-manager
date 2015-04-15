@@ -2,7 +2,8 @@
 @import "compass/css3";
 
 @mixin monster-editor($masthead-vertical-space, $content-vertical-padding) {
-  $content-header-height: 30px;
+  $content-header-height: 0;
+//  $content-header-height: 30px;
   $content-header-bottom-padding: 5px;
   $content-header-vertical-space: $content-header-height+$content-header-bottom-padding;
   $code-mirror-offset: $masthead-vertical-space+(2*$content-vertical-padding)+$content-header-vertical-space;
@@ -26,6 +27,7 @@
       font-weight: normal;
       font-style: italic;
       margin: 0;
+      display: none;
     }
 
     .CodeMirror {

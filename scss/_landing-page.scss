@@ -5,7 +5,8 @@
 $masthead-height: 90px;
 $masthead-vertical-padding: 10px;
 $masthead-vertical-space: $masthead-height+2*$masthead-vertical-padding;
-$content-vertical-padding: 10px;
+$content-vertical-padding: 20px;
+$content-horizontal-padding: 10px;
 $content-height: calc(100vh - #{$masthead-vertical-space});
 $monster-manager-width: 500px;
 
@@ -24,23 +25,40 @@ $monster-manager-width: 500px;
     @include flex-direction(column);
     @include align-items(center);
     @include justify-content(space-between);
-    @include box-shadow(1px 1px 8px #ccc);
+    @include box-shadow(0px 1px 3px 1px #333);
     @include bookmarklet;
     position: relative;
     z-index: 999999999;
     height: $masthead-height;
     padding: $masthead-vertical-padding 0;
-    background-color: white;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    background-repeat: repeat-x;
+    color: #fff;
+    background-color: #485E70; //old browsers
+    @include filter-gradient(#1E364A, #485E70, horizontal); // IE6-9 fallback on horizontal gradient
+    @include background-image(linear-gradient(to bottom, #1E364A 0, #485E70 100%));
+
   }
 
   .content {
     @include display-flex;
-    overflow: scroll;
+    overflow: auto;
     height: $content-height;
     position: relative;
     width: 100%;
     backface-visibility: hidden;
     will-change: overflow;
+
+    //   background: url(../img/bg/brushed.png);
+    //   background: url(../img/bg/grey_wash_wall.png);
+    //   background: url(../img/bg/greyzz.png);
+    //   background: url(../img/bg/light_grey.png);
+    //   background: url(../img/bg/mooning.png);
+    //   background: url(../img/bg/sos.png);
+    //   background: url(../img/bg/squairy_light.png);
+    //   background: url(../img/bg/squared_metal.png);
+    background: url(../img/bg/subtle_white_feathers.png);
 
     .left,
     .right {
@@ -48,7 +66,7 @@ $monster-manager-width: 500px;
       height: auto;
       -webkit-overflow-scrolling: touch;
       -ms-overflow-style: none;
-      padding: $content-vertical-padding;
+      padding: $content-vertical-padding $content-horizontal-padding;
       &::-webkit-scrollbar {
         display: none;
       }

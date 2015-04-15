@@ -9,20 +9,57 @@
     @include header-font;
     @include border-radius(10px, 10px);
     @include box-shadow(1px 1px 8px #ccc);
-    background-color: white;
+
     text-align: center;
-    padding: 2px 5px;
-    color: black;
+    padding: 2px 20px 2px 60px;
     text-decoration: none;
-    width: 250px;
+//    width: 250px;
     height: 50px;
     line-height: 50px;
     font-size: 21px;
-    border: 1px solid #ccc;
-    @include background-image(linear-gradient(white, #f8f8f8 80%, #eee 90%));
+    border: 1px solid #fff;
+
+    color: #fff;
+    background-color: transparent;
+    position: relative;
+
+    &:hover {
+      background-color: #fff;
+      color: #485E70;
+
+      &::before {
+        background: url(../img/d20_invert.svg) repeat center center;
+        content: '';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        background-repeat: no-repeat;
+        width: 30px;
+        height: 30px;
+        background-size: contain;
+        transform: translateY(-50%);
+      }
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      background: url(../img/d20_white.svg) repeat center center;
+      background-repeat: no-repeat;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      transform: translateY(-50%);
+
+    }
   }
   .instructions{
     @include body-font;
     margin: 0;
+    font-size: 120%;
   }
 }

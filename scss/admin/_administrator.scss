@@ -1,0 +1,89 @@
+@import "compass/css3";
+@import "../look-and-feel";
+
+@mixin administrator {
+  .monster-manager-administrator{
+    position: relative;
+    display: none; // until this is finished
+    .toolbar {
+      @include card-styles;
+      box-sizing: border-box;
+      width: 100%;
+      padding: 0 10px;
+      margin-bottom: 40px;
+      @include display-flex;
+      @include justify-content(space-between);
+
+      .logo {
+        @include flex-grow(1);
+        background-image: url('../img/logo4.svg');
+        width: 30px;
+        height: 30px;
+        padding: 5px 0 5px 0;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: left;
+        background-origin: content-box;
+      }
+
+      .button {
+        //@include card-button-styles;
+        @include transition-property(background-color);
+        @include transition-duration(150ms);
+        @include transition-timing-function(ease-in);
+
+        &:hover {
+          background-color: $button-depress-color;
+        }
+        width: 20px;
+        height: 20px;
+        padding: 10px;
+        cursor: pointer;
+
+        .icon {
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          background-origin: content-box;
+
+          opacity: 0.4;
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .settings .icon{
+        background-image: url('../img/settings.svg');
+      }
+
+      .button:hover{
+        .drawer {
+          visibility: visible;
+        }
+      }
+
+      .drawer {
+        @include card-styles;
+        @include border-radius(0 0 10px 10px);
+        @include box-shadow(
+                inset 0 4px 5px -2px rgba(0, 0, 0, 0.3),
+                1px 2px 5px rgba(0, 0, 0, 0.3)
+        );
+
+        position: absolute;
+        bottom: 1px;
+        right: 10px;
+        visibility: hidden;
+        width: calc(100% - 20px);
+        z-index: 10;
+        transform: translateY(100%);
+        cursor: default;
+        padding: 10px 5px 5px 5px;
+        box-sizing: border-box;
+      }
+    }
+
+
+  }
+
+}

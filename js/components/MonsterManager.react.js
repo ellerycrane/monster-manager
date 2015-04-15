@@ -1,5 +1,6 @@
 var React = require("react"),
     Draggable = require("react-draggable"),
+    MonsterManagerAdministrator = require('./admin/MonsterManagerAdministrator.react'),
     MonsterList = require("./MonsterList.react.js");
 
 var MonsterManager = React.createClass({
@@ -32,6 +33,7 @@ var MonsterManager = React.createClass({
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}>
                 <div className="monster-manager">
+                    <MonsterManagerAdministrator monsters={this.props.monsters} key="admin"></MonsterManagerAdministrator>
                     <MonsterList monsters={this.props.monsters} key="list"></MonsterList>
                 </div>
             </Draggable>
