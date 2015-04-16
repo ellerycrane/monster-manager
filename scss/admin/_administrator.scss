@@ -1,12 +1,45 @@
 @import "compass/css3";
 @import "../look-and-feel";
 
+@mixin dark-card-styles {
+  background-color: $dark-background; //old browsers
+  @include filter-gradient($darkest-background, $dark-background, horizontal); // IE6-9 fallback on horizontal gradient
+  @include background-image(linear-gradient(to bottom, $darkest-background 0, $dark-background 100%));
+  border: 1px solid #fff;
+  @include border-radius(10px);
+}
+
+@mixin invert-icon-styles($icon-selector: ".icon") {
+  #{$icon-selector} {
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: 50% 0;
+    background-size: cover;
+  }
+
+  &:hover {
+    #{$icon-selector} {
+      background-position: 50% 100%;
+    }
+  }
+}
+
 @mixin administrator {
-  .monster-manager-administrator{
+  .monster-manager-administrator {
+    //    display: none; // until this is finished
     position: relative;
-    display: none; // until this is finished
+    z-index: 5;
+    transition: opacity 150ms ease-out;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
     .toolbar {
-      @include card-styles;
+
+      border: 1px solid #fff;
+      @include border-radius(10px);
+      @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
+
       box-sizing: border-box;
       width: 100%;
       padding: 0 10px;
@@ -14,12 +47,19 @@
       @include display-flex;
       @include justify-content(space-between);
 
+      text-align: left;
+
+      color: #fff;
+      background-color: $dark-background; //old browsers
+      @include filter-gradient($darkest-background, $dark-background, horizontal); // IE6-9 fallback on horizontal gradient
+      @include background-image(linear-gradient(to bottom, $darkest-background 0, $dark-background 100%));
+
       .logo {
         @include flex-grow(1);
-        background-image: url('../img/logo4.svg');
-        width: 30px;
-        height: 30px;
-        padding: 5px 0 5px 0;
+        background-image: url('../img/d20_white.svg');
+        width: 20px;
+        height: 20px;
+        padding: 10px 0 10px 0;
         background-size: contain;
         background-repeat: no-repeat;
         background-position: left;
@@ -27,43 +67,51 @@
       }
 
       .button {
-        //@include card-button-styles;
-        @include transition-property(background-color);
-        @include transition-duration(150ms);
-        @include transition-timing-function(ease-in);
+        @include invert-icon-styles;
 
         &:hover {
-          background-color: $button-depress-color;
+          background-color: $light-background;
         }
+
         width: 20px;
         height: 20px;
         padding: 10px;
         cursor: pointer;
 
         .icon {
-          background-size: contain;
-          background-repeat: no-repeat;
-          background-position: center;
-          background-origin: content-box;
-
-          opacity: 0.4;
           width: 100%;
           height: 100%;
         }
       }
 
-      .settings .icon{
-        background-image: url('../img/settings.svg');
+      .settings {
+        .drawer::before {
+          content: 'Settings';
+        }
+        .icon {
+          background-image: url('../img/settings.svg');
+        }
       }
 
-      .button:hover{
+      .list {
+        .drawer::before {
+          content: 'Bulk Actions';
+        }
+        .icon {
+          background-image: url('../img/list.svg');
+        }
+      }
+
+      .button:hover {
         .drawer {
           visibility: visible;
         }
       }
 
       .drawer {
-        @include card-styles;
+        background-color: $darkest-background;
+        border: 1px solid #fff;
+
         @include border-radius(0 0 10px 10px);
         @include box-shadow(
                 inset 0 4px 5px -2px rgba(0, 0, 0, 0.3),
@@ -78,11 +126,74 @@
         z-index: 10;
         transform: translateY(100%);
         cursor: default;
-        padding: 10px 5px 5px 5px;
+        padding: 5px 5px 5px 5px;
         box-sizing: border-box;
+
+        &::before {
+          font-size: 15px;
+          padding: 0 5px 5px 5px;
+          line-height: 20px;
+          display: block;
+          @include header-font;
+          text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+        }
+
+        .drawer-content {
+          border-radius: 5px;
+          color: $darkest-background;
+          text-align: left;
+          overflow: hidden;
+
+          .action-list {
+            $icon-size: 18px;
+
+            li {
+              padding: 12px 10px 8px (10px+$icon-size);
+              @include body-font;
+              cursor: pointer;
+              font-size: 16px;
+              font-weight: normal;
+              background: $light-background;
+              position: relative;
+              line-height: $icon-size;
+
+              &:not(:last-child) {
+                border-bottom: 1px solid $darkest-background;
+              }
+
+              &:hover {
+                background-color: $dark-background;
+                color: $light-background;
+              }
+
+              @include invert-icon-styles('&::before');
+
+              &::before {
+                content: '';
+                width: $icon-size;
+                height: $icon-size;
+                display: block;
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                margin-top: -($icon-size/2);
+              }
+
+              &.filter::before {
+                background-image: url("../img/filter.svg");
+              }
+              &.edit::before {
+                background-image: url("../img/edit.svg");
+              }
+              &.load::before {
+                background-image: url("../img/load.svg");
+              }
+
+            }
+          }
+        }
       }
     }
-
 
   }
 

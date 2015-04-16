@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<svg height="72px" id="Layer_1" version="1.1" viewBox="0 0 36 72" width="36px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <polygon id="icon" points="14,30 22,25 22,17 35.999,0 17.988,0 0,0 14,17 "/>
+    </defs>
+    <use x="0" y="3" style="fill:#485E70" xlink:href="#icon"/>
+    <use x="0" y="39" style="fill:#FFFFFF" xlink:href="#icon"/>
+</svg>

@@ -442,24 +442,46 @@ var React = require("react"),
  <ExpandList />
  */
 
+/*
+ <ul className="list-group">
+ <li>Strength</li>
+ <li>Dexterity</li>
+ <li>Constitution</li>
+ <li>Intelligence</li>
+ <li>Wisdom</li>
+ <li>Charisma</li>
+ </ul>
+ */
+
 var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManagerAdministrator",
     render: function () {
         return (
             React.createElement("div", {className: "monster-manager-administrator"}, 
                 React.createElement("div", {className: "toolbar"}, 
                     React.createElement("div", {className: "logo"}), 
-                    React.createElement("div", {className: "settings button"}, 
+                    React.createElement("div", {className: "list button"}, 
                         React.createElement("div", {className: "icon"}), 
-                        React.createElement("div", {className: "drawer"}, React.createElement("p", null, "Hello, world!"))
+                        React.createElement("div", {className: "drawer"}, 
+                            React.createElement("div", {className: "drawer-content"}, 
+                                React.createElement("ul", {className: "action-list"}, 
+                                    React.createElement("li", null, "Roll Initiative"), 
+                                    React.createElement("li", null, 
+                                        "Roll Stat"
+                                    )
+                                )
+                            )
+                        )
                     ), 
                     React.createElement("div", {className: "settings button"}, 
                         React.createElement("div", {className: "icon"}), 
                         React.createElement("div", {className: "drawer"}, 
-                            React.createElement("p", null, "This is a settings drawer!"), 
-                            React.createElement("p", null, "This is a settings drawer!"), 
-                            React.createElement("p", null, "This is a settings drawer!"), 
-                            React.createElement("p", null, "This is a settings drawer!"), 
-                            React.createElement("p", null, "This is a settings drawer!")
+                            React.createElement("div", {className: "drawer-content"}, 
+                                React.createElement("ul", {className: "action-list"}, 
+                                    React.createElement("li", {className: "edit"}, "Edit Monster Data"), 
+                                    React.createElement("li", {className: "load"}, "Load Monster Data"), 
+                                    React.createElement("li", {className: "filter"}, "Filter Monster List")
+                                )
+                            )
                         )
                     )
 

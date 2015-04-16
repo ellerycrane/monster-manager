@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<svg baseProfile="tiny" height="48px" version="1.2" viewBox="0 0 24 48" width="24px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <g id="icon">
+            <path d="M19,17h-7c-1.103,0-2,0.897-2,2s0.897,2,2,2h7c1.103,0,2-0.897,2-2S20.103,17,19,17z"/><path d="M19,10h-7c-1.103,0-2,0.897-2,2s0.897,2,2,2h7c1.103,0,2-0.897,2-2S20.103,10,19,10z"/><path d="M19,3h-7c-1.103,0-2,0.897-2,2s0.897,2,2,2h7c1.103,0,2-0.897,2-2S20.103,3,19,3z"/><circle cx="5" cy="19" r="2.5"/><circle cx="5" cy="12" r="2.5"/><circle cx="5" cy="5" r="2.5"/>
+        </g>
+    </defs>
+    <use x="0" y="0" style="fill:#FFFFFF" xlink:href="#icon"/>
+    <use x="0" y="24" style="fill:#485E70" xlink:href="#icon"/>
+</svg>

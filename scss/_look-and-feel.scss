@@ -1,10 +1,15 @@
 @import "compass/css3";
+@import "typography";
 
 $card-bg-color: #F7F6F3;
 $card-border-color: rgb(165, 150, 46);
 $button-border-color: rgba(165, 150, 46, 0);
 $button-hover-color: rgba(165, 150, 46, 0.18);
 $button-depress-color: rgba(165, 150, 46, 0.48);
+
+$darkest-background: #1E364A;
+$dark-background: #485E70;
+$light-background: #FFFFFF;
 
 @mixin card-styles {
   background-color: $card-bg-color;

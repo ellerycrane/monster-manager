@@ -43,7 +43,8 @@ $monster-manager-width: 500px;
 
   .content {
     @include display-flex;
-    overflow: auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
     height: $content-height;
     position: relative;
     width: 100%;

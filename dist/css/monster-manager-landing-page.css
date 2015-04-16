@@ -712,7 +712,8 @@ span.CodeMirror-selectedtext {
 .monster-manager-landing .content {
   display: -webkit-flex;
   display: flex;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: scroll;
   height: calc(100vh - 110px);
   position: relative;
   width: 100%;
@@ -720,7 +721,7 @@ span.CodeMirror-selectedtext {
   will-change: overflow;
   background: url(../img/bg/subtle_white_feathers.png);
 }
-/* line 63, ../../scss/_landing-page.scss */
+/* line 64, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .left,
 .monster-manager-landing .content .right {
   overflow: auto;
@@ -729,12 +730,12 @@ span.CodeMirror-selectedtext {
   -ms-overflow-style: none;
   padding: 20px 10px;
 }
-/* line 70, ../../scss/_landing-page.scss */
+/* line 71, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .left::-webkit-scrollbar,
 .monster-manager-landing .content .right::-webkit-scrollbar {
   display: none;
 }
-/* line 75, ../../scss/_landing-page.scss */
+/* line 76, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .left {
   -webkit-flex: 1;
   flex: 1;
@@ -745,21 +746,21 @@ span.CodeMirror-selectedtext {
   min-width: 500px;
   overflow: visible;
 }
-/* line 82, ../../scss/_landing-page.scss */
+/* line 83, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .left .manager-position-fix {
   position: relative;
 }
-/* line 84, ../../scss/_landing-page.scss */
+/* line 85, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .left .manager-position-fix #monster-manager-container {
   width: 500px;
   left: -250px;
 }
-/* line 90, ../../scss/_landing-page.scss */
+/* line 91, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .right {
   -webkit-flex: 1;
   flex: 1;
 }
-/* line 92, ../../scss/_landing-page.scss */
+/* line 93, ../../scss/_landing-page.scss */
 .monster-manager-landing .content .right .editor {
   position: fixed;
   width: calc(50vw - 20px);
