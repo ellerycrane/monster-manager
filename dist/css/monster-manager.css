@@ -60,18 +60,18 @@
   position: absolute;
   cursor: move;
 }
-/* line 28, ../../scss/admin/_administrator.scss */
+/* line 4, ../../scss/admin/_administrator.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator {
   position: relative;
   z-index: 5;
   transition: opacity 150ms ease-out;
   opacity: 0.6;
 }
-/* line 34, ../../scss/admin/_administrator.scss */
+/* line 9, ../../scss/admin/_administrator.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator:hover {
   opacity: 1;
 }
-/* line 37, ../../scss/admin/_administrator.scss */
+/* line 5, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar {
   border: 1px solid #fff;
   -moz-border-radius: 10px;
@@ -89,7 +89,7 @@
   -webkit-justify-content: space-between;
   justify-content: space-between;
   text-align: left;
-  color: #fff;
+  color: #FFFFFF;
   background-color: #485E70;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=1, startColorstr='#FF1E364A', endColorstr='#FF485E70');
@@ -100,67 +100,70 @@
   background-image: -webkit-linear-gradient(top, #1e364a 0%, #485e70 100%);
   background-image: linear-gradient(to bottom, #1e364a 0%, #485e70 100%);
 }
-/* line 57, ../../scss/admin/_administrator.scss */
+/* line 25, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .logo {
-  -webkit-flex-grow: 1;
-  flex-grow: 1;
   background-image: url("../img/d20_white.svg");
   width: 20px;
   height: 20px;
   padding: 10px 0 10px 0;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: left;
+  background-position: 50% 0;
   background-origin: content-box;
 }
-/* line 69, ../../scss/admin/_administrator.scss */
+/* line 36, ../../scss/admin/_toolbars.scss */
+#monster-manager-container .monster-manager .monster-manager-administrator .toolbar .search-bar {
+  -webkit-flex-grow: 1;
+  flex-grow: 1;
+}
+/* line 40, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button {
   width: 20px;
   height: 20px;
   padding: 10px;
   cursor: pointer;
 }
-/* line 13, ../../scss/admin/_administrator.scss */
+/* line 13, ../../scss/admin/_admin-look-and-feel.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button .icon {
   background-repeat: no-repeat;
   background-origin: content-box;
   background-position: 50% 0;
   background-size: cover;
 }
-/* line 21, ../../scss/admin/_administrator.scss */
+/* line 21, ../../scss/admin/_admin-look-and-feel.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover .icon {
   background-position: 50% 100%;
 }
-/* line 72, ../../scss/admin/_administrator.scss */
+/* line 43, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover {
   background-color: #FFFFFF;
 }
-/* line 81, ../../scss/admin/_administrator.scss */
+/* line 52, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button .icon {
   width: 100%;
   height: 100%;
 }
-/* line 88, ../../scss/admin/_administrator.scss */
+/* line 59, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .settings .drawer::before {
   content: 'Settings';
 }
-/* line 91, ../../scss/admin/_administrator.scss */
+/* line 62, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .settings .icon {
   background-image: url("../img/settings.svg");
 }
-/* line 97, ../../scss/admin/_administrator.scss */
+/* line 68, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .list .drawer::before {
   content: 'Bulk Actions';
 }
-/* line 100, ../../scss/admin/_administrator.scss */
+/* line 71, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .list .icon {
   background-image: url("../img/list.svg");
 }
-/* line 106, ../../scss/admin/_administrator.scss */
+/* line 77, ../../scss/admin/_toolbars.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover .drawer {
   visibility: visible;
 }
-/* line 111, ../../scss/admin/_administrator.scss */
+/* line 4, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer {
   background-color: #1E364A;
   border: 1px solid #fff;
@@ -181,7 +184,7 @@
   padding: 5px 5px 5px 5px;
   box-sizing: border-box;
 }
-/* line 132, ../../scss/admin/_administrator.scss */
+/* line 25, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer::before {
   font-size: 15px;
   padding: 0 5px 5px 5px;
@@ -191,14 +194,14 @@
   font-weight: bold;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
-/* line 141, ../../scss/admin/_administrator.scss */
+/* line 34, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content {
   border-radius: 5px;
   color: #1E364A;
   text-align: left;
   overflow: hidden;
 }
-/* line 150, ../../scss/admin/_administrator.scss */
+/* line 43, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li {
   padding: 12px 10px 8px 28px;
   font-family: "Rokkitt", serif;
@@ -209,27 +212,27 @@
   position: relative;
   line-height: 18px;
 }
-/* line 160, ../../scss/admin/_administrator.scss */
+/* line 53, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:not(:last-child) {
   border-bottom: 1px solid #1E364A;
 }
-/* line 164, ../../scss/admin/_administrator.scss */
+/* line 57, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:hover {
   background-color: #485E70;
   color: #FFFFFF;
 }
-/* line 13, ../../scss/admin/_administrator.scss */
+/* line 13, ../../scss/admin/_admin-look-and-feel.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li::before {
   background-repeat: no-repeat;
   background-origin: content-box;
   background-position: 50% 0;
   background-size: cover;
 }
-/* line 21, ../../scss/admin/_administrator.scss */
+/* line 21, ../../scss/admin/_admin-look-and-feel.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:hover::before {
   background-position: 50% 100%;
 }
-/* line 171, ../../scss/admin/_administrator.scss */
+/* line 64, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li::before {
   content: '';
   width: 18px;
@@ -240,15 +243,15 @@
   left: 5px;
   margin-top: -9px;
 }
-/* line 182, ../../scss/admin/_administrator.scss */
+/* line 75, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.filter::before {
   background-image: url("../img/filter.svg");
 }
-/* line 185, ../../scss/admin/_administrator.scss */
+/* line 78, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.edit::before {
   background-image: url("../img/edit.svg");
 }
-/* line 188, ../../scss/admin/_administrator.scss */
+/* line 81, ../../scss/admin/_drawers.scss */
 #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.load::before {
   background-image: url("../img/load.svg");
 }

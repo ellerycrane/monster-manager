@@ -1,0 +1,89 @@
+@import "admin-look-and-feel";
+
+@mixin drawer {
+  .drawer {
+    background-color: $darkest-background;
+    border: 1px solid #fff;
+
+    @include border-radius(0 0 10px 10px);
+    @include box-shadow(
+            inset 0 4px 5px -2px rgba(0, 0, 0, 0.3),
+            1px 2px 5px rgba(0, 0, 0, 0.3)
+    );
+
+    position: absolute;
+    bottom: 1px;
+    right: 10px;
+    visibility: hidden;
+    width: calc(100% - 20px);
+    z-index: 10;
+    transform: translateY(100%);
+    cursor: default;
+    padding: 5px 5px 5px 5px;
+    box-sizing: border-box;
+
+    &::before {
+      font-size: 15px;
+      padding: 0 5px 5px 5px;
+      line-height: 20px;
+      display: block;
+      @include header-font;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+    }
+
+    .drawer-content {
+      border-radius: 5px;
+      color: $darkest-background;
+      text-align: left;
+      overflow: hidden;
+
+      .action-list {
+        $icon-size: 18px;
+
+        li {
+          padding: 12px 10px 8px (10px+$icon-size);
+          @include body-font;
+          cursor: pointer;
+          font-size: 16px;
+          font-weight: normal;
+          background: $light-background;
+          position: relative;
+          line-height: $icon-size;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid $darkest-background;
+          }
+
+          &:hover {
+            background-color: $dark-background;
+            color: $light-background;
+          }
+
+          @include invert-icon-styles('&::before');
+
+          &::before {
+            content: '';
+            width: $icon-size;
+            height: $icon-size;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            margin-top: -($icon-size/2);
+          }
+
+          &.filter::before {
+            background-image: url("../img/filter.svg");
+          }
+          &.edit::before {
+            background-image: url("../img/edit.svg");
+          }
+          &.load::before {
+            background-image: url("../img/load.svg");
+          }
+
+        }
+      }
+    }
+  }
+}

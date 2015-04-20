@@ -1,0 +1,25 @@
+@import "compass/css3";
+@import "../look-and-feel";
+
+@mixin dark-card-styles {
+  background-color: $dark-background; //old browsers
+  @include filter-gradient($darkest-background, $dark-background, horizontal); // IE6-9 fallback on horizontal gradient
+  @include background-image(linear-gradient(to bottom, $darkest-background 0, $dark-background 100%));
+  border: 1px solid #fff;
+  @include border-radius(10px);
+}
+
+@mixin invert-icon-styles($icon-selector: ".icon") {
+  #{$icon-selector} {
+    background-repeat: no-repeat;
+    background-origin: content-box;
+    background-position: 50% 0;
+    background-size: cover;
+  }
+
+  &:hover {
+    #{$icon-selector} {
+      background-position: 50% 100%;
+    }
+  }
+}

@@ -27,8 +27,14 @@ var MonsterRow = React.createClass({
         var actions = m.attacks.map(function(attack, i){
             return <MonsterAttack key={m.id + '-' + i + '-' +attack.name} monster={m} attack={attack} />;
         });
+
+        var log = function(){
+            this.refs.sidebar._logViewport();
+        }.bind(this);
+
+
         return (
-            <div className="monster-row">
+            <div className="monster-row" onClick={log}>
                 <div className="monster-card">
                     <MonsterAvatar monster={m} />
                     <div className="monster-card-values">
@@ -48,7 +54,7 @@ var MonsterRow = React.createClass({
                             {actions}
                         </div>
                     </div>
-                    <MonsterSidebar monster={m} />
+                    <MonsterSidebar monster={m} ref="sidebar"/>
 
                 </div>
             </div>

@@ -176,13 +176,13 @@ var React = require("react"),
 var MonsterManager = React.createClass({displayName: "MonsterManager",
 
     handleStart: function (event, ui) {
-        console.log('Event: ', event);
-        console.log('Position: ', ui.position);
+        //console.log('Event: ', event);
+        //console.log('Position: ', ui.position);
     },
 
     handleDrag: function (e, ui) {
-        console.log('Event: ', e);
-        console.log('Position: ', ui.position);
+        //console.log('Event: ', e);
+        //console.log('Position: ', ui.position);
         if(e.stopPropagation) e.stopPropagation();
         if(e.preventDefault) e.preventDefault();
         e.cancelBubble=true;
@@ -276,8 +276,14 @@ var MonsterRow = React.createClass({displayName: "MonsterRow",
         var actions = m.attacks.map(function(attack, i){
             return React.createElement(MonsterAttack, {key: m.id + '-' + i + '-' +attack.name, monster: m, attack: attack});
         });
+
+        var log = function(){
+            this.refs.sidebar._logViewport();
+        }.bind(this);
+
+
         return (
-            React.createElement("div", {className: "monster-row"}, 
+            React.createElement("div", {className: "monster-row", onClick: log}, 
                 React.createElement("div", {className: "monster-card"}, 
                     React.createElement(MonsterAvatar, {monster: m}), 
                     React.createElement("div", {className: "monster-card-values"}, 
@@ -297,7 +303,7 @@ var MonsterRow = React.createClass({displayName: "MonsterRow",
                             actions
                         )
                     ), 
-                    React.createElement(MonsterSidebar, {monster: m})
+                    React.createElement(MonsterSidebar, {monster: m, ref: "sidebar"})
 
                 )
             )
@@ -312,16 +318,44 @@ var React = require("react"),
     p = require("../utilities/PropertyUtils"),
     MonsterProperties = require('../constants/MonsterProperties');
 var MonsterSidebar = React.createClass({displayName: "MonsterSidebar",
+    _isInViewport: function () {
+        if(!this.getDOMNode()){
+            return false;
+        }
+        var rect = this.getDOMNode().getBoundingClientRect();
+        console.log("bounding rectangle: ");
+        console.log(rect);
+        console.log("window.innerHeight: "+window.innerHeight);
+        console.log("document.documentElement.clientHeight: "+document.documentElement.clientHeight);
+
+
+        return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && /*or $(window).height() */
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) /*or $(window).width() */
+        );
+    },
+
+    _logViewport: function(){
+        var msg = this._isInViewport() ? "is in viewport" : "is NOT in viewport";
+        console.log("Sidebar for monster "+this.props.monster.name+" "+msg);
+    },
+
+    componentDidMount: function(){
+        this._logViewport();
+    },
+
     render: function () {
         var m = this.props.monster,
             sidebarUrl = p.safeGet(m, MonsterProperties.sidebar);
-        if(sidebarUrl === null){
+        if (sidebarUrl === null) {
             return null;
         }
         var sidebarUrls = sidebarUrl.constructor === Array ? sidebarUrl : [sidebarUrl];
-        var sidebarContent = sidebarUrls.map(function(url, i){
+        var sidebarContent = sidebarUrls.map(function (url, i) {
             return (
-                React.createElement("div", {key: m.id+'-'+url+'-'+i, className: "sidebar-content-pane"}, 
+                React.createElement("div", {key: m.id + '-' + url + '-' + i, className: "sidebar-content-pane"}, 
                     React.createElement("div", {className: "sidebar-content", style: {backgroundImage: 'url(' + url + ')'}}, 
                         React.createElement("img", {src: url, style: {visibility: "hidden"}})
                     ), 
@@ -330,15 +364,14 @@ var MonsterSidebar = React.createClass({displayName: "MonsterSidebar",
             );
         }.bind(this));
         return (
-            React.createElement("div", {className: "sidebar-container"}, 
+            React.createElement("div", {className: "sidebar-container", onMouseDown: this._logViewport}, 
                 React.createElement("div", {className: "sidebar-scrollable-area"}, 
                     React.createElement("div", {className: "sidebar-inner"}, 
                     sidebarContent
                     )
                 )
             )
-        )
-
+        );
     }
 });
 
@@ -459,6 +492,7 @@ var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManage
             React.createElement("div", {className: "monster-manager-administrator"}, 
                 React.createElement("div", {className: "toolbar"}, 
                     React.createElement("div", {className: "logo"}), 
+                    React.createElement("div", {className: "search-bar"}), 
                     React.createElement("div", {className: "list button"}, 
                         React.createElement("div", {className: "icon"}), 
                         React.createElement("div", {className: "drawer"}, 

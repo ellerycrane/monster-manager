@@ -1,0 +1,84 @@
+@import "admin-look-and-feel";
+@import "drawers";
+
+@mixin toolbar {
+  .toolbar {
+
+    border: 1px solid #fff;
+    @include border-radius(10px);
+    @include box-shadow(1px 2px 5px rgba(0, 0, 0, 0.3));
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10px;
+    margin-bottom: 40px;
+    @include display-flex;
+    @include justify-content(space-between);
+
+    text-align: left;
+
+    color: $light-background;
+    background-color: $dark-background; //old browsers
+    @include filter-gradient($darkest-background, $dark-background, horizontal); // IE6-9 fallback on horizontal gradient
+    @include background-image(linear-gradient(to bottom, $darkest-background 0, $dark-background 100%));
+
+    .logo {
+      background-image: url('../img/d20_white.svg');
+      width: 20px;
+      height: 20px;
+      padding: 10px 0 10px 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: 50% 0;
+      background-origin: content-box;
+    }
+
+    .search-bar {
+      @include flex-grow(1);
+    }
+
+    .button {
+      @include invert-icon-styles;
+
+      &:hover {
+        background-color: $light-background;
+      }
+
+      width: 20px;
+      height: 20px;
+      padding: 10px;
+      cursor: pointer;
+
+      .icon {
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    .settings {
+      .drawer::before {
+        content: 'Settings';
+      }
+      .icon {
+        background-image: url('../img/settings.svg');
+      }
+    }
+
+    .list {
+      .drawer::before {
+        content: 'Bulk Actions';
+      }
+      .icon {
+        background-image: url('../img/list.svg');
+      }
+    }
+
+    .button:hover {
+      .drawer {
+        visibility: visible;
+      }
+    }
+
+    @include drawer;
+  }
+}

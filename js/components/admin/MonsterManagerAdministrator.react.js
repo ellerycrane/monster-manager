@@ -31,6 +31,7 @@ var MonsterManagerAdministrator = React.createClass({
             <div className="monster-manager-administrator">
                 <div className="toolbar">
                     <div className="logo"></div>
+                    <div className="search-bar"></div>
                     <div className="list button">
                         <div className="icon"></div>
                         <div className="drawer">

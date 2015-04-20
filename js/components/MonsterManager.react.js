@@ -6,13 +6,13 @@ var React = require("react"),
 var MonsterManager = React.createClass({
 
     handleStart: function (event, ui) {
-        console.log('Event: ', event);
-        console.log('Position: ', ui.position);
+        //console.log('Event: ', event);
+        //console.log('Position: ', ui.position);
     },
 
     handleDrag: function (e, ui) {
-        console.log('Event: ', e);
-        console.log('Position: ', ui.position);
+        //console.log('Event: ', e);
+        //console.log('Position: ', ui.position);
         if(e.stopPropagation) e.stopPropagation();
         if(e.preventDefault) e.preventDefault();
         e.cancelBubble=true;
