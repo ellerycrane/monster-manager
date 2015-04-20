@@ -5,13 +5,17 @@
   /* If we weren't using text-shadow, we'd set a fallback color
      and use this to set color instead
     -webkit-text-fill-color: white; */
-
+  -webkit-text-fill-color: $fill-color;
   color: $fill-color;
-  /* Simulated effect for Firefox and Opera
-         and nice enhancement for WebKit */
-//  text-shadow: 3px 3px 0 $stroke-color,
-//  -1px -1px 0 $stroke-color,
-//  1px -1px 0 $stroke-color,
-//  -1px 1px 0 $stroke-color,
-//  1px 1px 0 $stroke-color;
+
+  &:not(:-moz-handler-blocked){
+    /* Simulated effect for Firefox and Opera */
+    text-shadow: 3px 3px 0 $stroke-color,
+    -1px -1px 0 $stroke-color,
+    1px -1px 0 $stroke-color,
+    -1px 1px 0 $stroke-color,
+    1px 1px 0 $stroke-color;
+
+  }
 }
+
