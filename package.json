@@ -35,6 +35,7 @@
     "grunt-browserify": "~2.1.0",
     "grunt-browserifying": "~1.0.8",
     "grunt-watchify": "~0.1.0",
+    "grunt-autoprefixer":"*",
     "js-yaml": "*",
     "jquery": "*",
     "react": "*",

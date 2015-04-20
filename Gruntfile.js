@@ -76,6 +76,26 @@ module.exports = function (grunt) {
                     watch: true
                 }
             }
+        },
+
+        autoprefixer: {
+            options: {
+                // Task-specific options go here.
+            },
+            manager: {
+                options: {
+                    map: true
+                },
+                src: 'dist/css/monster-manager.css',
+                dest: 'dist/css/monster-manager.css'
+            },
+            landing: {
+                options: {
+                    map: true
+                },
+                src: 'dist/css/monster-manager-landing-page.css',
+                dest: 'dist/css/monster-manager-landing-page.css'
+            }
         }
 
     });
@@ -89,11 +109,14 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-autoprefixer');
 
     grunt.registerTask('build', [
         'browserify',
         'uglify',
-        'compass:dist'
+        'compass:dist',
+        'autoprefixer:manager',
+        'autoprefixer:landing'
     ]);
 
     grunt.registerTask('watch', [

@@ -338,8 +338,8 @@ var MonsterSidebar = React.createClass({displayName: "MonsterSidebar",
     },
 
     _logViewport: function(){
-        var msg = this._isInViewport() ? "is in viewport" : "is NOT in viewport";
-        console.log("Sidebar for monster "+this.props.monster.name+" "+msg);
+        //var msg = this._isInViewport() ? "is in viewport" : "is NOT in viewport";
+        //console.log("Sidebar for monster "+this.props.monster.name+" "+msg);
     },
 
     componentDidMount: function(){
