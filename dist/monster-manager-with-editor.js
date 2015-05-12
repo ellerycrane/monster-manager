@@ -517,6 +517,9 @@ var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManage
                                 )
                             )
                         )
+                    ), 
+                    React.createElement("div", {className: "close control"}, 
+                        React.createElement("div", {className: "icon"})
                     )
 
                 )

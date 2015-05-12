@@ -57,6 +57,9 @@ var MonsterManagerAdministrator = React.createClass({
                             </div>
                         </div>
                     </div>
+                    <div className="close control">
+                        <div className="icon"></div>
+                    </div>
 
                 </div>
             </div>

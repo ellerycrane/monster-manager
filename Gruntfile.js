@@ -96,6 +96,66 @@ module.exports = function (grunt) {
                 src: 'dist/css/monster-manager-landing-page.css',
                 dest: 'dist/css/monster-manager-landing-page.css'
             }
+        },
+
+        sass: {
+            dist: {
+                options:{
+                    require: 'sass-css-importer',
+                    compass: true
+                },
+
+                files: {
+                    'dist/css/monster-manager-landing-page.css': 'scss/monster-manager-landing-page.scss',
+                    'dist/css/monster-manager.css': 'scss/monster-manager.scss'
+                }
+            },
+            landing: {
+                options:{
+                    require: 'sass-css-importer',
+                    compass: true
+                },
+
+                files: {
+                    'dist/css/monster-manager-landing-page.css': 'scss/monster-manager-landing-page.scss'
+                }
+            },
+            manager: {
+                options:{
+                    require: 'sass-css-importer',
+                    compass: true
+                },
+
+                files: {
+                    'dist/css/monster-manager.css': 'scss/monster-manager.scss'
+                }
+            }
+        },
+
+        watch: {
+            managerCss: {
+                files: 'scss/**/*.scss',
+                tasks: ['sass:manager'],
+                options: {
+                    spawn: false
+                }
+            },
+
+            landingCss: {
+                files: 'scss/**/*.scss',
+                tasks: ['sass:landing'],
+                options: {
+                    spawn: false
+                }
+            }
+        },
+        concurrent: {
+            watchStyles: {
+                tasks: ['watch:managerCss', 'watch:landingCss'],
+                options: {
+                    logConcurrentOutput: true
+                }
+            }
         }
 
     });
@@ -109,22 +169,24 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-shell");
     grunt.loadNpmTasks("grunt-contrib-watch");
     grunt.loadNpmTasks('grunt-contrib-compass');
+    grunt.loadNpmTasks('grunt-contrib-sass');
     grunt.loadNpmTasks('grunt-autoprefixer');
+    grunt.loadNpmTasks('grunt-concurrent');
 
     grunt.registerTask('build', [
         'browserify',
         'uglify',
-        'compass:dist',
+        'sass:dist',
         'autoprefixer:manager',
         'autoprefixer:landing'
     ]);
 
-    grunt.registerTask('watch', [
+    grunt.registerTask('watch-js', [
         'watchify'
     ]);
 
     grunt.registerTask('watch-styles', [
-        'compass:watch'
+        'concurrent:watchStyles'
     ]);
 
     grunt.registerTask('default', ['build']);
