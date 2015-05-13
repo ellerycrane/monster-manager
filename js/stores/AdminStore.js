@@ -3,13 +3,20 @@ var Fluxxor = require('fluxxor'),
 
 var AdminStore = Fluxxor.createStore({
     initialize: function() {
-        //this.bindActions();
+        this.activeToolbarItemName = null;
+        this.bindActions(
+            Constants.SELECT_ACTIVE_TOOLBAR_ITEM, this.handleSelectActiveToolbarItem
+        );
     },
 
-
+    handleSelectActiveToolbarItem: function (payload, type) {
+        this.activeToolbarItemName = this.activeToolbarItemName === payload ? null : payload;
+        this.emit(Constants.change);
+    },
 
     getState: function(){
         return {
+            activeToolbarItemName: this.activeToolbarItemName
         };
     }
 });

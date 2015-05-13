@@ -19,7 +19,11 @@ Actions = {
     },
     toggleExpanded: function(){
         this.dispatch(Constants.TOGGLE_EXPANDED);
+    },
+    selectActiveToolbarItem: function(toolbarItemName){
+        this.dispatch(Constants.SELECT_ACTIVE_TOOLBAR_ITEM, toolbarItemName);
     }
+
 
 };
 
@@ -495,14 +499,57 @@ var STORE = 'AdminStore';
  </ul>
  */
 
-var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManagerAdministrator",
+var AdminToolbarItem = React.createClass({displayName: "AdminToolbarItem",
     mixins: [FluxMixin, StoreWatchMixin(STORE)],
 
-    getInitialState: function() {
+    propTypes: {
+        className: React.PropTypes.string.isRequired
+    },
+
+    getInitialState: function () {
         return {};
     },
 
-    getStateFromFlux: function() {
+    getStateFromFlux: function () {
+        return this.getFlux().store(STORE).getState();
+    },
+    handleClick: function () {
+        this.getFlux().actions.selectActiveToolbarItem(this.props.className);
+    },
+
+    render: function () {
+        var active = this.props.className === this.state.activeToolbarItemName;
+        var classes = {
+            'toolbar-item': true,
+            active: active
+        };
+        classes[this.props.className] = true;
+        var cx = React.addons.classSet;
+        classes = cx(classes);
+        return (
+            React.createElement("div", {className: classes}, 
+                React.createElement("div", {className: "button", onMouseDown: this.handleClick}, 
+                    React.createElement("div", {className: cx({"icon":true, active:active})})
+                ), 
+                React.createElement("div", {className: "drawer"}, 
+                    React.createElement("div", {className: "drawer-content"}, 
+                        this.props.children
+                    )
+                )
+            )
+        );
+    }
+
+});
+
+var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManagerAdministrator",
+    mixins: [FluxMixin, StoreWatchMixin(STORE)],
+
+    getInitialState: function () {
+        return {};
+    },
+
+    getStateFromFlux: function () {
         return this.getFlux().store(STORE).getState();
     },
 
@@ -514,22 +561,14 @@ var MonsterManagerAdministrator = React.createClass({displayName: "MonsterManage
                 React.createElement("div", {className: "toolbar"}, 
                     React.createElement("div", {className: "logo"}), 
                     React.createElement("div", {className: "search-bar"}), 
-                    React.createElement("div", {className: "list button"}, 
-                        React.createElement("div", {className: "icon"}), 
-                        React.createElement("div", {className: "drawer"}, 
-                            React.createElement("div", {className: "drawer-content"}, 
-                                React.createElement("ul", {className: "action-list"}, 
-                                    React.createElement("li", null, "Roll Initiative"), 
-                                    React.createElement("li", null, 
-                                        "Roll Stat"
-                                    )
-                                )
-                            )
+                    React.createElement(AdminToolbarItem, {className: "list"}, 
+                        React.createElement("ul", {className: "action-list"}, 
+                            React.createElement("li", null, "Roll Initiative"), 
+                            React.createElement("li", null, "Roll Stat")
                         )
                     ), 
-                    React.createElement("div", {className: "settings button"}, 
-                        React.createElement("div", {className: "icon"}), 
-                        React.createElement("div", {className: "drawer"}, 
+                    React.createElement(AdminToolbarItem, {className: "settings"}, 
+                        React.createElement("ul", {className: "action-list"}, 
                             React.createElement("div", {className: "drawer-content"}, 
                                 React.createElement("ul", {className: "action-list"}, 
                                     React.createElement("li", {className: "edit"}, "Edit Monster Data"), 
@@ -583,6 +622,7 @@ var Constants = {
     UPDATE_MONSTERS: null,
     LOAD_MONSTERS: null,
     TOGGLE_EXPANDED: null,
+    SELECT_ACTIVE_TOOLBAR_ITEM: null,
     change: null
 };
 Constants = keyMirror(Constants);
@@ -1211,13 +1251,20 @@ var Fluxxor = require('fluxxor'),
 
 var AdminStore = Fluxxor.createStore({
     initialize: function() {
-        //this.bindActions();
+        this.activeToolbarItemName = null;
+        this.bindActions(
+            Constants.SELECT_ACTIVE_TOOLBAR_ITEM, this.handleSelectActiveToolbarItem
+        );
     },
 
-
+    handleSelectActiveToolbarItem: function (payload, type) {
+        this.activeToolbarItemName = this.activeToolbarItemName === payload ? null : payload;
+        this.emit(Constants.change);
+    },
 
     getState: function(){
         return {
+            activeToolbarItemName: this.activeToolbarItemName
         };
     }
 });

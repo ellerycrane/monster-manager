@@ -18,7 +18,11 @@ Actions = {
     },
     toggleExpanded: function(){
         this.dispatch(Constants.TOGGLE_EXPANDED);
+    },
+    selectActiveToolbarItem: function(toolbarItemName){
+        this.dispatch(Constants.SELECT_ACTIVE_TOOLBAR_ITEM, toolbarItemName);
     }
+
 
 };
 

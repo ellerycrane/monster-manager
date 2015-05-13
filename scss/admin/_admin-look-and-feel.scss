@@ -16,11 +16,16 @@
     background-origin: content-box;
     background-position: 50% 0;
     background-size: cover;
+
+    &.active {
+      background-position: 50% 100%;
+    }
   }
 
-  &:hover {
+  &:hover{
     #{$icon-selector} {
       background-position: 50% 100%;
     }
   }
+
 }

@@ -99,6 +99,8 @@
             background-origin: content-box;
             background-position: 50% 0;
             background-size: cover; }
+            #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .open-close-button .icon.active {
+              background-position: 50% 100%; }
           #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .open-close-button:hover .icon {
             background-position: 50% 100%; }
           #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .open-close-button:hover {
@@ -118,34 +120,30 @@
             -webkit-transform: rotate(180deg);
                 -ms-transform: rotate(180deg);
                     transform: rotate(180deg); }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button {
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.active .button {
+          background-color: #FFFFFF; }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.active .drawer {
+          visibility: visible; }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button {
           width: 20px;
           height: 20px;
           padding: 10px;
           cursor: pointer; }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button .icon {
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button .icon {
             background-repeat: no-repeat;
             background-origin: content-box;
             background-position: 50% 0;
             background-size: cover; }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover .icon {
+            #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button .icon.active {
+              background-position: 50% 100%; }
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button:hover .icon {
             background-position: 50% 100%; }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover {
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button:hover {
             background-color: #FFFFFF; }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button .icon {
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .button .icon {
             width: 100%;
             height: 100%; }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .settings .drawer::before {
-          content: 'Settings'; }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .settings .icon {
-          background-image: url("../img/settings.svg"); }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .list .drawer::before {
-          content: 'Bulk Actions'; }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .list .icon {
-          background-image: url("../img/list.svg"); }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .button:hover .drawer {
-          visibility: visible; }
-        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer {
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer {
           background-color: #1E364A;
           border: 1px solid #fff;
           border-radius: 0 0 10px 10px;
@@ -162,7 +160,7 @@
           cursor: default;
           padding: 5px 5px 5px 5px;
           box-sizing: border-box; }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer::before {
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer::before {
             font-size: 15px;
             padding: 0 5px 5px 5px;
             line-height: 20px;
@@ -170,12 +168,12 @@
             font-family: "Libre Baskerville", serif;
             font-weight: bold;
             text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
-          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content {
+          #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content {
             border-radius: 5px;
             color: #1E364A;
             text-align: left;
             overflow: hidden; }
-            #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li {
+            #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li {
               padding: 12px 10px 8px 28px;
               font-family: "Rokkitt", serif;
               cursor: pointer;
@@ -184,19 +182,21 @@
               background: #FFFFFF;
               position: relative;
               line-height: 18px; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:not(:last-child) {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li:not(:last-child) {
                 border-bottom: 1px solid #1E364A; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:hover {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li:hover {
                 background-color: #485E70;
                 color: #FFFFFF; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li::before {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li::before {
                 background-repeat: no-repeat;
                 background-origin: content-box;
                 background-position: 50% 0;
                 background-size: cover; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li:hover::before {
+                #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li::before.active {
+                  background-position: 50% 100%; }
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li:hover::before {
                 background-position: 50% 100%; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li::before {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li::before {
                 content: '';
                 width: 18px;
                 height: 18px;
@@ -205,12 +205,20 @@
                 top: 50%;
                 left: 5px;
                 margin-top: -9px; }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.filter::before {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li.filter::before {
                 background-image: url("../img/filter.svg"); }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.edit::before {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li.edit::before {
                 background-image: url("../img/edit.svg"); }
-              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .drawer .drawer-content .action-list li.load::before {
+              #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item .drawer .drawer-content .action-list li.load::before {
                 background-image: url("../img/load.svg"); }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.settings .drawer::before {
+          content: 'Settings'; }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.settings .icon {
+          background-image: url("../img/settings.svg"); }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.list .drawer::before {
+          content: 'Bulk Actions'; }
+        #monster-manager-container .monster-manager .monster-manager-administrator .toolbar .toolbar-item.list .icon {
+          background-image: url("../img/list.svg"); }
     #monster-manager-container .monster-manager .monster-row {
       font-size: 16px;
       color: #000;
