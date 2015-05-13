@@ -1,10 +1,11 @@
 var React = require("react"),
     Draggable = require("react-draggable"),
     MonsterManagerAdministrator = require('./admin/MonsterManagerAdministrator.react'),
-    MonsterList = require("./MonsterList.react.js");
+    MonsterList = require("./MonsterList.react.js"),
+    _ = require("underscore");
+
 
 var MonsterManager = React.createClass({
-
     handleStart: function (event, ui) {
         //console.log('Event: ', event);
         //console.log('Position: ', ui.position);
@@ -26,6 +27,7 @@ var MonsterManager = React.createClass({
     },
 
     render: function () {
+        var monsterList = this.props.expanded ? <MonsterList monsters={this.props.monsters} key="list"></MonsterList> : null;
         return (
             <Draggable
                 zIndex={10000}
@@ -33,8 +35,8 @@ var MonsterManager = React.createClass({
                 onDrag={this.handleDrag}
                 onStop={this.handleStop}>
                 <div className="monster-manager">
-                    <MonsterManagerAdministrator monsters={this.props.monsters} key="admin"></MonsterManagerAdministrator>
-                    <MonsterList monsters={this.props.monsters} key="list"></MonsterList>
+                    <MonsterManagerAdministrator monsters={this.props.monsters} expanded={this.props.expanded} key="admin"></MonsterManagerAdministrator>
+                    {monsterList}
                 </div>
             </Draggable>
         );

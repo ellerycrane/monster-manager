@@ -15,6 +15,9 @@ Actions = {
     },
     rollAttack: function(monster, attack){
         Roll20Client.rollAttack(monster, attack);
+    },
+    toggleExpanded: function(){
+        this.dispatch(Constants.TOGGLE_EXPANDED);
     }
 
 };

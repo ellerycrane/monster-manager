@@ -2,21 +2,30 @@ var Fluxxor = require('fluxxor'),
     Constants = require('../constants/MonsterManagerConstants');
 
 var MonsterManagerStore = Fluxxor.createStore({
-    initialize: function() {
+    initialize: function () {
         this.monsters = [];
+        this.expanded = true;
         this.bindActions(
-            Constants.UPDATE_MONSTERS, this.handleUpdateMonsters
+            Constants.UPDATE_MONSTERS, this.handleUpdateMonsters,
+            Constants.TOGGLE_EXPANDED, this.handleToggleExpanded
         );
     },
 
-    handleUpdateMonsters: function(payload, type) {
+    handleToggleExpanded: function(payload, type) {
+        console.log("Calling handleToggleExpanded");
+        this.expanded = !this.expanded;
+        this.emit(Constants.change);
+    },
+
+    handleUpdateMonsters: function (payload, type) {
         this.monsters = payload.monsters;
         this.emit(Constants.change);
     },
 
-    getState: function(){
+    getState: function () {
         return {
-            monsters: this.monsters
+            monsters: this.monsters,
+            expanded: this.expanded
         };
     }
 });

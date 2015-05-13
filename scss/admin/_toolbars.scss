@@ -1,5 +1,6 @@
 @import "admin-look-and-feel";
 @import "drawers";
+@import "open-close-button";
 
 @mixin toolbar {
   .toolbar {
@@ -37,28 +38,8 @@
       @include flex-grow(1);
     }
 
-    .close.control {
-      @include invert-icon-styles;
-      width: 20px;
-      height: 20px;
-      margin: 10px 0 10px 15px;
 
-      cursor: pointer;
-      @include border-radius(20px, 20px);
-      &:hover {
-        background-color: $light-background;
-      }
-
-      .icon {
-        background-image: url("../img/close.svg");
-        background-size: cover;
-        width: 50%;
-        height: 50%;
-        margin: 25%;
-
-
-      }
-    }
+    @include open-close-button;
 
     .button {
       @include invert-icon-styles;

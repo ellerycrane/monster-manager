@@ -1,0 +1,31 @@
+@mixin open-close-button {
+  .open-close-button {
+    @include invert-icon-styles;
+    width: 20px;
+    height: 20px;
+    margin: 10px 0 10px 15px;
+
+    cursor: pointer;
+    @include border-radius(20px, 20px);
+    &:hover {
+      background-color: $light-background;
+    }
+
+    .icon {
+      transform: rotate(45deg);
+      transition: transform 150ms ease-out;
+      background-image: url("../img/close.svg");
+      background-size: cover;
+      width: 50%;
+      height: 50%;
+      margin: 25%;
+    }
+
+    &.expanded {
+      .icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+}

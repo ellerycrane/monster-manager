@@ -1,4 +1,6 @@
-var MonsterManagerStore= require('./MonsterManagerStore');
+var MonsterManagerStore= require('./MonsterManagerStore'),
+    AdminStore = require('./AdminStore');
 module.exports = {
-    MonsterManagerStore: new MonsterManagerStore()
+    MonsterManagerStore: new MonsterManagerStore(),
+    AdminStore: new AdminStore()
 };

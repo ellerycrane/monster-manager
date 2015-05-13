@@ -23,7 +23,7 @@ var MonsterManagerApplication = React.createClass({
 
     render: function() {
         return (
-            <MonsterManager monsters={this.state.monsters}/>
+            <MonsterManager monsters={this.state.monsters} expanded={this.state.expanded}/>
         );
     }
 });

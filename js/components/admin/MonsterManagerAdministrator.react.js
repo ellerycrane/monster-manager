@@ -1,7 +1,11 @@
 var React = require("react"),
     Fluxxor = require('fluxxor'),
     FluxMixin = Fluxxor.FluxMixin(React),
-    _ = require("underscore");
+    StoreWatchMixin = Fluxxor.StoreWatchMixin,
+    _ = require("underscore"),
+    OpenCloseButton = require('./OpenCloseButton.react');
+
+var STORE = 'AdminStore';
 
 //var Toolbar = React.createClass({
 //
@@ -26,7 +30,19 @@ var React = require("react"),
  */
 
 var MonsterManagerAdministrator = React.createClass({
+    mixins: [FluxMixin, StoreWatchMixin(STORE)],
+
+    getInitialState: function() {
+        return {};
+    },
+
+    getStateFromFlux: function() {
+        return this.getFlux().store(STORE).getState();
+    },
+
+
     render: function () {
+
         return (
             <div className="monster-manager-administrator">
                 <div className="toolbar">
@@ -57,9 +73,7 @@ var MonsterManagerAdministrator = React.createClass({
                             </div>
                         </div>
                     </div>
-                    <div className="close control">
-                        <div className="icon"></div>
-                    </div>
+                    <OpenCloseButton expanded={this.props.expanded} />
 
                 </div>
             </div>
