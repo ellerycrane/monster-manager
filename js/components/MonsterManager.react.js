@@ -33,7 +33,8 @@ var MonsterManager = React.createClass({
                 zIndex={10000}
                 onStart={this.handleStart}
                 onDrag={this.handleDrag}
-                onStop={this.handleStop}>
+                onStop={this.handleStop}
+                cancel=".dialog-container *">
                 <div className="monster-manager">
                     <MonsterManagerAdministrator monsters={this.props.monsters} expanded={this.props.expanded} key="admin"></MonsterManagerAdministrator>
                     {monsterList}

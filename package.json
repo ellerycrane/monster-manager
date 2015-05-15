@@ -51,6 +51,7 @@
     "codemirror": "5.0.0",
     "hasher":"1.2.0",
     "underscore": "*",
-    "brfs":"*"
+    "brfs":"*",
+    "classnames":"~2.1.1"
   }
 }

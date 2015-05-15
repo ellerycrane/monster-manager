@@ -1,0 +1,62 @@
+@import "../vendor/compass-all";
+@import "admin-look-and-feel";
+@import "data-loader";
+
+@mixin dialogs {
+  .dialog-container {
+    @include user-select(none);
+
+    .modal-overlay {
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 10000;
+      background-color: rgba(0, 0, 0, .2);
+      cursor: default;
+      @include display-flex;
+      @include justify-content(center);
+      @include align-items(center);
+
+      .action-dialog {
+        &.load::before{
+          content: 'Load Monster Data';
+        }
+
+        color: $light-background;
+        background-color: $darkest-background;
+        border: 1px solid #fff;
+
+        @include border-radius(10px 10px);
+        @include box-shadow(
+                inset 0 4px 5px -2px rgba(0, 0, 0, 0.3),
+                1px 2px 5px rgba(0, 0, 0, 0.3)
+        );
+
+        padding: 5px 5px 5px 5px;
+        box-sizing: border-box;
+
+        &::before {
+          font-size: 15px;
+          padding: 0 5px 5px 5px;
+          line-height: 20px;
+          display: block;
+          @include header-font;
+          text-shadow: 0 1px 0 rgba(0, 0, 0, .1);
+        }
+        .dialog-content {
+          border-radius: 5px;
+          color: $darkest-background;
+          text-align: left;
+          font-size: 16px;
+          font-weight: normal;
+          background: $light-background;
+          padding: 12px 10px 12px 10px;
+        }
+      }
+    }
+
+    @include data-loader;
+  }
+}

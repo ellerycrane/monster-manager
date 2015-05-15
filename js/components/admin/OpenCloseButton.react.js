@@ -1,6 +1,7 @@
-var React = require("react"),
+var React = require('react'),
     Fluxxor = require('fluxxor'),
-    FluxMixin = Fluxxor.FluxMixin(React);
+    FluxMixin = Fluxxor.FluxMixin(React),
+    classNames = require('classnames');
 
 var OpenCloseButton = React.createClass({
     mixins: [FluxMixin],
@@ -8,8 +9,7 @@ var OpenCloseButton = React.createClass({
         this.getFlux().actions.toggleExpanded();
     },
     render: function () {
-        var cx = React.addons.classSet;
-        var classes = cx({
+        var classes = classNames({
             'open-close-button': true,
             'expanded': this.props.expanded
         });

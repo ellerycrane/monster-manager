@@ -16,8 +16,8 @@ Kobold:
   attacks:
     - Dagger: +4, 1d4+2 piercing
     - Sling: +4, 1d4+2 bludgeoning
-  sidebar: http://i.imgur.com/02uwl0S.png
-  avatar: http://i.imgur.com/S7DE0hg.png?1
+  sidebar: https://i.imgur.com/02uwl0S.png
+  avatar: https://i.imgur.com/S7DE0hg.png?1
 
 Winged Kobold:
   ac: 13
@@ -35,8 +35,8 @@ Winged Kobold:
   attacks:
     - Dagger: +5, 1d4+3 piercing
     - Dropped Rock: +5, 1d6+3 bludgeoning
-  sidebar: http://i.imgur.com/VTGR6KR.png
-  avatar: http://i.imgur.com/X9kAhJ7.jpg?1
+  sidebar: https://i.imgur.com/VTGR6KR.png
+  avatar: https://i.imgur.com/X9kAhJ7.jpg?1
 
 Cloaker:
   ac: 14
@@ -53,7 +53,7 @@ Cloaker:
     - Stealth: +5
   senses:
     - darkvision 60 ft.
-  avatar: http://i.imgur.com/SdTKfBM.jpg?1
+  avatar: https://i.imgur.com/SdTKfBM.jpg?1
   attacks:
     - Bite: +6, 2d6+3 piercing
     - Tail: +6, 1d8+3 slashing
@@ -68,7 +68,7 @@ Ancient Blue Dragon:
     - 18
     - 17
     - 21
-  avatar: http://i.imgur.com/y0gjTQB.png
+  avatar: https://i.imgur.com/y0gjTQB.png
   attacks:
     - Bite: +16, 2d10+9 piercing, 2d10 lightning
     - Claw: +16, 2d6+9 slashing
@@ -89,7 +89,7 @@ Cthulhu:
     - 26
     - 26
     - 28
-  avatar: http://i.imgur.com/EyUFdjO.jpg
+  avatar: https://i.imgur.com/EyUFdjO.jpg
 
 Acolyte:
   ac: 10

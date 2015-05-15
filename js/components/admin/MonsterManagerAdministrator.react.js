@@ -3,7 +3,10 @@ var React = require("react"),
     FluxMixin = Fluxxor.FluxMixin(React),
     StoreWatchMixin = Fluxxor.StoreWatchMixin,
     _ = require("underscore"),
-    OpenCloseButton = require('./OpenCloseButton.react');
+    classNames = require('classnames'),
+    OpenCloseButton = require('./OpenCloseButton.react'),
+    DataLoader = require('./DataLoader.react'),
+    ActionDialog = require('./ActionDialog.react');
 
 var STORE = 'AdminStore';
 
@@ -54,12 +57,11 @@ var AdminToolbarItem = React.createClass({
             active: active
         };
         classes[this.props.className] = true;
-        var cx = React.addons.classSet;
-        classes = cx(classes);
+        classes = classNames(classes);
         return (
             <div className={classes}>
                 <div className="button" onMouseDown={this.handleClick}>
-                    <div className={cx({"icon":true, active:active})} />
+                    <div className={classNames({"icon": true, active: active})} />
                 </div>
                 <div className="drawer">
                     <div className="drawer-content">
@@ -72,6 +74,18 @@ var AdminToolbarItem = React.createClass({
 
 });
 
+var MenuItem = React.createClass({
+    handleClick: function () {
+        this.props.onCommand ? this.props.onCommand() : null;
+    },
+
+    render: function () {
+        return (
+            <li className={this.props.className} onMouseDown={this.handleClick}>{this.props.children}</li>
+        );
+    }
+});
+
 var MonsterManagerAdministrator = React.createClass({
     mixins: [FluxMixin, StoreWatchMixin(STORE)],
 
@@ -81,6 +95,28 @@ var MonsterManagerAdministrator = React.createClass({
 
     getStateFromFlux: function () {
         return this.getFlux().store(STORE).getState();
+    },
+
+    handleClick: function (e) {
+        if (this.getDOMNode().contains(e.target)) {
+            return; // the click was on the administrator, do nothing
+        }
+        this.getFlux().actions.clearActiveToolbarItem(); // the click was on something else; close any open toolbar drawers.
+    },
+
+    componentWillMount: function () {
+        document.addEventListener("click", this.handleClick, false);
+    },
+
+    componentWillUnmount: function () {
+        document.removeEventListener("click", this.handleClick, false);
+    },
+
+    showDialog: function (dialogComponent, type) {
+        var that = this;
+        return function () {
+            that.getFlux().actions.setActionDialogComponent({component:dialogComponent, type:type});
+        };
     },
 
 
@@ -99,18 +135,14 @@ var MonsterManagerAdministrator = React.createClass({
                     </AdminToolbarItem>
                     <AdminToolbarItem className="settings">
                         <ul className="action-list">
-                            <div className="drawer-content">
-                                <ul className="action-list">
-                                    <li className="edit">Edit Monster Data</li>
-                                    <li className="load">Load Monster Data</li>
-                                    <li className="filter">Filter Monster List</li>
-                                </ul>
-                            </div>
+                            <li className="edit">Edit Monster Data</li>
+                            <MenuItem className="load" onCommand={this.showDialog(DataLoader, 'load')}>Load Monster Data</MenuItem>
+                            <li className="filter">Filter Monster List</li>
                         </ul>
                     </AdminToolbarItem>
                     <OpenCloseButton expanded={this.props.expanded} />
-
                 </div>
+                <ActionDialog content={this.state.actionDialogContentComponent} type={this.state.actionDialogType}/>
             </div>
         );
     }

@@ -117,8 +117,11 @@ var isValidMonster = function (monsterDocument, key) {
 
 };
 
-var parseMonstersFromYaml = function (monsterYamlData) {
-    var monsterDocument = yaml.safeLoad(monsterYamlData);
+var parseYamlDocument = function(monsterYamlData){
+    return yaml.safeLoad(monsterYamlData);
+};
+
+var parseMonstersFromYamlDocument = function(monsterDocument){
     var monsters = [];
     for (var key in monsterDocument) {
         if (monsterDocument.hasOwnProperty(key) && isValidMonster(monsterDocument, key)) {
@@ -131,4 +134,39 @@ var parseMonstersFromYaml = function (monsterYamlData) {
     return monsters;
 };
 
-module.exports = {parseMonstersFromYaml: parseMonstersFromYaml};
+var parseMonstersFromYaml = function (monsterYamlData) {
+    var monsterDocument = parseYamlDocument(monsterYamlData);
+    return parseMonstersFromYamlDocument(monsterDocument);
+};
+
+var parseWithErrorChecking= function(monsterYamlData){
+    var yamlDocument,
+        monsterData,
+        result = {
+            errors: [],
+            monsterData: null
+        };
+    try{
+        yamlDocument = parseYamlDocument(monsterYamlData);
+    } catch(err){
+        result.errors.push({type: 'yaml', message:err.message});
+        return result;
+    }
+    try {
+        monsterData = parseMonstersFromYamlDocument(yamlDocument);
+        if(monsterData.length == 0){
+            result.errors.push({type:'no-data', message:"No monster data found."})
+        } else {
+            result.monsterYaml = monsterData;
+        }
+    } catch(err){
+        result.errors.push({type: 'bad-monster-data', message: err.message});
+    }
+    return result;
+
+};
+
+module.exports = {
+    parseWithErrorChecking: parseWithErrorChecking,
+    parseMonstersFromYaml: parseMonstersFromYaml
+};

@@ -21,8 +21,19 @@ Actions = {
     },
     selectActiveToolbarItem: function(toolbarItemName){
         this.dispatch(Constants.SELECT_ACTIVE_TOOLBAR_ITEM, toolbarItemName);
+    },
+    clearActiveToolbarItem: function(){
+        this.dispatch(Constants.CLEAR_ACTIVE_TOOLBAR_ITEM);
+    },
+    setActionDialogComponent: function(component){
+        this.dispatch(Constants.SET_ACTION_DIALOG_COMPONENT, component);
+    },
+    closeActionDialog: function(){
+        this.dispatch(Constants.CLOSE_ACTION_DIALOG);
+    },
+    setMonsterYaml: function(monsterYaml){
+        this.dispatch(Constants.SET_MONSTER_YAML, monsterYaml);
     }
-
 
 };
 
