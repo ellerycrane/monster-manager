@@ -20,6 +20,8 @@
       border: 1px dashed $dark-background;
       width: 100%;
       box-sizing: border-box;
+      line-height: 100%;
+      height: auto !important;
     }
 
     .controls {

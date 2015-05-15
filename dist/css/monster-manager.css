@@ -295,7 +295,9 @@
             border-radius: 5px / 5px;
             border: 1px dashed #485E70;
             width: 100%;
-            box-sizing: border-box; }
+            box-sizing: border-box;
+            line-height: 100%;
+            height: auto !important; }
           #monster-manager-container .monster-manager .monster-manager-administrator .dialog-container .data-loader-form .controls {
             display: -webkit-flex;
             display: -webkit-box;
